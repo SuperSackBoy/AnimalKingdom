@@ -29,7 +29,6 @@ public class PanelManager {
             center = frame.getContentPane().getWidth()/2-CardWidth/2;
             cardY = frame.getContentPane().getHeight()-CardHeight;
         }
-        System.out.println(cardY);
         spacing = 10;
 
         board = new Board();
