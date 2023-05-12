@@ -22,10 +22,15 @@ public class PanelManager {
     public static int spacing;
     public static int cardY;
 
-    public PanelManager(JFrame frame) {
+    public static void start(JFrame frame) {
         center = frame.getContentPane().getWidth()/2-CardWidth/2;
-        spacing = 10;
         cardY = frame.getContentPane().getHeight()-CardHeight;
+        while(center <= 0 || cardY <= 0) { //brute force fix for starting off screen
+            center = frame.getContentPane().getWidth()/2-CardWidth/2;
+            cardY = frame.getContentPane().getHeight()-CardHeight;
+        }
+        System.out.println(cardY);
+        spacing = 10;
 
         board = new Board();
         frame.add(board);

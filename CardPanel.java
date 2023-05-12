@@ -13,7 +13,6 @@ import java.util.TimerTask;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
 public class CardPanel extends JPanel {
     public int x = 0;
     public int y = 0;
@@ -26,9 +25,9 @@ public class CardPanel extends JPanel {
     public int ap = 10; //attack
     public int vp = 10; //value
 
-    private JLabel lHP = new JLabel(Integer.toString(hp));
-    private JLabel lAP = new JLabel(Integer.toString(ap));
-    private JLabel lVP = new JLabel(Integer.toString(vp));
+    private final JLabel lHP = new JLabel(Integer.toString(hp));
+    private final JLabel lAP = new JLabel(Integer.toString(ap));
+    private final JLabel lVP = new JLabel(Integer.toString(vp));
 
     public CardPanel() {
         this.setLayout(null);

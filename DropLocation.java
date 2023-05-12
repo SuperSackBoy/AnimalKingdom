@@ -10,7 +10,6 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
 public class DropLocation extends JPanel{
     public int index;
     public int x;
