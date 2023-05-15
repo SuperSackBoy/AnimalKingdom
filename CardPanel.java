@@ -3,6 +3,7 @@ Aaron Kimbel
 ICS4U0-C
 Final Project
 Animal Kingdom: Card Arena
+Panel to display a card
 */
 
 import java.awt.Color;
@@ -28,15 +29,21 @@ public class CardPanel extends JPanel {
     private final JLabel lHP = new JLabel(Integer.toString(hp));
     private final JLabel lAP = new JLabel(Integer.toString(ap));
     private final JLabel lVP = new JLabel(Integer.toString(vp));
+    private final JLabel lName = new JLabel("name");
 
-    public CardPanel() {
+    protected Card card;
+
+    public CardPanel(Card card) {
         this.setLayout(null);
         this.setBounds(x, y, width, height);
         this.setBackground(Color.black);
-
-        lHP.setBounds(2,0,PanelManager.CardWidth,15);
-        lAP.setBounds(2,15,PanelManager.CardWidth,15);
-        lVP.setBounds(2,30,PanelManager.CardWidth,15);
+        this.card = card;
+        lName.setText(card.getName());
+        lName.setBounds(2,0,PanelManager.CardWidth,15);
+        lHP.setBounds(2,15,PanelManager.CardWidth,15);
+        lAP.setBounds(2,30,PanelManager.CardWidth,15);
+        lVP.setBounds(2,45,PanelManager.CardWidth,15);
+        this.add(lName);
         this.add(lHP);
         this.add(lAP);
         this.add(lVP);
@@ -67,9 +74,13 @@ public class CardPanel extends JPanel {
     }
 
     public void update() {
-        lHP.setText("HP: " + Integer.toString(hp));
-        lAP.setText("AP: " + Integer.toString(ap));
-        lVP.setText("VP: " + Integer.toString(vp));
+        this.hp = card.getHP();
+        this.ap = card.getATK();
+        this.vp = card.getVP();
+
+        lHP.setText("HP: " + hp);
+        lAP.setText("AP: " + ap);
+        lVP.setText("VP: " + vp);
     }
 
     public void setX(int x) {

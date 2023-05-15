@@ -3,6 +3,7 @@ Aaron Kimbel
 ICS4U0-C
 Final Project
 Animal Kingdom: Card Arena
+A Version of the card object that can be moved by the player
 */
 
 import java.awt.Point;
@@ -16,8 +17,8 @@ import javax.swing.JPanel;
 
 public class PlayerCardPanel extends CardPanel {
     private boolean pressed = false;
-    public PlayerCardPanel() {
-        super();
+    public PlayerCardPanel(Card card) {
+        super(card);
         this.addMouseListener(new MouseListener() {
 
             @Override

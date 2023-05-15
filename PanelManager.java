@@ -1,3 +1,11 @@
+/*
+Aaron Kimbel
+ICS4U0-C
+Final Project
+Animal Kingdom: Card Arena
+Controls everything to do with the visualization of the game
+*/
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -31,10 +39,10 @@ public class PanelManager {
         }
         spacing = 10;
 
+        createHud(frame);
+
         board = new Board();
         frame.add(board);
-
-        PlayerHand[0].setBackground(Color.cyan);
 
 
         Timer timer = new Timer();
@@ -72,6 +80,27 @@ public class PanelManager {
             }
         });
         board.setBounds(board.x,board.y,board.width,board.height);
+    }
+    public static HealthBar playerHPBar;
+    public static HealthBar AIHPBar;
+    public static void createHud(JFrame frame) {
+        playerHPBar = new HealthBar(0,0,100, 40, 1f, "player", SwingConstants.LEFT);
+        frame.add(playerHPBar);
+
+        AIHPBar = new HealthBar(0,50,100, 40, 1f, "opponent", SwingConstants.RIGHT);
+        frame.add(AIHPBar);
+
+        JButton button = new JButton("End Turn");
+        button.setBounds(0,100,100,40);
+        button.addActionListener(e -> endTurn());
+        button.setFocusable(false);
+        frame.add(button);
+
+    }
+
+    public static void endTurn() {
+        //TODO code here :)
+        System.out.println("END TURN");
     }
 
     public static void mouseHandle() {

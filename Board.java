@@ -3,6 +3,7 @@ Aaron Kimbel
 ICS4U0-C
 Final Project
 Animal Kingdom: Card Arena
+Displays all of the cards, can be panned up or down
 */
 
 import java.awt.Point;
@@ -43,8 +44,8 @@ public class Board extends JPanel{
 		this.add(createDrop(PanelManager.center+PanelManager.CardWidth*2+PanelManager.spacing*2,PanelManager.cardY-PanelManager.cardY/16));
 		*/
     }
-    public PlayerCardPanel createCard(int x, int y, int pos) {
-        PlayerCardPanel c = new PlayerCardPanel();
+    public PlayerCardPanel createCard(int x, int y, int pos, Card card) {
+        PlayerCardPanel c = new PlayerCardPanel(card);
         c.setX(x);
         c.setY(y);
         PanelManager.PlayerHand[pos] = c;
@@ -60,25 +61,16 @@ public class Board extends JPanel{
 
     public PlayerCardPanel drawNewCard(int pos) {
         assert pos >= 0 && pos <=4;
-        int x = 0;
-        switch(pos) {
-            case 0:
-                x = PanelManager.center-PanelManager.CardWidth*2-PanelManager.spacing*2;
-                break;
-            case 1:
-                x = PanelManager.center-PanelManager.CardWidth-PanelManager.spacing;
-                break;
-            case 2:
-                x = PanelManager.center;
-                break;
-            case 3:
-                x = PanelManager.center+PanelManager.CardWidth+PanelManager.spacing;
-                break;
-            case 4:
-                x = PanelManager.center+PanelManager.CardWidth*2+PanelManager.spacing*2;
-                break;
-        }
-        PlayerCardPanel c = createCard(x,PanelManager.cardY+PanelManager.ScreenHeight+PanelManager.CardHeight, pos);
+        int x = switch (pos) {
+            case 0 -> PanelManager.center - PanelManager.CardWidth * 2 - PanelManager.spacing * 2;
+            case 1 -> PanelManager.center - PanelManager.CardWidth - PanelManager.spacing;
+            case 2 -> PanelManager.center;
+            case 3 -> PanelManager.center + PanelManager.CardWidth + PanelManager.spacing;
+            case 4 -> PanelManager.center + PanelManager.CardWidth * 2 + PanelManager.spacing * 2;
+            default -> 0;
+        };
+
+        PlayerCardPanel c = createCard(x,PanelManager.cardY+PanelManager.ScreenHeight+PanelManager.CardHeight, pos, CardDeck.drawCard());
         this.add(c);
         this.setComponentZOrder(c,0);
         c.smoothTransition(new Point(c.x,c.y-PanelManager.CardHeight));

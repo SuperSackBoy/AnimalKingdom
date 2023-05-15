@@ -3,6 +3,7 @@ Aaron Kimbel
 ICS4U0-C
 Final Project
 Animal Kingdom: Card Arena
+A place where a PlayerCardPanel can be placed
 */
 
 import java.awt.Color;
