@@ -4,11 +4,12 @@ import java.util.TimerTask;
 public class Main {
     public static void main(String[] args) {
 
-        //TODO there might be a memory leak somewhere i dont know
+        Player player = new Player();
+
         GameFrame frame = new GameFrame();
         frame.setVisible(true);
 
-        PanelManager.start(frame);
+        PanelManager.start(frame,player);
 
         Timer timer = new Timer();
         //this is very stupid and im acknowledging that and doing it regardless, it works.

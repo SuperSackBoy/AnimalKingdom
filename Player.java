@@ -8,31 +8,29 @@ May 11, 2023 * Fixed card deck object from instance
 import java.util.LinkedList;
 
 public class Player {
-    public int HP, VP;
-    public boolean selections[] = new boolean[5];
+    private int HP, VP;
+    private final int maxHP;
+    //public boolean selections[] = new boolean[5];
     /**
      * List that holds 5 of the players cards in their hand as separate objects
      */
-    public LinkedList<Card> playerHand = new LinkedList<Card>();
+    public PlayerCardPanel[] PlayerHand = new PlayerCardPanel[5];
     /**
      * List that holds the players cards as objects for the game field
      */
-    public LinkedList<Card> playerField = new LinkedList<Card>();
+    public PlayerCardPanel[] PlayerPlayedCards = new PlayerCardPanel[5];
+
 
     // constructor method called when object created
     public Player() {
-        for (int i = 0; i < 5; i++) {
-            playerField.add(null);
-        }
-        HP = 150;
+        HP = maxHP = 150;
         VP = 5;
-        for (int i = 0; i < 5; i++) {
-            playerHand.add(CardDeck.drawCard());
-        }
+
     }
     /**
      * Play the cards that the user selected. Selected cards are tested by the boolean array selections[]
      */
+    /*
     public void playCards() {
         for (int i = 0; i < 5; i++) {
             if (selections[i]) {
@@ -41,6 +39,7 @@ public class Player {
             }
         }
     }
+    */
 
     // changes the HP
     public void setHP(int newValue) {
@@ -51,6 +50,9 @@ public class Player {
     public int getHP() {
         return HP;
     }
+    public int getMaxHP() {
+        return maxHP;
+    }
 
     // changes the Value points
     public void setVP(int newValue) {
@@ -60,6 +62,10 @@ public class Player {
     // returns the value points
     public int getVP() {
         return VP;
+    }
+
+    public void removeVP(int newValue) {
+        VP -= newValue;
     }
 }
 

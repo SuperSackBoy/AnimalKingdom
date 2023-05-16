@@ -15,8 +15,6 @@ import java.util.TimerTask;
 
 public class PanelManager {
     public static Board board;
-    public static PlayerCardPanel[] PlayerHand = new PlayerCardPanel[5];
-    public static PlayerCardPanel[] PlayerPlayedCards = new PlayerCardPanel[5];
     public static DropLocation[] dropLocations = new DropLocation[5];
     public static Point mouse;
 
@@ -30,7 +28,10 @@ public class PanelManager {
     public static int spacing;
     public static int cardY;
 
-    public static void start(JFrame frame) {
+    public static Player player;
+
+    public static void start(JFrame frame, Player plyr) {
+        player = plyr;
         center = frame.getContentPane().getWidth()/2-CardWidth/2;
         cardY = frame.getContentPane().getHeight()-CardHeight;
         while(center <= 0 || cardY <= 0) { //brute force fix for starting off screen
@@ -49,15 +50,17 @@ public class PanelManager {
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 mouseHandle();
-                for(PlayerCardPanel c : PlayerHand) {
+                for(PlayerCardPanel c : player.PlayerHand) {
                     if(c!=null) c.update();
                 }
-                for(PlayerCardPanel c : PlayerPlayedCards) {
+                for(PlayerCardPanel c : player.PlayerPlayedCards) {
                     if(c!=null) c.update();
                 }
                 for(DropLocation d : dropLocations) {
                     d.setBounds(d.x, d.y, d.width, d.height);
                 }
+                VPDisplay.setText("VP: " + player.getVP());
+                playerHPBar.setPercent((float) player.getHP() / (float) player.getMaxHP());
             }
 
         }, 0, 1);
@@ -79,10 +82,11 @@ public class PanelManager {
 
             }
         });
-        board.setBounds(board.x,board.y,board.width,board.height);
+        board.setBounds(board.x,(int) board.y,board.width,board.height);
     }
     public static HealthBar playerHPBar;
     public static HealthBar AIHPBar;
+    public static JLabel VPDisplay = new JLabel();;
     public static void createHud(JFrame frame) {
         playerHPBar = new HealthBar(0,0,100, 40, 1f, "player", SwingConstants.LEFT);
         frame.add(playerHPBar);
@@ -95,6 +99,10 @@ public class PanelManager {
         button.addActionListener(e -> endTurn());
         button.setFocusable(false);
         frame.add(button);
+
+        VPDisplay.setBounds(0,150,100,40);
+        frame.add(VPDisplay);
+
 
     }
 
