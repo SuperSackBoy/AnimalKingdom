@@ -45,6 +45,7 @@ public class PanelManager {
         frame.add(board);
 
 
+
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
