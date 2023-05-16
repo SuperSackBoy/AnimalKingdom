@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -30,11 +29,7 @@ public class mainMenu extends JPanel {
         actionMap.put("debugAction", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (debugBox.isVisible()) {
-                    debugBox.setVisible(false);
-                } else {
-                    debugBox.setVisible(true);
-                }
+                debugBox.setVisible(!debugBox.isVisible());
             }
         });
 
