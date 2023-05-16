@@ -3,14 +3,17 @@ import java.util.TimerTask;
 
 public class Main {
     public static mainMenu mainMenuPanel;
+    public static GameFrame frame = new GameFrame();
     public static void main(String[] args) {
 
         //TODO there might be a memory leak somewhere i dont know
-        GameFrame frame = new GameFrame();
+
         frame.setVisible(true);
 
         mainMenuPanel = new mainMenu();
+        mainMenuPanel.setBounds(0, 0, frame.getWidth(), frame.getHeight()); // Set panel size to match frame
         frame.add(mainMenuPanel);
+
         //PanelManager.start(frame);
 
         Timer timer = new Timer();
