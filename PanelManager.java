@@ -109,6 +109,23 @@ public class PanelManager {
     public static void endTurn() {
         //TODO code here :)
         System.out.println("END TURN");
+        board.moveUp();
+        player.resetVP();
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            int x;
+            @Override
+            public void run() {
+                if(player.PlayerPlayedCards[x] != null )
+                    player.PlayerPlayedCards[x].attackAnimation();
+                x++;
+                if(x > player.PlayerPlayedCards.length-1) {
+                    //board.moveDown();
+                    this.cancel();
+                }
+            }
+        },200,100);
+
     }
 
     public static void mouseHandle() {

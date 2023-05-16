@@ -30,13 +30,10 @@ public class PlayerCardPanel extends CardPanel {
             @Override
             public void mousePressed(MouseEvent e) {
                 if(e.getButton() == 1) { //left mouse
-                    DropLocation d = onDropLocation(); //if the card is on a drop zone, dont activate it
+                    DropLocation d = onDropLocation(); //if the card is on a drop zone, or exceeds the players VP, dont activate it
                     if(d == null && card.getVP() <= PanelManager.player.getVP()) {
                         pressed = true;
                     }
-                }
-                if(e.getButton() == 3) { //right mouse
-                    attackAnimation();
                 }
             }
 
