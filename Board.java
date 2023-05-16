@@ -15,13 +15,13 @@ import javax.swing.JPanel;
 
 public class Board extends JPanel{
     public int x = 0;
-    public int y = -PanelManager.ScreenHeight;
+    public float y = -PanelManager.ScreenHeight;
     public int width = PanelManager.ScreenWidth;
     public int height = PanelManager.ScreenHeight*2;
 
     public Board() {
         this.setLayout(null);
-        this.setBounds(x,y,width,height);
+        this.setBounds(x,(int) y,width,height);
 
         drawNewCard(0);
         drawNewCard(1);
@@ -48,7 +48,7 @@ public class Board extends JPanel{
         PlayerCardPanel c = new PlayerCardPanel(card);
         c.setX(x);
         c.setY(y);
-        PanelManager.PlayerHand[pos] = c;
+        PanelManager.player.PlayerHand[pos] = c;
         return c;
     }
     public DropLocation createDrop(int x, int y, int pos) {
@@ -88,17 +88,15 @@ public class Board extends JPanel{
         else destination = -PanelManager.ScreenHeight/2; //set destination to board
 
         timer.scheduleAtFixedRate(new TimerTask() {
-            int lastY = y;
             @Override
             public void run() {
-                y = (int) PanelManager.lerp(y,destination,0.1);
-                if(y == lastY) { //if lastY is the same lerp is stuck due to rounding errors between int and double
+                y = (float) PanelManager.lerp(y,destination,0.1);
+                if(showHand ? y > destination-1 : y < destination+1) { //if lastY is the same lerp is stuck due to rounding errors between int and double
                     y = destination;
-                    setBounds(x,y,width,height);
+                    setBounds(x,(int) y,width,height);
                     this.cancel();
                 }
-                lastY = y;
-                setBounds(x,y,width,height);
+                setBounds(x,(int) y,width,height);
             }
         }, 1, 10);
 

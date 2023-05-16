@@ -10,6 +10,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,13 +30,10 @@ public class PlayerCardPanel extends CardPanel {
             @Override
             public void mousePressed(MouseEvent e) {
                 if(e.getButton() == 1) { //left mouse
-                    DropLocation d = onDropLocation(); //if the card is on a drop zone, dont activate it
-                    if(d == null) {
+                    DropLocation d = onDropLocation(); //if the card is on a drop zone, or exceeds the players VP, dont activate it
+                    if(d == null && card.getVP() <= PanelManager.player.getVP()) {
                         pressed = true;
                     }
-                }
-                if(e.getButton() == 3) { //right mouse
-                    attackAnimation();
                 }
             }
 
@@ -83,21 +81,26 @@ public class PlayerCardPanel extends CardPanel {
                         }
                     }, 150);
 
-                    DropLocation d = onDropLocation();
-                    if(d != null) { //if the card is on a drop location
-                        if(d.active) { //if the drop location is already occupied
-                            d = null; //set the drop location as invalid
+                    ArrayList<DropLocation> dList = getDrops();
+                    DropLocation d = null;
+
+                    if(dList != null) for(DropLocation drop : dList) {
+                        if (!drop.active) {
+                            d = drop;
+                            break;
                         }
                     }
+
                     if(d != null) { //set desired location to the drop point
                         desiredLocation.x = d.x;
                         desiredLocation.y = d.y;
                         d.active = true; //activate the drop location
-                        for(int x = 0; x < PanelManager.PlayerHand.length; x++) {
-                            if (PanelManager.PlayerHand[x].equals(this)) {
-                                PanelManager.PlayerHand[x] = this;
+                        playCard();
+                        for(int x = 0; x < PanelManager.player.PlayerHand.length; x++) {
+                            if (PanelManager.player.PlayerHand[x].equals(this)) {
+                                PanelManager.player.PlayerHand[x] = this;
                                 PanelManager.board.drawNewCard(x);
-                                PanelManager.PlayerPlayedCards[d.index] = this;
+                                PanelManager.player.PlayerPlayedCards[d.index] = this;
                             }
                         }
                     } else { //return to start location
@@ -111,6 +114,10 @@ public class PlayerCardPanel extends CardPanel {
         this.setBounds(x,y,width,height); //update cards x and y
     }
 
+    public void playCard() {
+        PanelManager.player.removeVP(card.getVP());
+    }
+
     public void destroy() {
         JPanel parent = (JPanel) this.getParent(); //get the parent panel
         DropLocation d = onDropLocation(); //get the cards drop location
@@ -118,9 +125,9 @@ public class PlayerCardPanel extends CardPanel {
         parent.remove(this); //remove the card
         parent.revalidate();
         parent.repaint();
-        for(int x = 0; x < PanelManager.PlayerPlayedCards.length; x++) {
-            if (PanelManager.PlayerPlayedCards[x].equals(this)) {
-                PanelManager.PlayerPlayedCards[x] = null;
+        for(int x = 0; x < PanelManager.player.PlayerPlayedCards.length; x++) {
+            if (PanelManager.player.PlayerPlayedCards[x].equals(this)) {
+                PanelManager.player.PlayerPlayedCards[x] = null;
             }
         }
     }
@@ -155,6 +162,22 @@ public class PlayerCardPanel extends CardPanel {
             }
         }
         return null;
+    }
+
+    public ArrayList<DropLocation> getDrops() { //returns the DropLocation the card is hovering over, null if none
+        ArrayList<DropLocation> drops = new ArrayList<>();
+        Rectangle card = new Rectangle((int) x,(int) y,width,height);
+        for(DropLocation d : PanelManager.dropLocations) {
+            Rectangle drop = new Rectangle(d.x,d.y,d.width,d.height);
+            if(card.intersects(drop)) {
+                drops.add(d);
+            }
+        }
+        if(drops.isEmpty()) {
+            return null;
+        } else {
+            return drops;
+        }
     }
 
 }

@@ -49,6 +49,10 @@ public class CardPanel extends JPanel {
         this.add(lVP);
     }
 
+    public Card getCard() {
+        return this.card;
+    }
+
     public void smoothTransition(Point p) { //smoothly moves from current location to p
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
