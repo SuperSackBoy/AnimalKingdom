@@ -45,7 +45,7 @@ public class mainMenu extends JPanel {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO open game panel
+                PanelManager.start();
             }
         });
         startButton.setText("Start");

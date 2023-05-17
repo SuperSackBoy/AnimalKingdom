@@ -29,9 +29,16 @@ public class PanelManager {
     public static int cardY;
 
     public static Player player;
+    public static JFrame frame;
 
-    public static void start(JFrame frame, Player plyr) {
+    public static void init(JFrame jframe, Player plyr) {
         player = plyr;
+        frame = jframe;
+    }
+
+    public static void start() {
+        frame.getContentPane().removeAll();
+
         center = frame.getContentPane().getWidth()/2-CardWidth/2;
         cardY = frame.getContentPane().getHeight()-CardHeight;
         while(center <= 0 || cardY <= 0) { //brute force fix for starting off screen
