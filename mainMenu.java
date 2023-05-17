@@ -1,19 +1,27 @@
+/*
+Luca Mazzotta
+ICS4U0-C
+Final Project
+Animal Kingdom: Card Arena
+Main menu panel that opens on program launch
+*/
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class mainMenu extends JPanel {
-    private BufferedImage bgImg;
-    private JButton startButton = new JButton();
-    private JButton quitButton = new JButton();
-    private JTextField debugBox = new JTextField();
-    private Font newFont = new Font(Font.DIALOG, Font.BOLD, 25);
+    private BufferedImage bgImg; //image variable
+    private JButton startButton = new JButton(); //start button initializer
+    private JButton quitButton = new JButton(); //Quit button initializer
+    private JTextField debugBox = new JTextField(); //debug box initializer
+    private Font newFont = new Font(Font.DIALOG, Font.BOLD, 25); //button font
 
+    /**
+     * Main Menu Constructor
+     */
     public mainMenu() {
         this.setFocusable(true); // Ensure the panel can receive focus
         this.requestFocusInWindow(); // Request focus for the panel
@@ -29,19 +37,24 @@ public class mainMenu extends JPanel {
         actionMap.put("debugAction", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                debugBox.setVisible(!debugBox.isVisible());
+                debugBox.setVisible(!debugBox.isVisible());//sets debug box visible
             }
         });
 
-        loadBackgroundImage();
+        loadBackgroundImage();//sets panel to background image
         this.setLayout(null);
 
+        //Debug box setup
         debugBox.setBounds(this.getWidth()/2+200, 190, 200, 40);
         debugBox.setText("Debug Box");
         debugBox.setVisible(false);
         this.add(debugBox);
 
+        //Start button setup
         startButton.setBounds(this.getWidth()/2+200-120, 250, 200, 110);
+        startButton.addMouseListener(buttonGrow(startButton));
+        startButton.setBackground(Color.white);
+        //Action listener when button is pressed
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,7 +65,11 @@ public class mainMenu extends JPanel {
         startButton.setFont(newFont);
         this.add(startButton);
 
+        //quit button setup
         quitButton.setBounds(this.getWidth()/2+200+120, 250, 200, 110);
+        quitButton.addMouseListener(buttonGrow(quitButton));
+        quitButton.setBackground(Color.white);
+        //Action listener when quit button is pressed
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,6 +81,9 @@ public class mainMenu extends JPanel {
         this.add(quitButton);
     }
 
+    /**
+     * Sets bgImg to the files path
+     */
     private void loadBackgroundImage() {
         try {
             bgImg = ImageIO.read(getClass().getResourceAsStream("imageAssets/TitleScreen1.png"));
@@ -73,6 +93,10 @@ public class mainMenu extends JPanel {
         }
     }
 
+    /**
+     * Adds background image to panel bg
+     * @param g
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -82,5 +106,21 @@ public class mainMenu extends JPanel {
             g.drawImage(scaledImage, 0, 0, null);
         }
     }
+    /**
+     * Makes a button grow when highlighted to make it feel more alive
+     * @param button uses the button set in parameters to grow on highlight
+     */
+    public MouseListener buttonGrow(JButton button) {
+        return new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBounds(button.getX() - 5, button.getY() - 5, button.getWidth() + 10, button.getHeight() + 10);
+            }
 
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
+            }
+        };
+    }
 }
