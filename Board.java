@@ -6,20 +6,25 @@ Animal Kingdom: Card Arena
 Displays all of the cards, can be panned up or down
 */
 
-import java.awt.Point;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 
 public class Board extends JPanel{
+    private BufferedImage bgImg;
     public int x = 0;
     public float y = -PanelManager.ScreenHeight;
     public int width = PanelManager.ScreenWidth;
     public int height = PanelManager.ScreenHeight*2;
 
     public Board() {
+        loadBackgroundImage();
         this.setLayout(null);
         this.setBounds(x,(int) y,width,height);
 
@@ -111,6 +116,24 @@ public class Board extends JPanel{
     public void moveDown() {
         if(showHand) {
             move();
+        }
+    }
+    private void loadBackgroundImage() {
+        try {
+            bgImg = ImageIO.read(getClass().getResourceAsStream("imageAssets/BackgroundImageLong.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception gracefully
+        }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (bgImg != null) {
+            // Scale the image to fit the panel dimensions
+            Image scaledImage = bgImg.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
+            g.drawImage(scaledImage, 0, 0, null);
         }
     }
 }

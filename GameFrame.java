@@ -17,7 +17,7 @@ public class GameFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(false);
         setBounds(0, 0, PanelManager.ScreenWidth, PanelManager.ScreenHeight);
-        this.setTitle("Card Game");
+        this.setTitle("Animal Kingdom: Card Arena");
         this.setLocationRelativeTo(null);
         JPanel contentPane = new JPanel();
         contentPane.setLayout(null);

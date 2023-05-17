@@ -34,7 +34,7 @@ public class mainMenu extends JPanel {
         });
 
         loadBackgroundImage();
-        setLayout(null);
+        this.setLayout(null);
 
         debugBox.setBounds(this.getWidth()/2+200, 190, 200, 40);
         debugBox.setText("Debug Box");
