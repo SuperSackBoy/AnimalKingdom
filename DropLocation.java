@@ -3,25 +3,20 @@ Aaron Kimbel
 ICS4U0-C
 Final Project
 Animal Kingdom: Card Arena
-A place where a PlayerCardPanel can be placed
+Displays locations where cards can be placed
 */
 
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-
-public class DropLocation extends JPanel{
-    public int index;
+public class DropLocation extends JPanel {
     public int x;
     public int y;
     public int width = PanelManager.CardWidth;
     public int height = PanelManager.CardHeight;
-    public boolean active;
-    public DropLocation(int x, int y, int index) {
+    public DropLocation(int x, int y) {
         this.x = x;
         this.y = y;
-        this.index = index;
 
         this.setBounds(x, y, width, height);
         this.setBorder(BorderFactory.createDashedBorder(Color.blue, 2, 2));

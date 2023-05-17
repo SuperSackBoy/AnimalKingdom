@@ -85,6 +85,7 @@ public class CardPanel extends JPanel {
         lHP.setText("HP: " + hp);
         lAP.setText("AP: " + ap);
         lVP.setText("VP: " + vp);
+        this.setBounds(x,y,width,height); //update cards x and y
     }
 
     public void setX(int x) {

@@ -15,7 +15,8 @@ import java.util.TimerTask;
 
 public class PanelManager {
     public static Board board;
-    public static DropLocation[] dropLocations = new DropLocation[5];
+    public static PlayerDropLocation[] dropLocations = new PlayerDropLocation[5];
+    public static AIDropLocation[] aiDropLocations = new AIDropLocation[5];
     public static Point mouse;
 
     public static int CardWidth = 64;
@@ -64,7 +65,7 @@ public class PanelManager {
                 for(PlayerCardPanel c : player.PlayerPlayedCards) {
                     if(c!=null) c.update();
                 }
-                for(DropLocation d : dropLocations) {
+                for(PlayerDropLocation d : dropLocations) {
                     d.setBounds(d.x, d.y, d.width, d.height);
                 }
                 VPDisplay.setText("VP: " + player.getVP());
@@ -72,6 +73,7 @@ public class PanelManager {
             }
 
         }, 0, 1);
+        frame.requestFocus();
         frame.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -109,6 +111,7 @@ public class PanelManager {
         frame.add(button);
 
         VPDisplay.setBounds(0,150,100,40);
+        VPDisplay.setForeground(Color.white);
         frame.add(VPDisplay);
 
 
@@ -125,7 +128,7 @@ public class PanelManager {
             @Override
             public void run() {
                 if(player.PlayerPlayedCards[x] != null )
-                    player.PlayerPlayedCards[x].attackAnimation();
+                    player.PlayerPlayedCards[x].attack();
                 x++;
                 if(x > player.PlayerPlayedCards.length-1) {
                     //board.moveDown();

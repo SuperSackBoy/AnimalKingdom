@@ -40,14 +40,13 @@ public class Board extends JPanel{
         createDrop(PanelManager.center+PanelManager.CardWidth+PanelManager.spacing,PanelManager.cardY+PanelManager.ScreenHeight/3,3);
         createDrop(PanelManager.center+PanelManager.CardWidth*2+PanelManager.spacing*2,PanelManager.cardY+PanelManager.ScreenHeight/3,4);
 
-		/*
-		//TODO these should be fake drop points, not real ones
-		this.add(createDrop(PanelManager.center-PanelManager.CardWidth*2-PanelManager.spacing*2,PanelManager.cardY-PanelManager.cardY/16));
-		this.add(createDrop(PanelManager.center-PanelManager.CardWidth-PanelManager.spacing,PanelManager.cardY-PanelManager.cardY/16));
-		this.add(createDrop(PanelManager.center,PanelManager.cardY-PanelManager.cardY/16));
-		this.add(createDrop(PanelManager.center+PanelManager.CardWidth+PanelManager.spacing,PanelManager.cardY-PanelManager.cardY/16));
-		this.add(createDrop(PanelManager.center+PanelManager.CardWidth*2+PanelManager.spacing*2,PanelManager.cardY-PanelManager.cardY/16));
-		*/
+
+		createAIDrop(PanelManager.center-PanelManager.CardWidth*2-PanelManager.spacing*2,PanelManager.cardY-PanelManager.cardY/16,0);
+		createAIDrop(PanelManager.center-PanelManager.CardWidth-PanelManager.spacing,PanelManager.cardY-PanelManager.cardY/16,1);
+		createAIDrop(PanelManager.center,PanelManager.cardY-PanelManager.cardY/16,2);
+		createAIDrop(PanelManager.center+PanelManager.CardWidth+PanelManager.spacing,PanelManager.cardY-PanelManager.cardY/16,3);
+		createAIDrop(PanelManager.center+PanelManager.CardWidth*2+PanelManager.spacing*2,PanelManager.cardY-PanelManager.cardY/16,4);
+
     }
     public PlayerCardPanel createCard(int x, int y, int pos, Card card) {
         PlayerCardPanel c = new PlayerCardPanel(card);
@@ -56,9 +55,17 @@ public class Board extends JPanel{
         PanelManager.player.PlayerHand[pos] = c;
         return c;
     }
-    public DropLocation createDrop(int x, int y, int pos) {
-        DropLocation d = new DropLocation(x,y,pos);
+    public PlayerDropLocation createDrop(int x, int y, int pos) {
+        PlayerDropLocation d = new PlayerDropLocation(x,y,pos);
         PanelManager.dropLocations[pos] = d;
+        this.add(d);
+        this.setComponentZOrder(d, 5);
+        return d;
+    }
+
+    public AIDropLocation createAIDrop(int x, int y, int pos) {
+        AIDropLocation d = new AIDropLocation(x,y,pos);
+        PanelManager.aiDropLocations[pos] = d;
         this.add(d);
         this.setComponentZOrder(d, 5);
         return d;
