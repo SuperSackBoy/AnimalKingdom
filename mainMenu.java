@@ -55,12 +55,7 @@ public class mainMenu extends JPanel {
         startButton.addMouseListener(buttonGrow(startButton));
         startButton.setBackground(Color.white);
         //Action listener when button is pressed
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                PanelManager.start();
-            }
-        });
+        startButton.addActionListener(e -> PanelManager.start());
         startButton.setText("Start");
         startButton.setFont(newFont);
         this.add(startButton);
@@ -70,12 +65,7 @@ public class mainMenu extends JPanel {
         quitButton.addMouseListener(buttonGrow(quitButton));
         quitButton.setBackground(Color.white);
         //Action listener when quit button is pressed
-        quitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        quitButton.addActionListener(e -> System.exit(0));
         quitButton.setText("Quit");
         quitButton.setFont(newFont);
         this.add(quitButton);
