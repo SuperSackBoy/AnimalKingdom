@@ -31,10 +31,12 @@ public class PanelManager {
 
     public static Player player;
     public static JFrame frame;
+    public static AIBase ai;
 
-    public static void init(JFrame jframe, Player plyr) {
+    public static void init(JFrame jframe, Player plyr, AIBase aiBase) {
         player = plyr;
         frame = jframe;
+        ai = aiBase;
     }
 
     public static void start() {

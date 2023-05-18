@@ -50,6 +50,10 @@ public class Player {
     public int getHP() {
         return HP;
     }
+
+    public void removeHP(int amount) {
+        this.setHP(this.getHP() - amount);
+    }
     public int getMaxHP() {
         return maxHP;
     }

@@ -64,6 +64,10 @@ public class Card {
         return VP;
     }
 
+    public void removeHP(int amount) {
+        this.setHP(getHP() - amount);
+    }
+
     // override to string for save file printing and debug printing
     @Override
     public String toString() {

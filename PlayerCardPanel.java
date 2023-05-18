@@ -130,6 +130,24 @@ public class PlayerCardPanel extends CardPanel {
 
     public void attack() { //Called when the card should attack
         attackAnimation();
+        AICardPanel[] cards = new AICardPanel[5];//TODO get enemy cards on field
+        PlayerCardPanel[] plyrCards = PanelManager.player.PlayerPlayedCards;
+        for(int x = 0; x < 4; x++) {
+            if (plyrCards[x].card == this.card) {
+                if(cards[x] != null) {
+                    if(this.card.getATK() <= cards[x].card.getHP()) {
+                        cards[x].card.removeHP(this.card.getATK());
+                        cards[x].destroy();
+                    } else {
+                        PanelManager.ai.HP -= this.card.getATK() - cards[x].card.getHP();
+                        cards[x].destroy();
+                    }
+                } else {
+                    PanelManager.ai.HP -= this.card.getATK();
+                }
+                return;
+            }
+        }
     }
 
     public void attackAnimation() { //moves the card up then back down
@@ -169,7 +187,6 @@ public class PlayerCardPanel extends CardPanel {
         PlayerDropLocation closest = new PlayerDropLocation(-99,-99,99);
         if(drops != null) {
             for(PlayerDropLocation d : drops) {
-                System.out.println(d.index);
                 if(new Point(closest.x,closest.y).distance(this.x,this.y) > new Point(d.x,d.y).distance(this.x,this.y)) {
                     closest = d;
                 }
