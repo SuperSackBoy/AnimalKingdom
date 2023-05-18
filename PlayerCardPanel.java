@@ -81,13 +81,10 @@ public class PlayerCardPanel extends CardPanel {
                         }
                     }, 150);
 
-                    ArrayList<PlayerDropLocation> dList = getDrops();
-                    PlayerDropLocation d = null;
-
-                    if(dList != null) for(PlayerDropLocation drop : dList) {
-                        if (!drop.active) {
-                            d = drop;
-                            break;
+                    PlayerDropLocation d = getClosestDrop();
+                    if(d != null) {
+                        if(d.active) {
+                            d = null;
                         }
                     }
 
@@ -165,6 +162,22 @@ public class PlayerCardPanel extends CardPanel {
             }
         }
         return null;
+    }
+
+    public PlayerDropLocation getClosestDrop() {
+        ArrayList<PlayerDropLocation> drops = getDrops();
+        PlayerDropLocation closest = new PlayerDropLocation(-99,-99,99);
+        if(drops != null) {
+            for(PlayerDropLocation d : drops) {
+                System.out.println(d.index);
+                if(new Point(closest.x,closest.y).distance(this.x,this.y) > new Point(d.x,d.y).distance(this.x,this.y)) {
+                    closest = d;
+                }
+            }
+            return closest;
+        } else {
+            return null;
+        }
     }
 
     public ArrayList<PlayerDropLocation> getDrops() { //returns the DropLocation the card is hovering over, null if none
