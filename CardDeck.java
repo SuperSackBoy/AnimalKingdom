@@ -9,7 +9,7 @@ May 11, 2023 *changed fields to static
 import java.util.LinkedList;
 
 public class CardDeck {
-    public static LinkedList<Card> cardList = new LinkedList<Card>();//list of all Cards
+    public static LinkedList<Card> cardList = new LinkedList<>();//list of all Cards
     CardDeck() {//constructor
         deckReset();//resets the deck when Card deck instance is created
     }
