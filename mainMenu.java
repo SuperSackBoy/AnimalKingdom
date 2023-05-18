@@ -17,7 +17,7 @@ public class mainMenu extends JPanel {
     private JButton startButton = new JButton(); //start button initializer
     private JButton quitButton = new JButton(); //Quit button initializer
     private JTextField debugBox = new JTextField(); //debug box initializer
-    private Font newFont = new Font(Font.DIALOG, Font.BOLD, 25); //button font
+    private Font newFont = new Font(Font.DIALOG, Font.BOLD, 30); //button font
 
     /**
      * Main Menu Constructor
@@ -45,13 +45,13 @@ public class mainMenu extends JPanel {
         this.setLayout(null);
 
         //Debug box setup
-        debugBox.setBounds(this.getWidth()/2+200, 190, 200, 40);
+        debugBox.setBounds((PanelManager.ScreenWidth/2) - (125), 320, 250, 50);
         debugBox.setText("Debug Box");
         debugBox.setVisible(false);
         this.add(debugBox);
 
         //Start button setup
-        startButton.setBounds(this.getWidth()/2+200-120, 250, 200, 110);
+        startButton.setBounds((PanelManager.ScreenWidth/2) - (125) -180, 400, 250, 120);
         startButton.addMouseListener(buttonGrow(startButton));
         startButton.setBackground(Color.white);
         //Action listener when button is pressed
@@ -66,7 +66,7 @@ public class mainMenu extends JPanel {
         this.add(startButton);
 
         //quit button setup
-        quitButton.setBounds(this.getWidth()/2+200+120, 250, 200, 110);
+        quitButton.setBounds((PanelManager.ScreenWidth/2) - (125) +180, 400, 250, 120);
         quitButton.addMouseListener(buttonGrow(quitButton));
         quitButton.setBackground(Color.white);
         //Action listener when quit button is pressed

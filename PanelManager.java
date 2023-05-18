@@ -19,11 +19,11 @@ public class PanelManager {
     public static AIDropLocation[] aiDropLocations = new AIDropLocation[5];
     public static Point mouse;
 
-    public static int CardWidth = 64;
-    public static int CardHeight = 96;
+    public static int CardWidth = 96;
+    public static int CardHeight = 144;
 
-    public static int ScreenWidth = 600;
-    public static int ScreenHeight = 450;
+    public static int ScreenWidth = 900;
+    public static int ScreenHeight = 675;
 
     public static int center;
     public static int spacing;
@@ -100,19 +100,19 @@ public class PanelManager {
     public static HealthBar AIHPBar;
     public static JLabel VPDisplay = new JLabel();;
     public static void createHud(JFrame frame) {
-        playerHPBar = new HealthBar(0,0,100, 40, 1f, "player", SwingConstants.LEFT);
+        playerHPBar = new HealthBar(0,0,150, 65, 1f, "player", SwingConstants.LEFT);
         frame.add(playerHPBar);
 
-        AIHPBar = new HealthBar(0,50,100, 40, 1f, "opponent", SwingConstants.RIGHT);
+        AIHPBar = new HealthBar(0,75,150, 65, 1f, "opponent", SwingConstants.RIGHT);
         frame.add(AIHPBar);
 
         JButton button = new JButton("End Turn");
-        button.setBounds(0,100,100,40);
+        button.setBounds(0,150,150,65);
         button.addActionListener(e -> endTurn());
         button.setFocusable(false);
         frame.add(button);
 
-        VPDisplay.setBounds(0,150,100,40);
+        VPDisplay.setBounds(0,300,200,80);
         VPDisplay.setForeground(Color.white);
         frame.add(VPDisplay);
 

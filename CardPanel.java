@@ -42,13 +42,13 @@ public class CardPanel extends JPanel {
         loadBackgroundImage(card);//sets panel to background image
         this.setLayout(null);
         this.setBounds(x, y, width, height);
-        this.setBackground(Color.black);
+        this.setBackground(Color.WHITE);
         this.card = card;
         lName.setText(card.getName());
-        lName.setBounds(2,0,PanelManager.CardWidth,15);
-        lHP.setBounds(2,15,PanelManager.CardWidth,15);
-        lAP.setBounds(2,30,PanelManager.CardWidth,15);
-        lVP.setBounds(2,45,PanelManager.CardWidth,15);
+        lName.setBounds(2,0,PanelManager.CardWidth,30);
+        lHP.setBounds(29+2,89-12,PanelManager.CardWidth,30);
+        lAP.setBounds(36+2,107-12,PanelManager.CardWidth,30);
+        lVP.setBounds(30+2,125-12,PanelManager.CardWidth,30);
         this.add(lName);
         this.add(lHP);
         this.add(lAP);
@@ -88,9 +88,9 @@ public class CardPanel extends JPanel {
         this.ap = card.getATK();
         this.vp = card.getVP();
 
-        lHP.setText("HP: " + hp);
-        lAP.setText("AP: " + ap);
-        lVP.setText("VP: " + vp);
+        lHP.setText(""+hp);
+        lAP.setText(""+ap);
+        lVP.setText(""+vp);
         this.setBounds(x,y,width,height); //update cards x and y
     }
 
@@ -107,7 +107,8 @@ public class CardPanel extends JPanel {
      */
     private void loadBackgroundImage(Card cCard) {
         try {
-            if (cCard.cardImg == "imageAssets/cardSprites/MooseCard.png") {
+            if (cCard.cardImg == "imageAssets/cardSprites/MooseCard.png" || cCard.cardImg == "imageAssets/cardSprites/PolarBearCard.png") {
+                lName.setVisible(false);
                 bgImg = read(getClass().getResourceAsStream(cCard.cardImg));
             } else {
                 return;
