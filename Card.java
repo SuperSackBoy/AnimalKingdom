@@ -6,7 +6,7 @@ Cards that are used in the game and are put into the card deck to be used by pla
 May 5, 2023
 */
 public class Card {
-    String name;
+    String name, cardImg;
     int HP, ATK, VP;
 
     // empty constructor
@@ -18,8 +18,9 @@ public class Card {
     }
 
     // Main constructor to be called when instance of a card is created
-    public Card(String name, int HP, int ATK, int VP) {
+    public Card(String name, String cardImg, int HP, int ATK, int VP) {
         this.name = name;// sets all stats to those placed in the arguments
+        this.cardImg = cardImg;
         this.HP = HP;
         this.ATK = ATK;
         this.VP = VP;

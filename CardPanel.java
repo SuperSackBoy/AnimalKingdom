@@ -6,15 +6,20 @@ Animal Kingdom: Card Arena
 Panel to display a card
 */
 
-import java.awt.Color;
-import java.awt.Point;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import static javax.imageio.ImageIO.read;
+
 public class CardPanel extends JPanel {
+    private BufferedImage bgImg; //image variable
     public int x = 0;
     public int y = 0;
     protected int startX = 0;
@@ -34,6 +39,7 @@ public class CardPanel extends JPanel {
     protected Card card;
 
     public CardPanel(Card card) {
+        loadBackgroundImage(card);//sets panel to background image
         this.setLayout(null);
         this.setBounds(x, y, width, height);
         this.setBackground(Color.black);
@@ -95,5 +101,34 @@ public class CardPanel extends JPanel {
     public void setY(int y) {
         this.y = y;
         this.startY = y;
+    }
+    /**
+     * Sets bgImg to the files path
+     */
+    private void loadBackgroundImage(Card cCard) {
+        try {
+            if (cCard.cardImg == "imageAssets/cardSprites/MooseCard.png") {
+                bgImg = read(getClass().getResourceAsStream(cCard.cardImg));
+            } else {
+                return;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception gracefully
+        }
+    }
+
+    /**
+     * Adds background image to panel bg
+     * @param g
+     */
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (bgImg != null) {
+            // Scale the image to fit the panel dimensions
+            Image scaledImage = bgImg.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
+            g.drawImage(scaledImage, 0, 0, null);
+        }
     }
 }
