@@ -42,7 +42,7 @@ public class CardPanel extends JPanel {
         loadBackgroundImage(card);//sets panel to background image
         this.setLayout(null);
         this.setBounds(x, y, width, height);
-        this.setBackground(Color.WHITE);
+        this.setBackground(Color.BLACK);
         this.card = card;
         lName.setText(card.getName());
         lName.setBounds(2,0,PanelManager.CardWidth,30);
