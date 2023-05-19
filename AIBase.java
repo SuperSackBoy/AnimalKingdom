@@ -11,7 +11,7 @@ public class AIBase
 {
     //--------------------------------------------------
     protected static LinkedList<Card> AiHandList = new LinkedList<Card>();
-    protected int HP, PlayerHP = 150;
+    protected static int HP, PlayerHP = 100, playedVP = 0;
     //--------------------------------------------------
     public AIBase()
     {
@@ -19,18 +19,43 @@ public class AIBase
         {
             AiHandList.add(CardDeck.drawCard());
         }
-        HP = 100;
+        HP = 150;
     }
     //--------------------------------------------------
-    public LinkedList<Card> playAI()
+    public static void playAI()
     {
+        playedVP = 0;
         if (HP <= (PlayerHP - 20))
         {
-            return DefensiveAI.DefensivePlay(AiHandList);
+            AiHandList = DefensiveAI.Play(AiHandList);
+            move();
         }
         else
         {
-            return AggressiveAI.AggressivePlay(AiHandList);
+            AiHandList = AggressiveAI.Play(AiHandList);
+            move();
+        }
+    }
+    //--------------------------------------------------
+    private static void move ()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if ((playedVP + AiHandList.get(i).getVP()) <= 5)
+            {
+                for (int ii = 0; ii < 5; ii++)
+                {
+                    if (AICardManager.AIPlayed[ii] != null)
+                    {
+                        AICardManager.playCard(i, ii);
+                        playedVP = playedVP + AiHandList.get(i).getVP();
+                    }
+                }
+            }
+            else
+            {
+                break;
+            }
         }
     }
 }

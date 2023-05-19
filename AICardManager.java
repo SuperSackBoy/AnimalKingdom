@@ -6,7 +6,7 @@ public class AICardManager {
 
     public static void playCard(int handIndex, int dropIndex) {
         AICardPanel card = AICardManager.AIHand[handIndex];
-        AICardManager.AIHand[handIndex] = null; //TODO should draw a new card
+        AICardManager.AIHand[handIndex] = new AICardPanel(CardDeck.drawCard()); //TODO should draw a new card
         AICardManager.AIPlayed[dropIndex] = card;
         AIDropLocation drop = PanelManager.aiDropLocations[dropIndex];
         Point point = new Point(drop.x,drop.y);

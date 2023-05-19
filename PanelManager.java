@@ -138,6 +138,7 @@ public class PanelManager {
                 }
             }
         },200,100);
+        AIBase.playAI();
 
     }
 

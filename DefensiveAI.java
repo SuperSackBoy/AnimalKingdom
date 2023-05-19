@@ -18,7 +18,7 @@ public class DefensiveAI extends AIBase
         //empty
     }
     //--------------------------------------------------
-    public static LinkedList<Card> DefensivePlay(LinkedList<Card> Hand)
+    public static LinkedList<Card> Play(LinkedList<Card> Hand)
     {
         //--------------------------------------------------
         //Sort the array in ascending order using two for loops

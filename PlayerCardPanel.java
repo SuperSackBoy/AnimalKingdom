@@ -133,7 +133,7 @@ public class PlayerCardPanel extends CardPanel {
         AICardPanel[] cards = new AICardPanel[5];//TODO get enemy cards on field
         PlayerCardPanel[] plyrCards = PanelManager.player.PlayerPlayedCards;
         for(int x = 0; x < 4; x++) {
-            if (plyrCards[x].card == this.card) {
+            if (plyrCards[x] != null) if (plyrCards[x].card == this.card) {
                 if(cards[x] != null) {
                     if(this.card.getATK() <= cards[x].card.getHP()) {
                         cards[x].card.removeHP(this.card.getATK());
