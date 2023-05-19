@@ -109,6 +109,7 @@ public class CardPanel extends JPanel {
         try {
             if (cCard.cardImg == "imageAssets/cardSprites/MooseCard.png" || cCard.cardImg == "imageAssets/cardSprites/PolarBearCard.png") {
                 lName.setVisible(false);
+                this.setOpaque(false);
                 bgImg = read(getClass().getResourceAsStream(cCard.cardImg));
             } else {
                 return;
