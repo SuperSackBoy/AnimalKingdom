@@ -72,6 +72,7 @@ public class PanelManager {
                 }
                 VPDisplay.setText("VP: " + player.getVP());
                 playerHPBar.setPercent((float) player.getHP() / (float) player.getMaxHP());
+                AIHPBar.setPercent((float) ai.getHP() / (float) player.getMaxHP());
             }
 
         }, 0, 1);
@@ -138,7 +139,7 @@ public class PanelManager {
                 }
             }
         },200,100);
-        AIBase.playAI();
+        ai.playAI();
 
     }
 

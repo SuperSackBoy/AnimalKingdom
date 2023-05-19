@@ -7,7 +7,6 @@ public class Main {
     public static void main(String[] args) {
         Player player = new Player();
         AIBase ai = new AIBase();
-        //TODO there might be a memory leak somewhere i dont know
 
         frame.setVisible(true);
 

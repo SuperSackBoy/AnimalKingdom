@@ -10,8 +10,10 @@ import java.util.LinkedList;
 public class AIBase
 {
     //--------------------------------------------------
-    protected static LinkedList<Card> AiHandList = new LinkedList<Card>();
-    protected static int HP, PlayerHP = 100, playedVP = 0;
+    //note: these should not be static, static means the variable is global across all instances of the object
+    //in this case, the ai is an object, don't access it with AIBase, access it through PanelManager.ai, or have it be public in main
+    protected LinkedList<Card> AiHandList = new LinkedList<Card>();
+    protected int HP, PlayerHP = 100, playedVP = 0;
     //--------------------------------------------------
     public AIBase()
     {
@@ -22,7 +24,7 @@ public class AIBase
         HP = 150;
     }
     //--------------------------------------------------
-    public static void playAI()
+    public void playAI()
     {
         playedVP = 0;
         if (HP <= (PlayerHP - 20))
@@ -37,7 +39,7 @@ public class AIBase
         }
     }
     //--------------------------------------------------
-    private static void move ()
+    private void move ()
     {
         for (int i = 0; i < 5; i++)
         {
@@ -57,5 +59,9 @@ public class AIBase
                 break;
             }
         }
+    }
+
+    public int getHP() {
+        return this.HP;
     }
 }
