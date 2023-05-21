@@ -8,7 +8,10 @@ Panel to display a card
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -107,7 +110,8 @@ public class CardPanel extends JPanel {
      */
     private void loadBackgroundImage(Card cCard) {
         try {
-            if (cCard.cardImg == "imageAssets/cardSprites/MooseCard.png" || cCard.cardImg == "imageAssets/cardSprites/PolarBearCard.png") {
+            File f = new File(cCard.cardImg);
+            if(f.exists() && !f.isDirectory()) {
                 lName.setVisible(false);
                 this.setOpaque(false);
                 bgImg = read(getClass().getResourceAsStream(cCard.cardImg));

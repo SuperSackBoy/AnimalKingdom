@@ -18,6 +18,7 @@ public class mainMenu extends JPanel {
     private JButton quitButton = new JButton(); //Quit button initializer
     private JTextField debugBox = new JTextField(); //debug box initializer
     private Font newFont = new Font(Font.DIALOG, Font.BOLD, 30); //button font
+    public static String debugCode = "";
 
     /**
      * Main Menu Constructor
@@ -47,6 +48,12 @@ public class mainMenu extends JPanel {
         //Debug box setup
         debugBox.setBounds((PanelManager.ScreenWidth/2) - (125), 320, 250, 50);
         debugBox.setText("Debug Box");
+        debugBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                debugCode = debugBox.getText();
+            }
+        });
         debugBox.setVisible(false);
         this.add(debugBox);
 
