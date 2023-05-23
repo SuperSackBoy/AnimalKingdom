@@ -49,7 +49,7 @@ public class AIBase
                 {
                     if (AICardManager.AIPlayed[ii] != null)
                     {
-                        AICardManager.playCard(i, ii);
+                        //AICardManager.playCard(i, ii); //TODO should draw a new card
                         playedVP = playedVP + AiHandList.get(i).getVP();
                     }
                 }
