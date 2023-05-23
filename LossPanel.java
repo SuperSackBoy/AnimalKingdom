@@ -19,17 +19,20 @@ public class LossPanel extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    LossPanel frame = new LossPanel();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
+        //if(HP == 0);
+        {
+            EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    try {
+                        LossPanel frame = new LossPanel();
+                        frame.setVisible(true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
-    }
+            });
+        }}
+
 
     /**
      * Create the frame.
@@ -50,7 +53,7 @@ public class LossPanel extends JFrame {
         lblNewLabel.setBounds(210, 52, 95, 45);
         contentPane.add(lblNewLabel);
 
-        JLabel lblNewLabel_1 = new JLabel("Better luck next time!");
+        JLabel lblNewLabel_1 = new JLabel("better luck next time!");
         lblNewLabel_1.setForeground(new Color(204, 51, 51));
         lblNewLabel_1.setBackground(new Color(255, 255, 255));
         lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 26));
@@ -68,6 +71,13 @@ public class LossPanel extends JFrame {
         contentPane.add(QuitButton);
 
         RestartButton = new JButton("Restart");
+        RestartButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+
+                dispose(); //get rid of loss panel
+            }
+        });
         RestartButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
         RestartButton.setBounds(409, 201, 95, 29);
         contentPane.add(RestartButton);

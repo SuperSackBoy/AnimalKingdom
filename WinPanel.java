@@ -18,16 +18,21 @@ public class WinPanel extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    WinPanel frame = new WinPanel();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
+        //if (enemyHP == 0);
+        //{
+            EventQueue.invokeLater(new Runnable() {
+                public void run() {
+
+
+                    try {
+                        WinPanel frame = new WinPanel();
+                        frame.setVisible(true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
+            });
+        //}
     }
 
     /**
@@ -63,6 +68,9 @@ public class WinPanel extends JFrame {
         JButton Restartbutton = new JButton("Restart");
         Restartbutton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+
+           dispose();
 
             }
         });
