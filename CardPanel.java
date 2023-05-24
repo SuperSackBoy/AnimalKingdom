@@ -35,10 +35,20 @@ public class CardPanel extends JPanel {
     private final JLabel lAP = new JLabel(Integer.toString(ap));
     private final JLabel lVP = new JLabel(Integer.toString(vp));
     private final JLabel lName = new JLabel("name");
+    private Font pixelFont;
 
     protected Card card;
 
     public CardPanel(Card card) {
+        try{
+            // load a custom font in your project folder
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")).deriveFont(13f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")));
+        }
+        catch(IOException | FontFormatException e){
+
+        }
         loadBackgroundImage(card);//sets panel to background image
         this.setLayout(null);
         this.setBounds(x, y, width, height);
@@ -89,8 +99,14 @@ public class CardPanel extends JPanel {
         this.vp = card.getVP();
 
         lHP.setText(""+hp);
+        lHP.setFont(pixelFont);
+        lHP.setForeground(Color.BLACK);
         lAP.setText(""+ap);
+        lAP.setFont(pixelFont);
+        lAP.setForeground(Color.BLACK);
         lVP.setText(""+vp);
+        lVP.setFont(pixelFont);
+        lVP.setForeground(Color.BLACK);
         this.setBounds(x,y,width,height); //update cards x and y
     }
 

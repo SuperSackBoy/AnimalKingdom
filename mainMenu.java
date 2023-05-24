@@ -10,8 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 public class mainMenu extends JPanel {
 
@@ -19,13 +19,22 @@ public class mainMenu extends JPanel {
     private JButton startButton = new JButton(); //start button initializer
     private JButton quitButton = new JButton(); //Quit button initializer
     private JTextField debugBox = new JTextField(); //debug box initializer
-    private Font newFont = new Font(Font.DIALOG, Font.BOLD, 30); //button font
+    private Font pixelFont;
     public static String debugCode = "";
 
     /**
      * Main Menu Constructor
      */
     public mainMenu() {
+        try{
+            // load a custom font in your project folder
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/BigPixelFont.ttf")).deriveFont(40f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/BigPixelFont.ttf")));
+        }
+        catch(IOException | FontFormatException e){
+
+        }
         this.setFocusable(true); // Ensure the panel can receive focus
         this.requestFocusInWindow(); // Request focus for the panel
         int condition = JComponent.WHEN_IN_FOCUSED_WINDOW;
@@ -65,8 +74,8 @@ public class mainMenu extends JPanel {
         startButton.setBackground(Color.white);
         //Action listener when button is pressed
         startButton.addActionListener(e -> PanelManager.start());
-        startButton.setText("Start");
-        startButton.setFont(newFont);
+        startButton.setText("START");
+        startButton.setFont(pixelFont);
         this.add(startButton);
 
         //quit button setup
@@ -75,8 +84,8 @@ public class mainMenu extends JPanel {
         quitButton.setBackground(Color.white);
         //Action listener when quit button is pressed
         quitButton.addActionListener(e -> System.exit(0));
-        quitButton.setText("Quit");
-        quitButton.setFont(newFont);
+        quitButton.setText("QUIT");
+        quitButton.setFont(pixelFont);
         this.add(quitButton);
     }
 
