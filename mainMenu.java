@@ -11,8 +11,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class mainMenu extends JPanel {
+
     private BufferedImage bgImg; //image variable
     private JButton startButton = new JButton(); //start button initializer
     private JButton quitButton = new JButton(); //Quit button initializer
