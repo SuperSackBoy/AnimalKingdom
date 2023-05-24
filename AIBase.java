@@ -13,7 +13,8 @@ public class AIBase
     //note: these should not be static, static means the variable is global across all instances of the object
     //in this case, the ai is an object, don't access it with AIBase, access it through PanelManager.ai, or have it be public in main
     protected LinkedList<Card> AiHandList = new LinkedList<Card>();
-    protected int HP, PlayerHP = 100, playedVP = 0;
+    protected int HP, playedVP = 0, ran;
+    private final int maxHP;
     //--------------------------------------------------
     public AIBase()
     {
@@ -21,25 +22,34 @@ public class AIBase
         {
             AiHandList.add(CardDeck.drawCard());
         }
-        HP = 150;
+        HP = maxHP = 150;
     }
     //--------------------------------------------------
     public void playAI()
     {
         playedVP = 0;
-        if (HP <= (PlayerHP - 20))
+        ran = (int)((Math.random()*100) + 1);
+        if (ran > 0 && ran < 16)
         {
-            AiHandList = DefensiveAI.Play(AiHandList);
+            AiHandList = RecklessAI.Play(AiHandList);
             move();
         }
         else
         {
-            AiHandList = AggressiveAI.Play(AiHandList);
-            move();
+            if (HP <= (Player.getHP() - 20))
+            {
+                AiHandList = DefensiveAI.Play(AiHandList);
+                move();
+            }
+            else
+            {
+                AiHandList = AggressiveAI.Play(AiHandList);
+                move();
+            }
         }
     }
     //--------------------------------------------------
-    private void move ()
+    private void move()
     {
         for (int i = 0; i < 5; i++)
         {
@@ -49,7 +59,8 @@ public class AIBase
                 {
                     if (AICardManager.AIPlayed[ii] != null)
                     {
-                        //AICardManager.playCard(i, ii); //TODO should draw a new card
+                        AICardManager.playCard(AiHandList.get(i), ii);
+                        AiHandList.set(i, CardDeck.drawCard());
                         playedVP = playedVP + AiHandList.get(i).getVP();
                     }
                 }
@@ -60,8 +71,9 @@ public class AIBase
             }
         }
     }
-
-    public int getHP() {
+    //--------------------------------------------------
+    public int getHP()
+    {
         return this.HP;
     }
 }
