@@ -32,7 +32,7 @@ public class CardDeck {
      */
     public static void deckReset() {
             cardList.add(new Card("Arctic Hare", "imageAssets/cardSprites/ArcticHareCard.png", 10, 5, 1));
-            cardList.add(new Card("Blue Jay", "imageAssets/cardSprites/BlueJayCrd.png", 10, 5, 1));
+            cardList.add(new Card("Blue Jay", "imageAssets/cardSprites/BlueJayCard.png", 10, 5, 1));
             cardList.add(new Card("Chipmunk", "imageAssets/cardSprites/ChipmunkCard.png", 10, 5, 1));
             cardList.add(new Card("Fisher", "imageAssets/cardSprites/FisherCard.png", 10, 5, 1));
             cardList.add(new Card("Groundhog", "imageAssets/cardSprites/GroundHogCard.png", 10, 5, 1));
@@ -40,7 +40,7 @@ public class CardDeck {
             cardList.add(new Card("Arctic Fox", "imageAssets/cardSprites/ArcticFoxCard.png", 15, 15, 1));
             cardList.add(new Card("Beaver", "imageAssets/cardSprites/BeaverCard.png", 20, 10, 2));
             cardList.add(new Card("Penguin", "imageAssets/cardSprites/PenguinCard.png", 20, 10, 2));
-            cardList.add(new Card("Racoon", "imageAssets/cardSprites/RacoonCard.png", 10, 20, 2));
+            cardList.add(new Card("Racoon", "imageAssets/cardSprites/RaccoonCard.png", 10, 20, 2));
             cardList.add(new Card("Wolf", "imageAssets/cardSprites/WolfCard.png", 20, 20, 2));
             cardList.add(new Card("Canada Goose", "imageAssets/cardSprites/CanadaGooseCard.png", 10, 30, 3));
             cardList.add(new Card("Canada Lynx", "imageAssets/cardSprites/CanadaLynxCard.png", 20, 20, 3));
