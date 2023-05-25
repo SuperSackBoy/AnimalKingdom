@@ -35,21 +35,20 @@ public class AIBase
         if (ran > 0 && ran < 16)
         {
             AiHandList = RecklessAI.Play(AiHandList);
-            move();
         }
         else
         {
             if (HP <= (Player.getHP() - 20))
             {
                 AiHandList = DefensiveAI.Play(AiHandList);
-                move();
             }
             else
             {
                 AiHandList = AggressiveAI.Play(AiHandList);
-                move();
             }
         }
+        move();
+        attack();
     }
     //--------------------------------------------------
     private void move()
@@ -65,6 +64,8 @@ public class AIBase
                         AICardManager.playCard(AiHandList.get(i), ii);
                         AiHandList.set(i, CardDeck.drawCard());
                         playedVP = playedVP + AiHandList.get(i).getVP();
+                        System.out.println(playedVP);
+                        break;
                     }
                 }
             }
@@ -74,7 +75,7 @@ public class AIBase
             }
         }
     }
-
+    //--------------------------------------------------
     private void attack() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -88,7 +89,7 @@ public class AIBase
                     this.cancel();
                 }
             }
-        },200,100);
+        },600,100);
     }
     //--------------------------------------------------
     public int getHP()
