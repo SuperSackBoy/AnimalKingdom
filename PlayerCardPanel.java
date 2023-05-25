@@ -130,7 +130,7 @@ public class PlayerCardPanel extends CardPanel {
 
     public void attack() { //Called when the card should attack
         attackAnimation();
-        AICardPanel[] cards = new AICardPanel[5];//TODO get enemy cards on field
+        AICardPanel[] cards = AICardManager.AIPlayed;
         PlayerCardPanel[] plyrCards = PanelManager.player.PlayerPlayedCards;
         for(int x = 0; x < 4; x++) {
             if (plyrCards[x] != null) if (plyrCards[x].card == this.card) {

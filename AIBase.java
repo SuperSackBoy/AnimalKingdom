@@ -7,6 +7,9 @@ Date: 2023-05-16
 Description: The main hub where all the AI values will be stored and strategy types will be decided
 */
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class AIBase
 {
     //--------------------------------------------------
@@ -70,6 +73,22 @@ public class AIBase
                 break;
             }
         }
+    }
+
+    private void attack() {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            int x;
+            @Override
+            public void run() {
+                if(AICardManager.AIPlayed[x] != null )
+                    AICardManager.AIPlayed[x].attack();
+                x++;
+                if(x > AICardManager.AIPlayed.length-1) {
+                    this.cancel();
+                }
+            }
+        },200,100);
     }
     //--------------------------------------------------
     public int getHP()
