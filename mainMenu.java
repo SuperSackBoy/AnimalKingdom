@@ -78,6 +78,7 @@ public class mainMenu extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 debugCode = debugBox.getText();
                 debugBox.setText("");
+                debugCodes.useCodes(debugCode);
             }
         });
         debugAccept.setVisible(false);
