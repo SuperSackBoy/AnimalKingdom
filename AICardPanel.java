@@ -30,7 +30,7 @@ public class AICardPanel extends CardPanel{
                         plyrCards[x].destroy();
                     }
                 } else {
-                    PanelManager.ai.HP -= this.card.getATK();
+                    PanelManager.player.removeHP(this.card.getATK());
                 }
                 return;
             }
