@@ -1,20 +1,44 @@
+/*
+Luca Mazzotta
+ICS4U0-C
+Final Project
+Animal Kingdom: Card Arena
+Main menu panel that opens on program launch
+*/
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class mainMenu extends JPanel {
-    private BufferedImage bgImg;
-    private JButton startButton = new JButton();
-    private JButton quitButton = new JButton();
-    private JTextField debugBox = new JTextField();
-    private Font newFont = new Font(Font.DIALOG, Font.BOLD, 25);
 
+    private BufferedImage bgImg; //image variable
+    private JButton startButton = new JButton(); //start button initializer
+    private JButton quitButton = new JButton(); //Quit button initializer
+    private JTextField debugBox = new JTextField(); //debug box initializer
+    private JButton debugAccept = new JButton();
+    private Font pixelFont;
+    private Font minecraft;
+    public static String debugCode = "";
+
+    /**
+     * Main Menu Constructor
+     */
     public mainMenu() {
+        try{
+            // load a custom font in your project folder
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/BigPixelFont.ttf")).deriveFont(40f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/BigPixelFont.ttf")));
+            minecraft = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")).deriveFont(20f);
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")));
+        }
+        catch(IOException | FontFormatException ignored){
+
+        }
         this.setFocusable(true); // Ensure the panel can receive focus
         this.requestFocusInWindow(); // Request focus for the panel
         int condition = JComponent.WHEN_IN_FOCUSED_WINDOW;
@@ -29,41 +53,60 @@ public class mainMenu extends JPanel {
         actionMap.put("debugAction", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                debugBox.setVisible(!debugBox.isVisible());
+                debugBox.setVisible(!debugBox.isVisible());//sets debug box visible
+                debugAccept.setVisible(!debugAccept.isVisible());//sets debug box visible
             }
         });
 
-        loadBackgroundImage();
+        loadBackgroundImage();//sets panel to background image
         this.setLayout(null);
 
-        debugBox.setBounds(this.getWidth()/2+200, 190, 200, 40);
+        //Debug box setup
+        debugBox.setBounds((PanelManager.ScreenWidth/2) - (125+55), 320, 250, 50);
         debugBox.setText("Debug Box");
+        debugBox.setFont(minecraft);
         debugBox.setVisible(false);
         this.add(debugBox);
 
-        startButton.setBounds(this.getWidth()/2+200-120, 250, 200, 110);
-        startButton.addActionListener(new ActionListener() {
+        //Debug Button setup
+        debugAccept.setBounds(debugBox.getX()+252, debugBox.getY(), 105, 50);
+        debugAccept.setText("Enter");
+        debugAccept.setFont(minecraft);
+        debugAccept.setBackground(Color.white);
+        debugAccept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PanelManager.start();
+                debugCode = debugBox.getText();
+                debugBox.setText("");
             }
         });
-        startButton.setText("Start");
-        startButton.setFont(newFont);
+        debugAccept.setVisible(false);
+        this.add(debugAccept);
+
+        //Start button setup
+        startButton.setBounds((PanelManager.ScreenWidth/2) - (125) -180, 400, 250, 120);
+        startButton.addMouseListener(buttonGrow(startButton));
+        startButton.setBackground(Color.white);
+        //Action listener when button is pressed
+        startButton.addActionListener(e -> PanelManager.start());
+        startButton.setText("START");
+        startButton.setFont(pixelFont);
         this.add(startButton);
 
-        quitButton.setBounds(this.getWidth()/2+200+120, 250, 200, 110);
-        quitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-        quitButton.setText("Quit");
-        quitButton.setFont(newFont);
+        //quit button setup
+        quitButton.setBounds((PanelManager.ScreenWidth/2) - (125) +180, 400, 250, 120);
+        quitButton.addMouseListener(buttonGrow(quitButton));
+        quitButton.setBackground(Color.white);
+        //Action listener when quit button is pressed
+        quitButton.addActionListener(e -> System.exit(0));
+        quitButton.setText("QUIT");
+        quitButton.setFont(pixelFont);
         this.add(quitButton);
     }
 
+    /**
+     * Sets bgImg to the files path
+     */
     private void loadBackgroundImage() {
         try {
             bgImg = ImageIO.read(getClass().getResourceAsStream("imageAssets/TitleScreen1.png"));
@@ -73,6 +116,10 @@ public class mainMenu extends JPanel {
         }
     }
 
+    /**
+     * Adds background image to panel bg
+     * @param g
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -82,5 +129,21 @@ public class mainMenu extends JPanel {
             g.drawImage(scaledImage, 0, 0, null);
         }
     }
+    /**
+     * Makes a button grow when highlighted to make it feel more alive
+     * @param button uses the button set in parameters to grow on highlight
+     */
+    public MouseListener buttonGrow(JButton button) {
+        return new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBounds(button.getX() - 5, button.getY() - 5, button.getWidth() + 10, button.getHeight() + 10);
+            }
 
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
+            }
+        };
+    }
 }

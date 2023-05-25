@@ -9,7 +9,7 @@ May 11, 2023 *changed fields to static
 import java.util.LinkedList;
 
 public class CardDeck {
-    public static LinkedList<Card> cardList = new LinkedList<Card>();//list of all Cards
+    public static LinkedList<Card> cardList = new LinkedList<>();//list of all Cards
     CardDeck() {//constructor
         deckReset();//resets the deck when Card deck instance is created
     }
@@ -31,31 +31,29 @@ public class CardDeck {
      * Resets the deck to have all of the Cards in it
      */
     public static void deckReset() {
-        cardList.add(new Card("Arctic Hare", 10, 5, 1));
-        cardList.add(new Card("Blue Jay", 10, 5, 1));
-        cardList.add(new Card("Chipmunk", 10, 5, 1));
-        cardList.add(new Card("Fisher", 10, 5, 1));
-        cardList.add(new Card("Groundhog", 10, 5, 1));
-        cardList.add(new Card("Stoat", 10, 5, 1));
-        cardList.add(new Card("Arctic Fox", 15, 15, 1));
-        cardList.add(new Card("Beaver", 20, 10, 2));
-        cardList.add(new Card("Penguin", 20, 10, 2));
-        cardList.add(new Card("Racoon", 10, 20, 2));
-        cardList.add(new Card("Wolf", 20, 20, 2));
-        cardList.add(new Card("Canada Goose", 10, 30, 3));
-        cardList.add(new Card("Canada Lynx", 20, 20, 3));
-        cardList.add(new Card("Coyote", 20, 20, 3));
-        cardList.add(new Card("Snowy Owl", 15, 25, 3));
-        cardList.add(new Card("Bison", 30, 20, 4));
-        cardList.add(new Card("Black Bear", 30, 20, 4));
-        cardList.add(new Card("Brown Bear", 35, 15, 4));
-        cardList.add(new Card("Moose", 35, 25, 5));
-        cardList.add(new Card("Polar Bear", 40, 20, 5));
-        /*
-         * if ("""debug mr jone cheat is active""") {
-         * 	CardList.add(new Card("Mr. Jone", 99, 99, 1));
-         * }
-         */
+            cardList.add(new Card("Arctic Hare", "imageAssets/cardSprites/ArcticHareCard.png", 10, 5, 1));
+            cardList.add(new Card("Blue Jay", "imageAssets/cardSprites/BlueJayCard.png", 10, 5, 1));
+            cardList.add(new Card("Chipmunk", "imageAssets/cardSprites/ChipmunkCard.png", 10, 5, 1));
+            cardList.add(new Card("Fisher", "imageAssets/cardSprites/FisherCard.png", 10, 5, 1));
+            cardList.add(new Card("Groundhog", "imageAssets/cardSprites/GroundHogCard.png", 10, 5, 1));
+            cardList.add(new Card("Stoat", "imageAssets/cardSprites/StoatCard.png", 10, 5, 1));
+            cardList.add(new Card("Arctic Fox", "imageAssets/cardSprites/ArcticFoxCard.png", 15, 15, 1));
+            cardList.add(new Card("Beaver", "imageAssets/cardSprites/BeaverCard.png", 20, 10, 2));
+            cardList.add(new Card("Penguin", "imageAssets/cardSprites/PenguinCard.png", 20, 10, 2));
+            cardList.add(new Card("Racoon", "imageAssets/cardSprites/RaccoonCard.png", 10, 20, 2));
+            cardList.add(new Card("Wolf", "imageAssets/cardSprites/WolfCard.png", 20, 20, 2));
+            cardList.add(new Card("Canada Goose", "imageAssets/cardSprites/CanadaGooseCard.png", 10, 30, 3));
+            cardList.add(new Card("Canada Lynx", "imageAssets/cardSprites/CanadaLynxCard.png", 20, 20, 3));
+            cardList.add(new Card("Coyote", "imageAssets/cardSprites/CoyoteCard.png", 20, 20, 3));
+            cardList.add(new Card("Snowy Owl", "imageAssets/cardSprites/SnowyOwlCard.png", 15, 25, 3));
+            cardList.add(new Card("Bison", "imageAssets/cardSprites/BisonCard.png", 30, 20, 4));
+            cardList.add(new Card("Black Bear", "imageAssets/cardSprites/BlackBearCard.png", 30, 20, 4));
+            cardList.add(new Card("Brown Bear", "imageAssets/cardSprites/BrownBearCard.png", 35, 15, 4));
+            cardList.add(new Card("Moose", "imageAssets/cardSprites/MooseCard.png", 35, 25, 5));
+            cardList.add(new Card("Polar Bear", "imageAssets/cardSprites/PolarBearCard.png", 40, 20, 5));
+            if (mainMenu.debugCode.equalsIgnoreCase("Mr. Jone")) {
+                cardList.add(new Card("Mr. Jone", "imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1));
+            }
     }
 }
 

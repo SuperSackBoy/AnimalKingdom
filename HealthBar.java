@@ -25,6 +25,7 @@ public class HealthBar extends JPanel {
     public HealthBar(int x, int y, int width, int height, float percent, String labelText, int textAlign) {
         this.setBounds(x,y,width,height);
         this.setLayout(null);
+        this.setOpaque(false);
         this.percent = percent;
         this.width = width;
         this.height = height;
@@ -33,7 +34,7 @@ public class HealthBar extends JPanel {
         label.setBounds(0,0,width,height/2);
         label.setHorizontalAlignment(textAlign);
         label.setVerticalAlignment(SwingConstants.BOTTOM);
-
+        label.setForeground(Color.white);
         this.add(label);
 
 

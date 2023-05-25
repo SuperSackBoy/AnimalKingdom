@@ -8,7 +8,7 @@ May 11, 2023 * Fixed card deck object from instance
 import java.util.LinkedList;
 
 public class Player {
-    private int HP, VP;
+    private static int HP, VP;
     private final int maxHP, maxVP;
     //public boolean selections[] = new boolean[5];
     /**
@@ -47,8 +47,12 @@ public class Player {
     }
 
     // returns the HP
-    public int getHP() {
+    public static int getHP() {
         return HP;
+    }
+
+    public void removeHP(int amount) {
+        this.setHP(this.getHP() - amount);
     }
     public int getMaxHP() {
         return maxHP;

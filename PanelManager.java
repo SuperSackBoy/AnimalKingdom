@@ -15,14 +15,15 @@ import java.util.TimerTask;
 
 public class PanelManager {
     public static Board board;
-    public static DropLocation[] dropLocations = new DropLocation[5];
+    public static PlayerDropLocation[] dropLocations = new PlayerDropLocation[5];
+    public static AIDropLocation[] aiDropLocations = new AIDropLocation[5];
     public static Point mouse;
 
-    public static int CardWidth = 64;
-    public static int CardHeight = 96;
+    public static int CardWidth = 96;
+    public static int CardHeight = 144;
 
-    public static int ScreenWidth = 600;
-    public static int ScreenHeight = 450;
+    public static int ScreenWidth = 900;
+    public static int ScreenHeight = 675;
 
     public static int center;
     public static int spacing;
@@ -30,13 +31,17 @@ public class PanelManager {
 
     public static Player player;
     public static JFrame frame;
+    public static AIBase ai;
 
-    public static void init(JFrame jframe, Player plyr) {
+    public static void init(JFrame jframe, Player plyr, AIBase aiBase) {
         player = plyr;
         frame = jframe;
+        ai = aiBase;
     }
 
     public static void start() {
+        System.out.println(mainMenu.debugCode);
+        CardDeck.deckReset();
         frame.getContentPane().removeAll();
 
         center = frame.getContentPane().getWidth()/2-CardWidth/2;
@@ -58,20 +63,29 @@ public class PanelManager {
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 mouseHandle();
+                for(Component c : board.getComponents()) {
+                    if (c instanceof CardInterface) {
+                        ((CardInterface) c).update();
+                    }
+                }
+                /*
                 for(PlayerCardPanel c : player.PlayerHand) {
                     if(c!=null) c.update();
                 }
                 for(PlayerCardPanel c : player.PlayerPlayedCards) {
                     if(c!=null) c.update();
                 }
-                for(DropLocation d : dropLocations) {
+                 */
+                for(PlayerDropLocation d : dropLocations) {
                     d.setBounds(d.x, d.y, d.width, d.height);
                 }
                 VPDisplay.setText("VP: " + player.getVP());
                 playerHPBar.setPercent((float) player.getHP() / (float) player.getMaxHP());
+                AIHPBar.setPercent((float) ai.getHP() / (float) player.getMaxHP());
             }
 
         }, 0, 1);
+        frame.requestFocus();
         frame.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -96,26 +110,20 @@ public class PanelManager {
     public static HealthBar AIHPBar;
     public static JLabel VPDisplay = new JLabel();;
     public static void createHud(JFrame frame) {
-        playerHPBar = new HealthBar(0,0,100, 40, 1f, "player", SwingConstants.LEFT);
+        playerHPBar = new HealthBar(0,0,150, 65, 1f, "player", SwingConstants.LEFT);
         frame.add(playerHPBar);
 
-        AIHPBar = new HealthBar(0,50,100, 40, 1f, "opponent", SwingConstants.RIGHT);
+        AIHPBar = new HealthBar(0,75,150, 65, 1f, "opponent", SwingConstants.RIGHT);
         frame.add(AIHPBar);
 
         JButton button = new JButton("End Turn");
-        button.setBounds(0,100,100,40);
+        button.setBounds(0,150,150,65);
         button.addActionListener(e -> endTurn());
         button.setFocusable(false);
         frame.add(button);
 
-        JButton surrenderButton = new JButton("Surrender");
-        button.setBounds(0,140,100,40);
-        button.addActionListener(e -> endTurn());
-        button.setFocusable(false);
-        frame.add(button);
-
-
-        VPDisplay.setBounds(0,150,100,40);
+        VPDisplay.setBounds(0,300,200,80);
+        VPDisplay.setForeground(Color.white);
         frame.add(VPDisplay);
 
 
@@ -125,22 +133,21 @@ public class PanelManager {
         //TODO code here :)
         System.out.println("END TURN");
         board.moveUp();
-        player.resetVP();
+        player.setVP(0);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             int x;
             @Override
             public void run() {
                 if(player.PlayerPlayedCards[x] != null )
-                    player.PlayerPlayedCards[x].attackAnimation();
+                    player.PlayerPlayedCards[x].attack();
                 x++;
                 if(x > player.PlayerPlayedCards.length-1) {
-                    //board.moveDown();
+                    ai.playAI();
                     this.cancel();
                 }
             }
         },200,100);
-
     }
 
     public static void mouseHandle() {

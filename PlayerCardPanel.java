@@ -20,7 +20,7 @@ public class PlayerCardPanel extends CardPanel {
     private boolean pressed = false;
     public PlayerCardPanel(Card card) {
         super(card);
-        this.addMouseListener(new MouseListener() {
+        this.addMouseListener(new MouseListener() { //To drag cards around
 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -30,7 +30,7 @@ public class PlayerCardPanel extends CardPanel {
             @Override
             public void mousePressed(MouseEvent e) {
                 if(e.getButton() == 1) { //left mouse
-                    DropLocation d = onDropLocation(); //if the card is on a drop zone, or exceeds the players VP, dont activate it
+                    PlayerDropLocation d = onDropLocation(); //if the card is on a drop zone, or exceeds the players VP, dont activate it
                     if(d == null && card.getVP() <= PanelManager.player.getVP()) {
                         pressed = true;
                     }
@@ -81,13 +81,10 @@ public class PlayerCardPanel extends CardPanel {
                         }
                     }, 150);
 
-                    ArrayList<DropLocation> dList = getDrops();
-                    DropLocation d = null;
-
-                    if(dList != null) for(DropLocation drop : dList) {
-                        if (!drop.active) {
-                            d = drop;
-                            break;
+                    PlayerDropLocation d = getClosestDrop();
+                    if(d != null) {
+                        if(d.active) {
+                            d = null;
                         }
                     }
 
@@ -111,23 +108,43 @@ public class PlayerCardPanel extends CardPanel {
                 }
             }
         }
-        this.setBounds(x,y,width,height); //update cards x and y
     }
 
-    public void playCard() {
+    public void playCard() { //Called when the card is moved to a drop zone
         PanelManager.player.removeVP(card.getVP());
     }
 
     public void destroy() {
         JPanel parent = (JPanel) this.getParent(); //get the parent panel
-        DropLocation d = onDropLocation(); //get the cards drop location
+        PlayerDropLocation d = onDropLocation(); //get the cards drop location
         if(d != null) d.active = false; //if the card is on a drop location set it to be open
         parent.remove(this); //remove the card
         parent.revalidate();
         parent.repaint();
         for(int x = 0; x < PanelManager.player.PlayerPlayedCards.length; x++) {
-            if (PanelManager.player.PlayerPlayedCards[x].equals(this)) {
+            if(PanelManager.player.PlayerPlayedCards[x] != null) if (PanelManager.player.PlayerPlayedCards[x].equals(this)) {
                 PanelManager.player.PlayerPlayedCards[x] = null;
+            }
+        }
+    }
+
+    public void attack() { //Called when the card should attack
+        attackAnimation();
+        AICardPanel[] cards = AICardManager.AIPlayed;
+        PlayerCardPanel[] plyrCards = PanelManager.player.PlayerPlayedCards;
+        for(int x = 0; x < 5; x++) {
+            if (plyrCards[x] != null) if (plyrCards[x].card == this.card) {
+                if(cards[x] != null) {
+                    if(this.card.getATK() < cards[x].card.getHP()) {
+                        cards[x].card.removeHP(this.card.getATK());
+                    } else {
+                        PanelManager.ai.HP -= this.card.getATK() - cards[x].card.getHP();
+                        cards[x].destroy();
+                    }
+                } else {
+                    PanelManager.ai.HP -= this.card.getATK();
+                }
+                return;
             }
         }
     }
@@ -153,9 +170,9 @@ public class PlayerCardPanel extends CardPanel {
         }, 1, 10);
     }
 
-    public DropLocation onDropLocation() { //returns the DropLocation the card is hovering over, null if none
+    public PlayerDropLocation onDropLocation() { //returns the DropLocation the card is hovering over, null if none
         Rectangle card = new Rectangle(x,y,width,height);
-        for(DropLocation d : PanelManager.dropLocations) {
+        for(PlayerDropLocation d : PanelManager.dropLocations) {
             Rectangle drop = new Rectangle(d.x,d.y,d.width,d.height);
             if(card.intersects(drop)) {
                 return d;
@@ -164,10 +181,25 @@ public class PlayerCardPanel extends CardPanel {
         return null;
     }
 
-    public ArrayList<DropLocation> getDrops() { //returns the DropLocation the card is hovering over, null if none
-        ArrayList<DropLocation> drops = new ArrayList<>();
+    public PlayerDropLocation getClosestDrop() {
+        ArrayList<PlayerDropLocation> drops = getDrops();
+        PlayerDropLocation closest = new PlayerDropLocation(-99,-99,99);
+        if(drops != null) {
+            for(PlayerDropLocation d : drops) {
+                if(new Point(closest.x,closest.y).distance(this.x,this.y) > new Point(d.x,d.y).distance(this.x,this.y)) {
+                    closest = d;
+                }
+            }
+            return closest;
+        } else {
+            return null;
+        }
+    }
+
+    public ArrayList<PlayerDropLocation> getDrops() { //returns the DropLocation the card is hovering over, null if none
+        ArrayList<PlayerDropLocation> drops = new ArrayList<>();
         Rectangle card = new Rectangle((int) x,(int) y,width,height);
-        for(DropLocation d : PanelManager.dropLocations) {
+        for(PlayerDropLocation d : PanelManager.dropLocations) {
             Rectangle drop = new Rectangle(d.x,d.y,d.width,d.height);
             if(card.intersects(drop)) {
                 drops.add(d);
