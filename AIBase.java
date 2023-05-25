@@ -62,9 +62,8 @@ public class AIBase
                     if (AICardManager.AIPlayed[ii] == null)
                     {
                         AICardManager.playCard(AiHandList.get(i), ii);
-                        AiHandList.set(i, CardDeck.drawCard());
                         playedVP = playedVP + AiHandList.get(i).getVP();
-                        System.out.println(playedVP);
+                        AiHandList.set(i, CardDeck.drawCard());
                         break;
                     }
                 }
