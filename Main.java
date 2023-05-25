@@ -27,5 +27,6 @@ public class Main {
                 frame.revalidate();
             }
         }, 1, 1);
+
     }
 }

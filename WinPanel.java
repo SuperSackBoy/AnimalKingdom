@@ -1,5 +1,4 @@
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -58,7 +57,7 @@ public class WinPanel extends JFrame {
         JButton QuitButton = new JButton("Quit Game");
         QuitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.exit(EXIT_ON_CLOSE);
+                System.exit(EXIT_ON_CLOSE);//close panel
             }
         });
         QuitButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
@@ -69,7 +68,7 @@ public class WinPanel extends JFrame {
         Restartbutton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-
+           //mainMenu();
            dispose();
 
             }

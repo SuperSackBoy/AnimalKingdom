@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 
 public class LossPanel extends JFrame {
 
+
     private JPanel contentPane;
     private JButton RestartButton;
 
@@ -73,11 +74,11 @@ public class LossPanel extends JFrame {
         RestartButton = new JButton("Restart");
         RestartButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-
+              //  mainMenu();
                 dispose(); //get rid of loss panel
-            }
-        });
+                }
+            });
+
         RestartButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
         RestartButton.setBounds(409, 201, 95, 29);
         contentPane.add(RestartButton);
