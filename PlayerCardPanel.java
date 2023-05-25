@@ -122,7 +122,7 @@ public class PlayerCardPanel extends CardPanel {
         parent.revalidate();
         parent.repaint();
         for(int x = 0; x < PanelManager.player.PlayerPlayedCards.length; x++) {
-            if (PanelManager.player.PlayerPlayedCards[x].equals(this)) {
+            if(PanelManager.player.PlayerPlayedCards[x] != null) if (PanelManager.player.PlayerPlayedCards[x].equals(this)) {
                 PanelManager.player.PlayerPlayedCards[x] = null;
             }
         }
@@ -132,12 +132,11 @@ public class PlayerCardPanel extends CardPanel {
         attackAnimation();
         AICardPanel[] cards = AICardManager.AIPlayed;
         PlayerCardPanel[] plyrCards = PanelManager.player.PlayerPlayedCards;
-        for(int x = 0; x < 4; x++) {
+        for(int x = 0; x < 5; x++) {
             if (plyrCards[x] != null) if (plyrCards[x].card == this.card) {
                 if(cards[x] != null) {
-                    if(this.card.getATK() <= cards[x].card.getHP()) {
+                    if(this.card.getATK() < cards[x].card.getHP()) {
                         cards[x].card.removeHP(this.card.getATK());
-                        cards[x].destroy();
                     } else {
                         PanelManager.ai.HP -= this.card.getATK() - cards[x].card.getHP();
                         cards[x].destroy();

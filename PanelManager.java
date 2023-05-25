@@ -133,7 +133,7 @@ public class PanelManager {
         //TODO code here :)
         System.out.println("END TURN");
         board.moveUp();
-        player.resetVP();
+        player.setVP(0);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             int x;
@@ -143,13 +143,11 @@ public class PanelManager {
                     player.PlayerPlayedCards[x].attack();
                 x++;
                 if(x > player.PlayerPlayedCards.length-1) {
-                    //board.moveDown();
+                    ai.playAI();
                     this.cancel();
                 }
             }
         },200,100);
-        ai.playAI();
-
     }
 
     public static void mouseHandle() {

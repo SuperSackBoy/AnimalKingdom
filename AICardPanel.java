@@ -12,19 +12,22 @@ public class AICardPanel extends CardPanel{
         parent.remove(this); //remove the card
         parent.revalidate();
         parent.repaint();
-        //TODO remove from AI Field array
+        for(int x = 0; x < AICardManager.AIPlayed.length; x++) {
+            if(AICardManager.AIPlayed[x] != null) if(AICardManager.AIPlayed[x].equals(this)) {
+                AICardManager.AIPlayed[x] = null;
+            }
+        }
     }
 
     public void attack() { //Called when the card should attack
         attackAnimation();
         AICardPanel[] aiCards = AICardManager.AIPlayed;
         PlayerCardPanel[] plyrCards = PanelManager.player.PlayerPlayedCards;
-        for(int x = 0; x < 4; x++) {
+        for(int x = 0; x < 5; x++) {
             if (aiCards[x] != null) if (aiCards[x].card == this.card) {
                 if(plyrCards[x] != null) {
-                    if(this.card.getATK() <= plyrCards[x].card.getHP()) {
+                    if(this.card.getATK() < plyrCards[x].card.getHP()) {
                         plyrCards[x].card.removeHP(this.card.getATK());
-                        plyrCards[x].destroy();
                     } else {
                         PanelManager.player.removeHP(this.card.getATK() - plyrCards[x].card.getHP());
                         plyrCards[x].destroy();

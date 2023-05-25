@@ -85,10 +85,11 @@ public class AIBase
                     AICardManager.AIPlayed[x].attack();
                 x++;
                 if(x > AICardManager.AIPlayed.length-1) {
+                    PanelManager.player.resetVP();
                     this.cancel();
                 }
             }
-        },600,100);
+        },700,100);
     }
     //--------------------------------------------------
     public int getHP()
