@@ -10,7 +10,7 @@ public class Main {
         AIBase ai = new AIBase();
 
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        //frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         mainMenuPanel = new mainMenu();
         mainMenuPanel.setBounds(0, 0, frame.getWidth(), frame.getHeight()); // Set panel size to match frame

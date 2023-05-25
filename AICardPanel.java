@@ -17,7 +17,7 @@ public class AICardPanel extends CardPanel{
 
     public void attack() { //Called when the card should attack
         attackAnimation();
-        AICardPanel[] aiCards = new AICardPanel[5];//TODO get enemy cards on field
+        AICardPanel[] aiCards = AICardManager.AIPlayed;
         PlayerCardPanel[] plyrCards = PanelManager.player.PlayerPlayedCards;
         for(int x = 0; x < 4; x++) {
             if (aiCards[x] != null) if (aiCards[x].card == this.card) {
@@ -30,7 +30,7 @@ public class AICardPanel extends CardPanel{
                         plyrCards[x].destroy();
                     }
                 } else {
-                    PanelManager.ai.HP -= this.card.getATK();
+                    PanelManager.player.removeHP(this.card.getATK());
                 }
                 return;
             }

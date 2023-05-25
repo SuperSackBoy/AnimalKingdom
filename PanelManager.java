@@ -63,12 +63,19 @@ public class PanelManager {
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 mouseHandle();
+                for(Component c : board.getComponents()) {
+                    if (c instanceof CardInterface) {
+                        ((CardInterface) c).update();
+                    }
+                }
+                /*
                 for(PlayerCardPanel c : player.PlayerHand) {
                     if(c!=null) c.update();
                 }
                 for(PlayerCardPanel c : player.PlayerPlayedCards) {
                     if(c!=null) c.update();
                 }
+                 */
                 for(PlayerDropLocation d : dropLocations) {
                     d.setBounds(d.x, d.y, d.width, d.height);
                 }

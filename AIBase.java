@@ -7,6 +7,9 @@ Date: 2023-05-16
 Description: The main hub where all the AI values will be stored and strategy types will be decided
 */
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class AIBase
 {
     //--------------------------------------------------
@@ -32,21 +35,20 @@ public class AIBase
         if (ran > 0 && ran < 16)
         {
             AiHandList = RecklessAI.Play(AiHandList);
-            move();
         }
         else
         {
             if (HP <= (Player.getHP() - 20))
             {
                 AiHandList = DefensiveAI.Play(AiHandList);
-                move();
             }
             else
             {
                 AiHandList = AggressiveAI.Play(AiHandList);
-                move();
             }
         }
+        move();
+        attack();
     }
     //--------------------------------------------------
     private void move()
@@ -57,11 +59,13 @@ public class AIBase
             {
                 for (int ii = 0; ii < 5; ii++)
                 {
-                    if (AICardManager.AIPlayed[ii] != null)
+                    if (AICardManager.AIPlayed[ii] == null)
                     {
                         AICardManager.playCard(AiHandList.get(i), ii);
                         AiHandList.set(i, CardDeck.drawCard());
                         playedVP = playedVP + AiHandList.get(i).getVP();
+                        System.out.println(playedVP);
+                        break;
                     }
                 }
             }
@@ -70,6 +74,22 @@ public class AIBase
                 break;
             }
         }
+    }
+    //--------------------------------------------------
+    private void attack() {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            int x;
+            @Override
+            public void run() {
+                if(AICardManager.AIPlayed[x] != null )
+                    AICardManager.AIPlayed[x].attack();
+                x++;
+                if(x > AICardManager.AIPlayed.length-1) {
+                    this.cancel();
+                }
+            }
+        },600,100);
     }
     //--------------------------------------------------
     public int getHP()

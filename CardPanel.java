@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 
 import static javax.imageio.ImageIO.read;
 
-public class CardPanel extends JPanel {
+public class CardPanel extends JPanel implements CardInterface{
     private BufferedImage bgImg; //image variable
     public int x = 0;
     public int y = 0;
