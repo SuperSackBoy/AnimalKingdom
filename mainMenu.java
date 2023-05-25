@@ -19,7 +19,9 @@ public class mainMenu extends JPanel {
     private JButton startButton = new JButton(); //start button initializer
     private JButton quitButton = new JButton(); //Quit button initializer
     private JTextField debugBox = new JTextField(); //debug box initializer
+    private JButton debugAccept = new JButton();
     private Font pixelFont;
+    private Font minecraft;
     public static String debugCode = "";
 
     /**
@@ -31,8 +33,10 @@ public class mainMenu extends JPanel {
             pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/BigPixelFont.ttf")).deriveFont(40f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/BigPixelFont.ttf")));
+            minecraft = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")).deriveFont(20f);
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")));
         }
-        catch(IOException | FontFormatException e){
+        catch(IOException | FontFormatException ignored){
 
         }
         this.setFocusable(true); // Ensure the panel can receive focus
@@ -50,6 +54,7 @@ public class mainMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 debugBox.setVisible(!debugBox.isVisible());//sets debug box visible
+                debugAccept.setVisible(!debugAccept.isVisible());//sets debug box visible
             }
         });
 
@@ -57,16 +62,26 @@ public class mainMenu extends JPanel {
         this.setLayout(null);
 
         //Debug box setup
-        debugBox.setBounds((PanelManager.ScreenWidth/2) - (125), 320, 250, 50);
+        debugBox.setBounds((PanelManager.ScreenWidth/2) - (125+55), 320, 250, 50);
         debugBox.setText("Debug Box");
-        debugBox.addActionListener(new ActionListener() {
+        debugBox.setFont(minecraft);
+        debugBox.setVisible(false);
+        this.add(debugBox);
+
+        //Debug Button setup
+        debugAccept.setBounds(debugBox.getX()+252, debugBox.getY(), 105, 50);
+        debugAccept.setText("Enter");
+        debugAccept.setFont(minecraft);
+        debugAccept.setBackground(Color.white);
+        debugAccept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 debugCode = debugBox.getText();
+                debugBox.setText("");
             }
         });
-        debugBox.setVisible(false);
-        this.add(debugBox);
+        debugAccept.setVisible(false);
+        this.add(debugAccept);
 
         //Start button setup
         startButton.setBounds((PanelManager.ScreenWidth/2) - (125) -180, 400, 250, 120);

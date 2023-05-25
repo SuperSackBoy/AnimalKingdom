@@ -16,8 +16,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 
-public class GameFrame extends JFrame implements KeyListener {
-    private ArrayList<String> validCodes = new ArrayList<String> (Arrays.asList("Mr.Jone"));
+public class GameFrame extends JFrame /*implements KeyListener*/ {
+    //private ArrayList<String> validCodes = new ArrayList<String> (Arrays.asList("Mr.Jone"));
     public GameFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(false);
@@ -27,13 +27,13 @@ public class GameFrame extends JFrame implements KeyListener {
         JPanel contentPane = new JPanel();
         contentPane.setLayout(null);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        addKeyListener(this);
+        //addKeyListener(this);
         this.setResizable(false);
 
         setContentPane(contentPane);
 
     }
-    public void keyPressed(KeyEvent event) {
+    /*public void keyPressed(KeyEvent event) {
         int letter = event.getKeyCode();
         if(letter == 67) {
             String cheatCode = (String)JOptionPane.showInputDialog(this,"", "Debug Console",JOptionPane.PLAIN_MESSAGE,null, null, null);
@@ -55,7 +55,7 @@ public class GameFrame extends JFrame implements KeyListener {
     }
     public void keyTyped(KeyEvent event) {
         //not implemented
-    }
+    }*/
 
 
 }
