@@ -57,7 +57,7 @@ public class AIBase
             {
                 for (int ii = 0; ii < 5; ii++)
                 {
-                    if (AICardManager.AIPlayed[ii] != null)
+                    if (AICardManager.AIPlayed[ii] == null)
                     {
                         AICardManager.playCard(AiHandList.get(i), ii);
                         AiHandList.set(i, CardDeck.drawCard());

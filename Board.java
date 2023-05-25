@@ -55,6 +55,15 @@ public class Board extends JPanel{
         PanelManager.player.PlayerHand[pos] = c;
         return c;
     }
+
+    public AICardPanel createAICard(int x, int y, Card card) {
+        AICardPanel c = new AICardPanel(card);
+        c.setX(x);
+        c.setY(y);
+        this.add(c);
+        this.setComponentZOrder(c,0);
+        return c;
+    }
     public PlayerDropLocation createDrop(int x, int y, int pos) {
         PlayerDropLocation d = new PlayerDropLocation(x,y,pos);
         PanelManager.dropLocations[pos] = d;
