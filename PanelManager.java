@@ -40,6 +40,8 @@ public class PanelManager {
     }
 
     public static void start() {
+        System.out.println(mainMenu.debugCode);
+        CardDeck.deckReset();
         frame.getContentPane().removeAll();
 
         center = frame.getContentPane().getWidth()/2-CardWidth/2;
