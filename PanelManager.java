@@ -108,6 +108,13 @@ public class PanelManager {
         button.setFocusable(false);
         frame.add(button);
 
+        JButton surrenderButton = new JButton("Surrender");
+        button.setBounds(0,140,100,40);
+        button.addActionListener(e -> endTurn());
+        button.setFocusable(false);
+        frame.add(button);
+
+
         VPDisplay.setBounds(0,150,100,40);
         frame.add(VPDisplay);
 
