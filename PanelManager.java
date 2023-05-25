@@ -123,10 +123,10 @@ public class PanelManager {
         frame.add(button);
 
         JButton surrenderButton = new JButton("Surrender");
-        button.setBounds(0,225,150,65);
-        button.addActionListener(e -> endTurn());
-        button.setFocusable(false);
-        frame.add(button);
+        surrenderButton.setBounds(720,550,150,65);
+        surrenderButton.addActionListener(e -> surrender());
+        surrenderButton.setFocusable(false);
+        frame.add(surrenderButton);
 
         VPDisplay.setBounds(0,300,200,80);
         VPDisplay.setForeground(Color.white);
@@ -134,7 +134,11 @@ public class PanelManager {
 
 
     }
-
+    public static void surrender() {
+     System.out.println("Surrender");
+     //dispose game board
+        //open the loss panel
+    }
     public static void endTurn() {
         //TODO code here :)
         System.out.println("END TURN");
