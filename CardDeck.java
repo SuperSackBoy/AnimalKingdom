@@ -51,9 +51,6 @@ public class CardDeck {
             cardList.add(new Card("Brown Bear", "imageAssets/cardSprites/BrownBearCard.png", 35, 15, 4));
             cardList.add(new Card("Moose", "imageAssets/cardSprites/MooseCard.png", 35, 25, 5));
             cardList.add(new Card("Polar Bear", "imageAssets/cardSprites/PolarBearCard.png", 40, 20, 5));
-            if (mainMenu.debugCode.equalsIgnoreCase("Mr. Jone")) {
-                cardList.add(new Card("Mr. Jone", "imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1));
-            }
     }
 }
 

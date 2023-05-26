@@ -40,8 +40,6 @@ public class PanelManager {
     }
 
     public static void start() {
-        System.out.println(mainMenu.debugCode);
-        CardDeck.deckReset();
         frame.getContentPane().removeAll();
 
         center = frame.getContentPane().getWidth()/2-CardWidth/2;
@@ -123,8 +121,8 @@ public class PanelManager {
         frame.add(button);
 
         JButton surrenderButton = new JButton("Surrender");
-        surrenderButton.setBounds(720,550,150,65);
-        surrenderButton.addActionListener(e -> surrender());
+        surrenderButton.setBounds(0,225,150,65);
+        surrenderButton.addActionListener(e -> endTurn());
         surrenderButton.setFocusable(false);
         frame.add(surrenderButton);
 
@@ -134,11 +132,7 @@ public class PanelManager {
 
 
     }
-    public static void surrender() {
-     System.out.println("Surrender");
-     //dispose game board
-        //open the loss panel
-    }
+
     public static void endTurn() {
         //TODO code here :)
         System.out.println("END TURN");
