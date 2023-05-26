@@ -48,6 +48,7 @@ public class AIBase
             }
         }
         move();
+        System.out.println("Moved");
         attack();
     }
     //--------------------------------------------------
@@ -95,5 +96,13 @@ public class AIBase
     public int getHP()
     {
         return this.HP;
+    }
+    //--------------------------------------------------
+    public void show ()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            System.out.println(AiHandList.get(i).getName() + " {" + AiHandList.get(i).getHP() + "/" + AiHandList.get(i).getATK() + "/" + AiHandList.get(i).getVP() + "}");
+        }
     }
 }
