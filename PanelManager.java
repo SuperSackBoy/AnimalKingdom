@@ -40,8 +40,6 @@ public class PanelManager {
     }
 
     public static void start() {
-        System.out.println(mainMenu.debugCode);
-        CardDeck.deckReset();
         frame.getContentPane().removeAll();
 
         center = frame.getContentPane().getWidth()/2-CardWidth/2;
@@ -123,10 +121,10 @@ public class PanelManager {
         frame.add(button);
 
         JButton surrenderButton = new JButton("Surrender");
-        button.setBounds(0,225,150,65);
-        button.addActionListener(e -> endTurn());
-        button.setFocusable(false);
-        frame.add(button);
+        surrenderButton.setBounds(0,225,150,65);
+        surrenderButton.addActionListener(e -> endTurn());
+        surrenderButton.setFocusable(false);
+        frame.add(surrenderButton);
 
         VPDisplay.setBounds(0,300,200,80);
         VPDisplay.setForeground(Color.white);
