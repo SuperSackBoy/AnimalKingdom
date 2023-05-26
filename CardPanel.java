@@ -47,10 +47,10 @@ public class CardPanel extends JPanel implements CardInterface{
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")));
         }
         catch(IOException | FontFormatException e){
-
+            e.printStackTrace();
         }
         loadBackgroundImage(card);//sets panel to background image
-        this.setLayout(null);
+        this.setLayout(null); //formatting
         this.setBounds(x, y, width, height);
         this.setBackground(Color.BLACK);
         this.card = card;

@@ -16,12 +16,13 @@ public class HealthBar extends JPanel {
     private final JPanel hp;
     private final int height;
     private final int width;
-
+    //constructor for changing the color
     public HealthBar(int x, int y, int width, int height, float percent, String labelText, int textAlign, Color color) {
         this(x,y,width,height,percent,labelText,textAlign);
         this.color = color;
         this.hp.setBackground(color);
     }
+    //default constructor
     public HealthBar(int x, int y, int width, int height, float percent, String labelText, int textAlign) {
         this.setBounds(x,y,width,height);
         this.setLayout(null);
