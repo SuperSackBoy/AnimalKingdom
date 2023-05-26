@@ -17,21 +17,7 @@ public class WinPanel extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
-        //if (enemyHP == 0);
-        //{
-            EventQueue.invokeLater(new Runnable() {
-                public void run() {
-
-
-                    try {
-                        WinPanel frame = new WinPanel();
-                        frame.setVisible(true);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        //}
+        //empty
     }
 
     /**

@@ -20,19 +20,8 @@ public class LossPanel extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
-        //if(HP == 0);
-        {
-            EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    try {
-                        LossPanel frame = new LossPanel();
-                        frame.setVisible(true);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }}
+        //empty
+    }
 
 
     /**

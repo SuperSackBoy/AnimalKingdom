@@ -122,7 +122,6 @@ public class PanelManager {
 
         JButton surrenderButton = new JButton("Surrender");
         surrenderButton.setBounds(0,225,150,65);
-        //surrenderButton.addActionListener(e -> endTurn());
         surrenderButton.setFocusable(false);
         frame.add(surrenderButton);
 

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,6 +35,20 @@ public class AICardPanel extends CardPanel{
                     }
                 } else {
                     PanelManager.player.removeHP(this.card.getATK());
+                }
+                if(Player.getHP() <= 0)
+                {
+                    System.out.println(Player.getHP());
+                    EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                            try {
+                                LossPanel frame = new LossPanel();
+                                frame.setVisible(true);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                 }
                 return;
             }

@@ -6,6 +6,7 @@ Sub-Assignment: AI base object
 Date: 2023-05-16
 Description: The main hub where all the AI values will be stored and strategy types will be decided
 */
+import java.awt.*;
 import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,26 +31,41 @@ public class AIBase
     //--------------------------------------------------
     public void playAI()
     {
-        playedVP = 0;
-        ran = (int)((Math.random()*100) + 1);
-        if (ran > 0 && ran < 16)
+        if (getHP() <= 0)
         {
-            AiHandList = RecklessAI.Play(AiHandList);
+            EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    try {
+                        WinPanel frame = new WinPanel();
+                        frame.setVisible(true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
         else
         {
-            if (HP <= (Player.getHP() - 20))
+            playedVP = 0;
+            ran = (int)((Math.random()*100) + 1);
+            if (ran > 0 && ran < 16)
             {
-                AiHandList = DefensiveAI.Play(AiHandList);
+                AiHandList = RecklessAI.Play(AiHandList);
             }
             else
             {
-                AiHandList = AggressiveAI.Play(AiHandList);
+                if (HP <= (Player.getHP() - 20))
+                {
+                    AiHandList = DefensiveAI.Play(AiHandList);
+                }
+                else
+                {
+                    AiHandList = AggressiveAI.Play(AiHandList);
+                }
             }
+            move();
+            attack();
         }
-        move();
-        System.out.println("Moved");
-        attack();
     }
     //--------------------------------------------------
     private void move()
