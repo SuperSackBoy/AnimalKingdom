@@ -5,6 +5,8 @@ import java.util.TimerTask;
 public class Main {
     public static mainMenu mainMenuPanel;
     public static GameFrame frame = new GameFrame();
+    public static WinPanel Wframe = new WinPanel();
+    public static LossPanel Lframe = new LossPanel();
     public static void main(String[] args) {
         Player player = new Player();
         AIBase ai = new AIBase();

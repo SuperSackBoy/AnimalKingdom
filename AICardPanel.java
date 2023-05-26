@@ -36,13 +36,13 @@ public class AICardPanel extends CardPanel{
                 } else { //reduce health from the player
                     PanelManager.player.removeHP(this.card.getATK());
                 }
-                if (Player.getHP() <= 0)
+                if (Player.getHP() <= 0 && !(Main.Lframe.isVisible()))
                 {
                     EventQueue.invokeLater(new Runnable() {
                         public void run() {
                             try {
-                                LossPanel frame = new LossPanel();
-                                frame.setVisible(true);
+
+                                Main.Lframe.setVisible(true);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

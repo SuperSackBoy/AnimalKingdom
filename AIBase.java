@@ -31,13 +31,12 @@ public class AIBase
     //--------------------------------------------------
     public void playAI()
     {
-        if (getHP() <= 0)
+        if (getHP() <= 0 && !(Main.Wframe.isVisible()))
         {
             EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     try {
-                        WinPanel frame = new WinPanel();
-                        frame.setVisible(true);
+                        Main.Wframe.setVisible(true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
