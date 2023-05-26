@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 
-public class Board extends JPanel{
+public class Board extends JPanel{ //manages the card locations and drop locations on screen, can be panned
     private BufferedImage bgImg;
     public int x = 0;
     public float y = -PanelManager.ScreenHeight;
@@ -28,19 +28,19 @@ public class Board extends JPanel{
         this.setLayout(null);
         this.setBounds(x,(int) y,width,height);
 
-        drawNewCard(0);
+        drawNewCard(0); //draw cards for the player
         drawNewCard(1);
         drawNewCard(2);
         drawNewCard(3);
         drawNewCard(4);
-
+        //creates drop locations
         createDrop(PanelManager.center-PanelManager.CardWidth*2-PanelManager.spacing*2,PanelManager.cardY+PanelManager.ScreenHeight/3,0);
         createDrop(PanelManager.center-PanelManager.CardWidth-PanelManager.spacing,PanelManager.cardY+PanelManager.ScreenHeight/3,1);
         createDrop(PanelManager.center,PanelManager.cardY+PanelManager.ScreenHeight/3,2);
         createDrop(PanelManager.center+PanelManager.CardWidth+PanelManager.spacing,PanelManager.cardY+PanelManager.ScreenHeight/3,3);
         createDrop(PanelManager.center+PanelManager.CardWidth*2+PanelManager.spacing*2,PanelManager.cardY+PanelManager.ScreenHeight/3,4);
 
-
+        //creates drop locations for the AI to use
 		createAIDrop(PanelManager.center-PanelManager.CardWidth*2-PanelManager.spacing*2,PanelManager.cardY-PanelManager.cardY/16,0);
 		createAIDrop(PanelManager.center-PanelManager.CardWidth-PanelManager.spacing,PanelManager.cardY-PanelManager.cardY/16,1);
 		createAIDrop(PanelManager.center,PanelManager.cardY-PanelManager.cardY/16,2);
@@ -49,31 +49,31 @@ public class Board extends JPanel{
 
     }
     public PlayerCardPanel createCard(int x, int y, int pos, Card card) {
-        PlayerCardPanel c = new PlayerCardPanel(card);
-        c.setX(x);
+        PlayerCardPanel c = new PlayerCardPanel(card); //creates a new card panel
+        c.setX(x); //set the x and y
         c.setY(y);
-        PanelManager.player.PlayerHand[pos] = c;
+        PanelManager.player.PlayerHand[pos] = c; //add it to the players hand array
         return c;
     }
 
     public AICardPanel createAICard(int x, int y, Card card) {
-        AICardPanel c = new AICardPanel(card);
-        c.setX(x);
+        AICardPanel c = new AICardPanel(card); //creates a new AI card panel
+        c.setX(x); //set the x and y
         c.setY(y);
-        this.add(c);
-        this.setComponentZOrder(c,0);
+        this.add(c); //add it to the panel
+        this.setComponentZOrder(c,0); //set it to the front
         return c;
     }
     public PlayerDropLocation createDrop(int x, int y, int pos) {
-        PlayerDropLocation d = new PlayerDropLocation(x,y,pos);
-        PanelManager.dropLocations[pos] = d;
+        PlayerDropLocation d = new PlayerDropLocation(x,y,pos); //create a drop location
+        PanelManager.dropLocations[pos] = d; //add it to the array
         this.add(d);
-        this.setComponentZOrder(d, 5);
+        this.setComponentZOrder(d, 5); //set it to the back
         return d;
     }
 
     public AIDropLocation createAIDrop(int x, int y, int pos) {
-        AIDropLocation d = new AIDropLocation(x,y,pos);
+        AIDropLocation d = new AIDropLocation(x,y); //literally the same as the previous
         PanelManager.aiDropLocations[pos] = d;
         this.add(d);
         this.setComponentZOrder(d, 5);
@@ -81,8 +81,8 @@ public class Board extends JPanel{
     }
 
     public PlayerCardPanel drawNewCard(int pos) {
-        assert pos >= 0 && pos <=4;
-        int x = switch (pos) {
+        assert pos >= 0 && pos <=4; //forces a crash if pos is out of this range
+        int x = switch (pos) { //get the desired x position
             case 0 -> PanelManager.center - PanelManager.CardWidth * 2 - PanelManager.spacing * 2;
             case 1 -> PanelManager.center - PanelManager.CardWidth - PanelManager.spacing;
             case 2 -> PanelManager.center;
@@ -90,11 +90,11 @@ public class Board extends JPanel{
             case 4 -> PanelManager.center + PanelManager.CardWidth * 2 + PanelManager.spacing * 2;
             default -> 0;
         };
-
+        //create a card
         PlayerCardPanel c = createCard(x,PanelManager.cardY+PanelManager.ScreenHeight+PanelManager.CardHeight, pos, CardDeck.drawCard());
-        this.add(c);
-        this.setComponentZOrder(c,0);
-        c.smoothTransition(new Point(c.x,c.y-PanelManager.CardHeight));
+        this.add(c); //add the card to the screen
+        this.setComponentZOrder(c,0); //set it to the top
+        c.smoothTransition(new Point(c.x,c.y-PanelManager.CardHeight)); //smooth animations even if its never seen
         return c;
     }
 

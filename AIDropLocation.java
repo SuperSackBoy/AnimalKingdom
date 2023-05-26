@@ -1,7 +1,5 @@
 public class AIDropLocation extends DropLocation{
-    public int index;
-    public AIDropLocation(int x, int y, int index) {
+    public AIDropLocation(int x, int y) { //literally does nothing, just a visual component on the screen
         super(x, y);
-        this.index = index;
     }
 }
