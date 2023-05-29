@@ -10,9 +10,6 @@ import java.util.LinkedList;
 
 public class CardDeck {
     public static LinkedList<Card> cardList = new LinkedList<>();//list of all Cards
-    CardDeck() {//constructor
-        deckReset();//resets the deck when Card deck instance is created
-    }
     /**
      * Method used to draw a random Card to a players hand from the CardDeck object
      * @return randomly selected Card
