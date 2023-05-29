@@ -114,6 +114,8 @@ public class AIBase
         return this.HP;
     }
     //--------------------------------------------------
+    public void resetHP() { HP = maxHP; }
+    //--------------------------------------------------
     public void show ()
     {
         for (int i = 0; i < 5; i++)
