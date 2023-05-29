@@ -1,3 +1,11 @@
+/*
+Luca Mazzotta
+ICS4U0-C
+Debug Code class
+holds various debug codes to be used in the program
+May 29, 2023
+*/
+
 public class debugCodes {
     public static boolean allJone, mrJone;
     public static void useCodes(String code) {
