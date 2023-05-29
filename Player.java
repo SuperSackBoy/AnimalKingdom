@@ -51,6 +51,9 @@ public class Player {
         return HP;
     }
 
+    //resets the HP
+    public void resetHP() { HP = maxHP; }
+
     public void removeHP(int amount) {
         this.setHP(this.getHP() - amount);
     }
