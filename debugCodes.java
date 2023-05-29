@@ -34,6 +34,7 @@ public class debugCodes {
 
         if (code.equalsIgnoreCase("Player VP " + codeNum)) {
             Player.setMaxVP(codeNumInt);
+            Player.setVP(codeNumInt);
             System.out.println(mainMenu.debugCode);
         }
     }
