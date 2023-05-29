@@ -51,8 +51,23 @@ public class LossPanel extends JPanel {
         RestartButton = new JButton("Restart");
         RestartButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-              //  mainMenu();
-                //dispose(); //get rid of loss panel
+
+                EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        try {
+                            Main.frame.getContentPane().removeAll();
+                            Main.frame.add(Main.mainMenuPanel);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+
+
+
+
+
                 }
             });
 

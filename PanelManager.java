@@ -122,6 +122,7 @@ public class PanelManager {
 
         JButton surrenderButton = new JButton("Surrender");
         surrenderButton.setBounds(0,225,150,65);
+        surrenderButton.addActionListener(e -> surrender());
         surrenderButton.setFocusable(false);
         frame.add(surrenderButton);
 
@@ -131,6 +132,24 @@ public class PanelManager {
 
 
     }
+
+    public static void surrender() {
+        {
+            System.out.println("Surrender");
+            EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    try {
+                        Main.frame.getContentPane().removeAll();
+                        Main.frame.add(Main.Lframe);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+        return; //breaks the for loop
+    }
+
 
     public static void endTurn() {
         //TODO code here :)

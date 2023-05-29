@@ -37,7 +37,7 @@ public class WinPanel extends JPanel {
             }
         });
         QuitButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        QuitButton.setBounds(10, 191, 130, 39);
+        QuitButton.setBounds(10, 191, 140, 39);
         this.add(QuitButton);
 
         JButton Restartbutton = new JButton("Restart");
@@ -45,6 +45,20 @@ public class WinPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
            //mainMenu();
+                EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        try {
+                            Main.frame.getContentPane().removeAll();
+                            Main.frame.add(Main.mainMenuPanel);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+
+
+
            //dispose();
 
             }
