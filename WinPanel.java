@@ -9,36 +9,26 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class WinPanel extends JFrame {
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-    private JPanel contentPane;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        //empty
-    }
+public class WinPanel extends JPanel {
 
     /**
      * Create the frame.
      */
     public WinPanel() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 532, 280);
-        contentPane = new JPanel();
-        contentPane.setBackground(new Color(255, 255, 255));
-        contentPane.setForeground(new Color(64, 64, 64));
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        this.setBackground(new Color(255, 255, 255));
+        this.setForeground(new Color(64, 64, 64));
+        this.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+        this.setLayout(null);
 
         JLabel CongratsLabel = new JLabel("Congratulations,");
         CongratsLabel.setForeground(new Color(0, 153, 0));
         CongratsLabel.setFont(new Font("Times New Roman", Font.BOLD, 26));
         CongratsLabel.setBounds(145, 48, 205, 68);
-        contentPane.add(CongratsLabel);
+        this.add(CongratsLabel);
 
         JButton QuitButton = new JButton("Quit Game");
         QuitButton.addActionListener(new ActionListener() {
@@ -48,25 +38,25 @@ public class WinPanel extends JFrame {
         });
         QuitButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
         QuitButton.setBounds(10, 191, 130, 39);
-        contentPane.add(QuitButton);
+        this.add(QuitButton);
 
         JButton Restartbutton = new JButton("Restart");
         Restartbutton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
            //mainMenu();
-           dispose();
+           //dispose();
 
             }
         });
         Restartbutton.setFont(new Font("Times New Roman", Font.BOLD, 18));
         Restartbutton.setBounds(376, 191, 130, 39);
-        contentPane.add(Restartbutton);
+        this.add(Restartbutton);
 
         JLabel lblNewLabel = new JLabel("You have won!");
         lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 26));
         lblNewLabel.setForeground(new Color(0, 153, 51));
         lblNewLabel.setBounds(155, 98, 242, 39);
-        contentPane.add(lblNewLabel);
+        this.add(lblNewLabel);
     }
 }

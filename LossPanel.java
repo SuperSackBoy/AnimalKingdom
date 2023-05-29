@@ -10,45 +10,33 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class LossPanel extends JFrame {
+public class LossPanel extends JPanel {
 
 
-    private JPanel contentPane;
     private JButton RestartButton;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        //empty
-    }
-
 
     /**
      * Create the frame.
      */
     public LossPanel() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 530, 280);
-        contentPane = new JPanel();
-        contentPane.setBackground(new Color(255, 255, 255));
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        this.setBackground(new Color(255, 255, 255));
+        this.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+        this.setLayout(null);
 
         JLabel lblNewLabel = new JLabel("Sorry,");
         lblNewLabel.setForeground(new Color(204, 51, 0));
         lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 26));
         lblNewLabel.setBounds(210, 52, 95, 45);
-        contentPane.add(lblNewLabel);
+        this.add(lblNewLabel);
 
         JLabel lblNewLabel_1 = new JLabel("better luck next time!");
         lblNewLabel_1.setForeground(new Color(204, 51, 51));
         lblNewLabel_1.setBackground(new Color(255, 255, 255));
         lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 26));
         lblNewLabel_1.setBounds(123, 89, 250, 47);
-        contentPane.add(lblNewLabel_1);
+        this.add(lblNewLabel_1);
 
         JButton QuitButton = new JButton("Quit Game");
         QuitButton.addActionListener(new ActionListener() {
@@ -58,19 +46,19 @@ public class LossPanel extends JFrame {
         });
         QuitButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
         QuitButton.setBounds(10, 201, 119, 29);
-        contentPane.add(QuitButton);
+        this.add(QuitButton);
 
         RestartButton = new JButton("Restart");
         RestartButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
               //  mainMenu();
-                dispose(); //get rid of loss panel
+                //dispose(); //get rid of loss panel
                 }
             });
 
         RestartButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
         RestartButton.setBounds(409, 201, 95, 29);
-        contentPane.add(RestartButton);
+        this.add(RestartButton);
     }
 
 }
