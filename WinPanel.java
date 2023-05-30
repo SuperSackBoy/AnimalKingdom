@@ -43,8 +43,10 @@ public class WinPanel extends JPanel {
         JButton Restartbutton = new JButton("Restart");
         Restartbutton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+           AIBase.resetHP();
+           Player.resetHP();
+           Player.resetVP();
 
-           //mainMenu();
                 EventQueue.invokeLater(new Runnable() {
                     public void run() {
                         try {

@@ -19,7 +19,7 @@ public class LossPanel extends JPanel {
      * Create the frame.
      */
     public LossPanel() {
-        setBounds(100, 100, 530, 280);
+        setBounds(10, 10, 865, 615);
         this.setBackground(new Color(255, 255, 255));
         this.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -45,12 +45,17 @@ public class LossPanel extends JPanel {
             }
         });
         QuitButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        QuitButton.setBounds(10, 201, 119, 29);
+        QuitButton.setBounds(10, 550, 120, 29);
         this.add(QuitButton);
 
         RestartButton = new JButton("Restart");
         RestartButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+                AIBase.resetHP();
+                Player.resetHP();
+                Player.resetVP();
+
 
                 EventQueue.invokeLater(new Runnable() {
                     public void run() {
@@ -72,7 +77,7 @@ public class LossPanel extends JPanel {
             });
 
         RestartButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        RestartButton.setBounds(409, 201, 95, 29);
+        RestartButton.setBounds(700, 550, 95, 29);
         this.add(RestartButton);
     }
 

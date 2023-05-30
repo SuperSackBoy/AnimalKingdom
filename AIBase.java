@@ -17,8 +17,8 @@ public class AIBase
     //note: these should not be static, static means the variable is global across all instances of the object
     //in this case, the ai is an object, don't access it with AIBase, access it through PanelManager.ai, or have it be public in main
     protected LinkedList<Card> AiHandList = new LinkedList<Card>();
-    protected int HP, playedVP = 0, ran;
-    private final int maxHP;
+    protected static int AiHP, playedVP = 0, ran;
+    private static final int AimaxHP = 150;
     //--------------------------------------------------
     public AIBase()
     {
@@ -26,7 +26,7 @@ public class AIBase
         {
             AiHandList.add(CardDeck.drawCard());
         }
-        HP = maxHP = 150;
+        AiHP = AimaxHP;
     }
     //--------------------------------------------------
     public void playAI()
@@ -54,7 +54,7 @@ public class AIBase
             }
             else
             {
-                if (HP <= (Player.getHP() - 20))
+                if (AiHP <= (Player.getHP() - 20))
                 {
                     AiHandList = DefensiveAI.Play(AiHandList);
                 }
@@ -111,10 +111,10 @@ public class AIBase
     //--------------------------------------------------
     public int getHP()
     {
-        return this.HP;
+        return this.AiHP;
     }
     //--------------------------------------------------
-    public void resetHP() { HP = maxHP; }
+    public static void resetHP() { AiHP = AimaxHP; }
     //--------------------------------------------------
     public void show ()
     {
