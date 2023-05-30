@@ -1,9 +1,9 @@
 /*
 Luca Mazzotta
 ICS4U0-C
-Final Project
-Animal Kingdom: Card Arena
+main Menu panel
 Main menu panel that opens on program launch
+May 15, 2023
 */
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,8 +16,9 @@ import java.io.IOException;
 public class mainMenu extends JPanel {
 
     private BufferedImage bgImg; //image variable
-    private JButton startButton = new JButton(); //start button initializer
-    private JButton quitButton = new JButton(); //Quit button initializer
+    ImageIcon icon = new ImageIcon("imageAssets/ButtonIcon.png");
+    private JButton startButton = new JButton(icon); //start button initializer
+    private JButton quitButton = new JButton(icon); //Quit button initializer
     private JTextField debugBox = new JTextField(); //debug box initializer
     private JButton debugAccept = new JButton();
     private Font pixelFont;
@@ -92,6 +93,10 @@ public class mainMenu extends JPanel {
         startButton.addActionListener(e -> PanelManager.start());
         startButton.setText("START");
         startButton.setFont(pixelFont);
+        startButton.setOpaque(false);
+        startButton.setContentAreaFilled(false);
+        startButton.setBorderPainted(false);
+        startButton.setFocusPainted(false);
         this.add(startButton);
 
         //quit button setup
@@ -102,6 +107,10 @@ public class mainMenu extends JPanel {
         quitButton.addActionListener(e -> System.exit(0));
         quitButton.setText("QUIT");
         quitButton.setFont(pixelFont);
+        quitButton.setOpaque(false);
+        quitButton.setContentAreaFilled(false);
+        quitButton.setBorderPainted(false);
+        quitButton.setFocusPainted(false);
         this.add(quitButton);
     }
 

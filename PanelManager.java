@@ -33,13 +33,14 @@ public class PanelManager {
     public static JFrame frame;
     public static AIBase ai;
 
-    public static void init(JFrame jframe, Player plyr, AIBase aiBase) {
+    public static void init(JFrame jframe, Player plyr) {
         player = plyr;
         frame = jframe;
-        ai = aiBase;
+        //ai = new AIBase();
     }
 
     public static void start() {
+        ai = new AIBase();
         frame.getContentPane().removeAll();
 
         center = frame.getContentPane().getWidth()/2-CardWidth/2;

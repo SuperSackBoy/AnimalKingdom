@@ -10,9 +10,6 @@ import java.util.LinkedList;
 
 public class CardDeck {
     public static LinkedList<Card> cardList = new LinkedList<>();//list of all Cards
-    CardDeck() {//constructor
-        deckReset();//resets the deck when Card deck instance is created
-    }
     /**
      * Method used to draw a random Card to a players hand from the CardDeck object
      * @return randomly selected Card
@@ -21,14 +18,18 @@ public class CardDeck {
         if (cardList.size() <= 0) {
             deckReset();
         }
-        Card CardDrew = new Card();//creates an instance of the Card object to be returned
-        int rNum = (int) (Math.random()* cardList.size());//gets random number from the Card list index
-        CardDrew = cardList.get(rNum);//sets the drawn Card to the Card in the list of the rNum index
-        cardList.remove(rNum);//removes that Card from the deck
-        return CardDrew;//sends Card out of method
+        if (debugCodes.allJone) {
+            return cardList.getLast();
+        } else {
+            Card CardDrew = new Card();//creates an instance of the Card object to be returned
+            int rNum = (int) (Math.random() * cardList.size());//gets random number from the Card list index
+            CardDrew = cardList.get(rNum);//sets the drawn Card to the Card in the list of the rNum index
+            cardList.remove(rNum);//removes that Card from the deck
+            return CardDrew;//sends Card out of method
+        }
     }
     /**
-     * Resets the deck to have all of the Cards in it
+     * Resets the deck to have all the Cards in it
      */
     public static void deckReset() {
             cardList.add(new Card("Arctic Hare", "imageAssets/cardSprites/ArcticHareCard.png", 10, 5, 1));
@@ -51,6 +52,9 @@ public class CardDeck {
             cardList.add(new Card("Brown Bear", "imageAssets/cardSprites/BrownBearCard.png", 35, 15, 4));
             cardList.add(new Card("Moose", "imageAssets/cardSprites/MooseCard.png", 35, 25, 5));
             cardList.add(new Card("Polar Bear", "imageAssets/cardSprites/PolarBearCard.png", 40, 20, 5));
+            if (debugCodes.mrJone){
+                CardDeck.cardList.add(new Card("Mr. Jone", "imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1));
+            }
     }
 }
 
