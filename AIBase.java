@@ -54,7 +54,7 @@ public class AIBase
             }
             else
             {
-                if (AiHP <= (Player.getHP() - 20))
+                if (AiHP <= (PanelManager.player.getHP() - 20))
                 {
                     AiHandList = DefensiveAI.Play(AiHandList);
                 }
@@ -103,6 +103,7 @@ public class AIBase
                 x++;
                 if(x > AICardManager.AIPlayed.length-1) {
                     PanelManager.player.resetVP();
+                    PanelManager.board.moveDown();
                     this.cancel();
                 }
             }

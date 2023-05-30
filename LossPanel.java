@@ -52,9 +52,9 @@ public class LossPanel extends JPanel {
         RestartButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                AIBase.resetHP();
-                Player.resetHP();
-                Player.resetVP();
+                PanelManager.ai.resetHP();
+                PanelManager.player.resetHP();
+                PanelManager.player.resetVP();
 
 
                 EventQueue.invokeLater(new Runnable() {

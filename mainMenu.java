@@ -12,6 +12,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class mainMenu extends JPanel {
 
@@ -90,7 +91,10 @@ public class mainMenu extends JPanel {
         startButton.addMouseListener(buttonGrow(startButton));
         startButton.setBackground(Color.white);
         //Action listener when button is pressed
-        startButton.addActionListener(e -> PanelManager.start());
+        startButton.addActionListener(e -> {
+            Random r = new Random();
+            PanelManager.start(r.nextBoolean());
+        });
         startButton.setText("START");
         startButton.setFont(pixelFont);
         startButton.setOpaque(false);

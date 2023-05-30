@@ -39,7 +39,7 @@ public class PanelManager {
         //ai = new AIBase();
     }
 
-    public static void start() {
+    public static void start(boolean playerStart) {
         ai = new AIBase();
         frame.getContentPane().removeAll();
 
@@ -103,7 +103,15 @@ public class PanelManager {
 
             }
         });
+
+
+        if(!playerStart) {
+            board.y = (float) -ScreenHeight /2;
+            board.showHand = !board.showHand;
+            endTurn();
+        }
         board.setBounds(board.x,(int) board.y,board.width,board.height);
+
     }
     public static HealthBar playerHPBar;
     public static HealthBar AIHPBar;

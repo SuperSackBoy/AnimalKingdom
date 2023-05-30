@@ -44,8 +44,8 @@ public class WinPanel extends JPanel {
         Restartbutton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
            AIBase.resetHP();
-           Player.resetHP();
-           Player.resetVP();
+           PanelManager.player.resetHP();
+           PanelManager.player.resetVP();
 
                 EventQueue.invokeLater(new Runnable() {
                     public void run() {
