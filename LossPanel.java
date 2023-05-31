@@ -28,14 +28,14 @@ public class LossPanel extends JPanel {
         JLabel lblNewLabel = new JLabel("Sorry,");
         lblNewLabel.setForeground(new Color(204, 51, 0));
         lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
-        lblNewLabel.setBounds(425, 200, 100, 100);
+        lblNewLabel.setBounds(375, 200, 100, 100);
         this.add(lblNewLabel);
 
         JLabel lblNewLabel_1 = new JLabel("better luck next time!");
         lblNewLabel_1.setForeground(new Color(204, 51, 51));
         lblNewLabel_1.setBackground(new Color(255, 255, 255));
         lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 30));
-        lblNewLabel_1.setBounds(335, 255, 300, 47);
+        lblNewLabel_1.setBounds(300, 255, 300, 47);
         this.add(lblNewLabel_1);
 
         JButton QuitButton = new JButton("Quit Game");
