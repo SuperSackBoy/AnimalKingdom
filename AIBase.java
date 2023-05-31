@@ -17,8 +17,8 @@ public class AIBase
     //note: these should not be static, static means the variable is global across all instances of the object
     //in this case, the ai is an object, don't access it with AIBase, access it through PanelManager.ai, or have it be public in main
     protected LinkedList<Card> AiHandList = new LinkedList<Card>();
-    protected int HP, playedVP = 0, ran, power, full;
-    private final int maxHP;
+    protected static int AiHP, playedVP = 0, ran;
+    private static final int AimaxHP = 150;
     //--------------------------------------------------
     public AIBase()
     {
@@ -26,13 +26,11 @@ public class AIBase
         {
             AiHandList.add(CardDeck.drawCard());
         }
-        HP = maxHP = 150;
+        AiHP = AimaxHP;
     }
     //--------------------------------------------------
     public void playAI()
     {
-        power = 0;
-        full = 0;
         if (getHP() <= 0)
         {
             EventQueue.invokeLater(new Runnable() {
@@ -48,15 +46,6 @@ public class AIBase
         }
         else
         {
-            for (int i = 0; i < 5; i++)
-            {
-                if(AICardManager.AIPlayed[i] != null )
-                {
-                    power = power + AICardManager.AIPlayed[i].getCard().getATK();
-                    full++;
-                }
-            }
-            //System.out.println("Full spaces: " + full + "\nCurrent: " + power + "\nPlaying: " + KillShotAI.BestATK(AiHandList, full, power));
             playedVP = 0;
             ran = (int)((Math.random()*100) + 1);
             if (ran > 0 && ran < 16)
@@ -65,10 +54,9 @@ public class AIBase
             }
             else
             {
-                if (HP <= (Player.getHP() - 20))
+                if (AiHP <= (PanelManager.player.getHP() - 20))
                 {
-                    //AiHandList = DefensiveAI.Play(AiHandList);
-                    AiHandList = AggressiveAI.Play(AiHandList);
+                    AiHandList = DefensiveAI.Play(AiHandList);
                 }
                 else
                 {
@@ -115,6 +103,7 @@ public class AIBase
                 x++;
                 if(x > AICardManager.AIPlayed.length-1) {
                     PanelManager.player.resetVP();
+                    PanelManager.board.moveDown();
                     this.cancel();
                 }
             }
@@ -123,10 +112,10 @@ public class AIBase
     //--------------------------------------------------
     public int getHP()
     {
-        return this.HP;
+        return this.AiHP;
     }
     //--------------------------------------------------
-    public void resetHP() { HP = maxHP; }
+    public static void resetHP() { AiHP = AimaxHP; }
     //--------------------------------------------------
     public void show ()
     {

@@ -19,7 +19,7 @@ public class LossPanel extends JPanel {
      * Create the frame.
      */
     public LossPanel() {
-        setBounds(100, 100, 530, 280);
+        setBounds(10, 10, 865, 615);
         this.setBackground(new Color(255, 255, 255));
         this.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -27,15 +27,15 @@ public class LossPanel extends JPanel {
 
         JLabel lblNewLabel = new JLabel("Sorry,");
         lblNewLabel.setForeground(new Color(204, 51, 0));
-        lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 26));
-        lblNewLabel.setBounds(210, 52, 95, 45);
+        lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        lblNewLabel.setBounds(375, 200, 100, 100);
         this.add(lblNewLabel);
 
         JLabel lblNewLabel_1 = new JLabel("better luck next time!");
         lblNewLabel_1.setForeground(new Color(204, 51, 51));
         lblNewLabel_1.setBackground(new Color(255, 255, 255));
-        lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 26));
-        lblNewLabel_1.setBounds(123, 89, 250, 47);
+        lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        lblNewLabel_1.setBounds(300, 255, 300, 47);
         this.add(lblNewLabel_1);
 
         JButton QuitButton = new JButton("Quit Game");
@@ -45,12 +45,17 @@ public class LossPanel extends JPanel {
             }
         });
         QuitButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        QuitButton.setBounds(10, 201, 119, 29);
+        QuitButton.setBounds(10, 550, 120, 29);
         this.add(QuitButton);
 
         RestartButton = new JButton("Restart");
         RestartButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+                PanelManager.ai.resetHP();
+                PanelManager.player.resetHP();
+                PanelManager.player.resetVP();
+
 
                 EventQueue.invokeLater(new Runnable() {
                     public void run() {
@@ -72,7 +77,7 @@ public class LossPanel extends JPanel {
             });
 
         RestartButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        RestartButton.setBounds(409, 201, 95, 29);
+        RestartButton.setBounds(750, 550, 95, 29);
         this.add(RestartButton);
     }
 

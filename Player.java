@@ -8,8 +8,8 @@ May 11, 2023 * Fixed card deck object from instance
 import java.util.LinkedList;
 
 public class Player {
-    private static int HP, VP;
-    private static int maxHP, maxVP;
+    private int HP, VP;
+    private final int maxHP = 150, maxVP = 5;
     //public boolean selections[] = new boolean[5];
     /**
      * List that holds 5 of the players cards in their hand as separate objects
@@ -23,8 +23,8 @@ public class Player {
 
     // constructor method called when object created
     public Player() {
-        HP = maxHP = 150;
-        VP = maxVP = 5;
+        HP = maxHP;
+        VP = maxVP;
 
     }
     /**
@@ -32,12 +32,12 @@ public class Player {
      */
 
     // changes the HP
-    public static void setHP(int newValue) {
+    public void setHP(int newValue) {
         HP = newValue;
     }
 
     // returns the HP
-    public static int getHP() {
+    public int getHP() {
         return HP;
     }
 
@@ -47,17 +47,17 @@ public class Player {
     public void removeHP(int amount) {
         this.setHP(this.getHP() - amount);
     }
-
     public int getMaxHP() {
         return maxHP;
     }
-    // changes the Value points
-    public static void setVP(int newValue) {
-        VP = newValue;
+
+    public int getMaxVP() {
+        return maxVP;
     }
 
-    public static void setMaxVP(int newValue) {
-        maxVP = newValue;
+    // changes the Value points
+    public void setVP(int newValue) {
+        VP = newValue;
     }
 
     public void resetVP() {

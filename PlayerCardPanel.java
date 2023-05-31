@@ -138,11 +138,11 @@ public class PlayerCardPanel extends CardPanel {
                     if(this.card.getATK() < cards[x].card.getHP()) {
                         cards[x].card.removeHP(this.card.getATK());
                     } else {
-                        PanelManager.ai.HP -= this.card.getATK() - cards[x].card.getHP();
+                        PanelManager.ai.AiHP -= this.card.getATK() - cards[x].card.getHP();
                         cards[x].destroy();
                     }
                 } else {
-                    PanelManager.ai.HP -= this.card.getATK();
+                    PanelManager.ai.AiHP -= this.card.getATK();
                 }
                 return;
             }

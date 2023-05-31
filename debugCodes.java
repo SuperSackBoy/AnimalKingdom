@@ -32,17 +32,17 @@ public class debugCodes {
         }
 
         if (code.equalsIgnoreCase("Player HP " + codeNum)) {
-            Player.setHP(codeNumInt);
+            PanelManager.player.setHP(codeNumInt);
             System.out.println(mainMenu.debugCode);
         }
         if (code.equalsIgnoreCase("AI HP "+ codeNum)) {
-            PanelManager.ai.HP = codeNumInt;
+            PanelManager.ai.AiHP = codeNumInt;
             System.out.println(mainMenu.debugCode);
         }
 
         if (code.equalsIgnoreCase("Player VP " + codeNum)) {
-            Player.setMaxVP(codeNumInt);
-            Player.setVP(codeNumInt);
+            //Player.setMaxVP(codeNumInt);
+            PanelManager.player.setVP(codeNumInt);
             System.out.println(mainMenu.debugCode);
         }
     }

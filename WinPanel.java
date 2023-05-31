@@ -17,7 +17,7 @@ public class WinPanel extends JPanel {
      * Create the frame.
      */
     public WinPanel() {
-        setBounds(100, 100, 532, 280);
+        setBounds(10, 10, 865, 615);
         this.setBackground(new Color(255, 255, 255));
         this.setForeground(new Color(64, 64, 64));
         this.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -27,7 +27,7 @@ public class WinPanel extends JPanel {
         JLabel CongratsLabel = new JLabel("Congratulations,");
         CongratsLabel.setForeground(new Color(0, 153, 0));
         CongratsLabel.setFont(new Font("Times New Roman", Font.BOLD, 26));
-        CongratsLabel.setBounds(145, 48, 205, 68);
+        CongratsLabel.setBounds(325, 200, 205, 68);
         this.add(CongratsLabel);
 
         JButton QuitButton = new JButton("Quit Game");
@@ -37,14 +37,16 @@ public class WinPanel extends JPanel {
             }
         });
         QuitButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        QuitButton.setBounds(10, 191, 140, 39);
+        QuitButton.setBounds(10, 550, 140, 39);
         this.add(QuitButton);
 
         JButton Restartbutton = new JButton("Restart");
         Restartbutton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+           AIBase.resetHP();
+           PanelManager.player.resetHP();
+           PanelManager.player.resetVP();
 
-           //mainMenu();
                 EventQueue.invokeLater(new Runnable() {
                     public void run() {
                         try {
@@ -64,13 +66,13 @@ public class WinPanel extends JPanel {
             }
         });
         Restartbutton.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        Restartbutton.setBounds(376, 191, 130, 39);
+        Restartbutton.setBounds(725, 550, 130, 39);
         this.add(Restartbutton);
 
         JLabel lblNewLabel = new JLabel("You have won!");
         lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 26));
         lblNewLabel.setForeground(new Color(0, 153, 51));
-        lblNewLabel.setBounds(155, 98, 242, 39);
+        lblNewLabel.setBounds(335, 250, 242, 39);
         this.add(lblNewLabel);
     }
 }
