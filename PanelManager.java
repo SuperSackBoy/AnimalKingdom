@@ -21,6 +21,8 @@ public class PanelManager {
     public static AIDropLocation[] aiDropLocations = new AIDropLocation[5];
     public static Point mouse;
 
+    public static JButton endTurnButton;
+
     private static Font minecraft;
 
     public static int CardWidth = 96;
@@ -141,18 +143,20 @@ public class PanelManager {
         AIHPBar.label.setFont(minecraft);
         frame.add(AIHPBar);
 
-        JButton button = new JButton("End Turn");
-        button.setBounds(0,150,150,65);
-        button.addActionListener(e -> endTurn());
-        button.setFocusable(false);
-        button.setFont(minecraft);
-        mainMenu.buttonImageLoader(button);
-        frame.add(button);
+        endTurnButton = new JButton("End Turn");
+        endTurnButton.setBounds(0,150,150,65);
+        endTurnButton.addActionListener(e -> endTurn());
+        endTurnButton.setFocusable(false);
+        endTurnButton.setFont(minecraft);
+        mainMenu.buttonImageLoader(endTurnButton);
+        frame.add(endTurnButton);
 
         JButton surrenderButton = new JButton("Surrender");
         surrenderButton.setBounds(0,225,150,65);
         surrenderButton.addActionListener(e -> surrender());
         surrenderButton.setFocusable(false);
+        surrenderButton.setFont(minecraft);
+        mainMenu.buttonImageLoader(surrenderButton);
         frame.add(surrenderButton);
 
         VPDisplay.setBounds(0,300,200,80);
@@ -180,6 +184,7 @@ public class PanelManager {
 
 
     public static void endTurn() {
+        endTurnButton.setEnabled(false);
         System.out.println("END TURN");
         board.moveUp();
         player.setVP(0);
