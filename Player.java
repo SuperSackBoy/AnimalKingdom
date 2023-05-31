@@ -30,16 +30,6 @@ public class Player {
     /**
      * Play the cards that the user selected. Selected cards are tested by the boolean array selections[]
      */
-    /*
-    public void playCards() {
-        for (int i = 0; i < 5; i++) {
-            if (selections[i]) {
-                playerField.add(i, playerHand.get(i));
-                playerHand.set(i, null);
-            }
-        }
-    }
-    */
 
     // changes the HP
     public static void setHP(int newValue) {

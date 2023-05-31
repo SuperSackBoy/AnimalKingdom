@@ -17,7 +17,7 @@ public class AIBase
     //note: these should not be static, static means the variable is global across all instances of the object
     //in this case, the ai is an object, don't access it with AIBase, access it through PanelManager.ai, or have it be public in main
     protected LinkedList<Card> AiHandList = new LinkedList<Card>();
-    protected int HP, playedVP = 0, ran;
+    protected int HP, playedVP = 0, ran, power, full;
     private final int maxHP;
     //--------------------------------------------------
     public AIBase()
@@ -31,6 +31,8 @@ public class AIBase
     //--------------------------------------------------
     public void playAI()
     {
+        power = 0;
+        full = 0;
         if (getHP() <= 0)
         {
             EventQueue.invokeLater(new Runnable() {
@@ -46,6 +48,15 @@ public class AIBase
         }
         else
         {
+            for (int i = 0; i < 5; i++)
+            {
+                if(AICardManager.AIPlayed[i] != null )
+                {
+                    power = power + AICardManager.AIPlayed[i].getCard().getATK();
+                    full++;
+                }
+            }
+            //System.out.println("Full spaces: " + full + "\nCurrent: " + power + "\nPlaying: " + KillShotAI.BestATK(AiHandList, full, power));
             playedVP = 0;
             ran = (int)((Math.random()*100) + 1);
             if (ran > 0 && ran < 16)
@@ -56,7 +67,8 @@ public class AIBase
             {
                 if (HP <= (Player.getHP() - 20))
                 {
-                    AiHandList = DefensiveAI.Play(AiHandList);
+                    //AiHandList = DefensiveAI.Play(AiHandList);
+                    AiHandList = AggressiveAI.Play(AiHandList);
                 }
                 else
                 {
