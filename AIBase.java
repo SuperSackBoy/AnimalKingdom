@@ -104,6 +104,7 @@ public class AIBase
                 if(x > AICardManager.AIPlayed.length-1) {
                     PanelManager.player.resetVP();
                     PanelManager.board.moveDown();
+                    PanelManager.endTurnButton.setEnabled(true);
                     this.cancel();
                 }
             }

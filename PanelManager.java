@@ -116,6 +116,7 @@ public class PanelManager {
     public static HealthBar playerHPBar;
     public static HealthBar AIHPBar;
     public static JLabel VPDisplay = new JLabel();;
+    public static JButton endTurnButton;
     public static void createHud(JFrame frame) {
         playerHPBar = new HealthBar(0,0,150, 65, 1f, "player", SwingConstants.LEFT);
         frame.add(playerHPBar);
@@ -123,11 +124,11 @@ public class PanelManager {
         AIHPBar = new HealthBar(0,75,150, 65, 1f, "opponent", SwingConstants.RIGHT);
         frame.add(AIHPBar);
 
-        JButton button = new JButton("End Turn");
-        button.setBounds(0,150,150,65);
-        button.addActionListener(e -> endTurn());
-        button.setFocusable(false);
-        frame.add(button);
+        endTurnButton = new JButton("End Turn");
+        endTurnButton.setBounds(0,150,150,65);
+        endTurnButton.addActionListener(e -> endTurn());
+        endTurnButton.setFocusable(false);
+        frame.add(endTurnButton);
 
         JButton surrenderButton = new JButton("Surrender");
         surrenderButton.setBounds(0,225,150,65);
@@ -161,7 +162,7 @@ public class PanelManager {
 
 
     public static void endTurn() {
-        //TODO code here :)
+        endTurnButton.setEnabled(false);
         System.out.println("END TURN");
         board.moveUp();
         player.setVP(0);
