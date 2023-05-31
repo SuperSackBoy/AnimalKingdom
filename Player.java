@@ -9,7 +9,8 @@ import java.util.LinkedList;
 
 public class Player {
     private int HP, VP;
-    private final int maxHP = 150, maxVP = 5;
+    private int maxHP = 150;
+    private final int maxVP = 5;
     //public boolean selections[] = new boolean[5];
     /**
      * List that holds 5 of the players cards in their hand as separate objects
@@ -46,6 +47,10 @@ public class Player {
 
     public void removeHP(int amount) {
         this.setHP(this.getHP() - amount);
+    }
+
+    public void setMaxHP(int newValue) {
+        maxHP = newValue;
     }
     public int getMaxHP() {
         return maxHP;

@@ -17,9 +17,8 @@ import java.util.Random;
 public class mainMenu extends JPanel {
 
     private BufferedImage bgImg; //image variable
-    ImageIcon icon = new ImageIcon("imageAssets/ButtonIcon.png");
-    private JButton startButton = new JButton(icon); //start button initializer
-    private JButton quitButton = new JButton(icon); //Quit button initializer
+    private JButton startButton = new JButton(); //start button initializer
+    private JButton quitButton = new JButton(); //Quit button initializer
     private JTextField debugBox = new JTextField(); //debug box initializer
     private JButton debugAccept = new JButton();
     private Font pixelFont;
@@ -88,36 +87,42 @@ public class mainMenu extends JPanel {
 
         //Start button setup
         startButton.setBounds((PanelManager.ScreenWidth/2) - (125) -180, 400, 250, 120);
+        buttonImageLoader(startButton);
         startButton.addMouseListener(buttonGrow(startButton));
-        startButton.setBackground(Color.white);
         //Action listener when button is pressed
         startButton.addActionListener(e -> {
             Random r = new Random();
             PanelManager.start(r.nextBoolean());
         });
         startButton.setText("START");
-        startButton.setFont(pixelFont);
-        startButton.setOpaque(false);
-        startButton.setContentAreaFilled(false);
         startButton.setBorderPainted(false);
-        startButton.setFocusPainted(false);
+        startButton.setFont(pixelFont);
         this.add(startButton);
 
         //quit button setup
         quitButton.setBounds((PanelManager.ScreenWidth/2) - (125) +180, 400, 250, 120);
+        buttonImageLoader(quitButton);
         quitButton.addMouseListener(buttonGrow(quitButton));
-        quitButton.setBackground(Color.white);
         //Action listener when quit button is pressed
         quitButton.addActionListener(e -> System.exit(0));
         quitButton.setText("QUIT");
         quitButton.setFont(pixelFont);
-        quitButton.setOpaque(false);
-        quitButton.setContentAreaFilled(false);
         quitButton.setBorderPainted(false);
-        quitButton.setFocusPainted(false);
         this.add(quitButton);
     }
 
+    public static void buttonImageLoader(JButton button) {
+        ImageIcon imageIcon = new ImageIcon("imageAssets/ButtonIcon.png"); // load the image to a imageIcon
+        Image image = imageIcon.getImage(); // transform it
+        Image newimg = image.getScaledInstance(button.getWidth(), button.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
+        imageIcon = new ImageIcon(newimg);  // transform it back
+        button.setIcon(imageIcon);
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setHorizontalTextPosition(JButton.CENTER);
+        button.setVerticalTextPosition(JButton.CENTER);
+    }
     /**
      * Sets bgImg to the files path
      */
@@ -152,11 +157,13 @@ public class mainMenu extends JPanel {
             @Override
             public void mouseEntered(MouseEvent e) {
                 button.setBounds(button.getX() - 5, button.getY() - 5, button.getWidth() + 10, button.getHeight() + 10);
+                buttonImageLoader(button);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
+                buttonImageLoader(button);
             }
         };
     }

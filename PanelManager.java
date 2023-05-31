@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -18,6 +20,8 @@ public class PanelManager {
     public static PlayerDropLocation[] dropLocations = new PlayerDropLocation[5];
     public static AIDropLocation[] aiDropLocations = new AIDropLocation[5];
     public static Point mouse;
+
+    private static Font minecraft;
 
     public static int CardWidth = 96;
     public static int CardHeight = 144;
@@ -40,6 +44,16 @@ public class PanelManager {
     }
 
     public static void start(boolean playerStart) {
+        try{
+            // load a custom font in your project folder0f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            minecraft = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")).deriveFont(13f);
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")));
+        }
+        catch(IOException | FontFormatException ignored){
+
+        }
+
         ai = new AIBase();
         frame.getContentPane().removeAll();
 
@@ -80,7 +94,9 @@ public class PanelManager {
                 }
                 VPDisplay.setText("VP: " + player.getVP());
                 playerHPBar.setPercent((float) player.getHP() / (float) player.getMaxHP());
-                AIHPBar.setPercent((float) ai.getHP() / (float) player.getMaxHP());
+                playerHPBar.label.setText("Player: "+player.getHP());
+                AIHPBar.setPercent((float) ai.getHP() / (float) ai.getMaxHP());
+                AIHPBar.label.setText("Opponent: "+ai.getHP());
             }
 
         }, 0, 1);
@@ -117,29 +133,34 @@ public class PanelManager {
     public static HealthBar AIHPBar;
     public static JLabel VPDisplay = new JLabel();;
     public static void createHud(JFrame frame) {
-        playerHPBar = new HealthBar(0,0,150, 65, 1f, "player", SwingConstants.LEFT);
+        playerHPBar = new HealthBar(0,0,150, 65, 1f, "Player: " +player.getHP(), SwingConstants.LEFT);
+        playerHPBar.label.setFont(minecraft);
         frame.add(playerHPBar);
 
-        AIHPBar = new HealthBar(0,75,150, 65, 1f, "opponent", SwingConstants.RIGHT);
+        AIHPBar = new HealthBar(0,75,150, 65, 1f, "Opponent: " +ai.getHP(), SwingConstants.RIGHT);
+        AIHPBar.label.setFont(minecraft);
         frame.add(AIHPBar);
 
         JButton button = new JButton("End Turn");
         button.setBounds(0,150,150,65);
         button.addActionListener(e -> endTurn());
         button.setFocusable(false);
+        button.setFont(minecraft);
+        mainMenu.buttonImageLoader(button);
         frame.add(button);
 
         JButton surrenderButton = new JButton("Surrender");
         surrenderButton.setBounds(0,225,150,65);
         surrenderButton.addActionListener(e -> surrender());
         surrenderButton.setFocusable(false);
+        surrenderButton.setFont(minecraft);
+        mainMenu.buttonImageLoader(surrenderButton);
         frame.add(surrenderButton);
 
         VPDisplay.setBounds(0,300,200,80);
+        VPDisplay.setFont(minecraft);
         VPDisplay.setForeground(Color.white);
         frame.add(VPDisplay);
-
-
     }
 
     public static void surrender() {

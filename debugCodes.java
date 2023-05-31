@@ -33,6 +33,7 @@ public class debugCodes {
 
         if (code.equalsIgnoreCase("Player HP " + codeNum)) {
             PanelManager.player.setHP(codeNumInt);
+            PanelManager.player.setMaxHP(codeNumInt);
             System.out.println(mainMenu.debugCode);
         }
         if (code.equalsIgnoreCase("AI HP "+ codeNum)) {

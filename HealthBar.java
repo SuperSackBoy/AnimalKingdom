@@ -11,6 +11,7 @@ import java.awt.*;
 
 public class HealthBar extends JPanel {
 
+    public JLabel label;
     private float percent;
     private Color color = Color.RED;
     private final JPanel hp;
@@ -31,7 +32,7 @@ public class HealthBar extends JPanel {
         this.width = width;
         this.height = height;
 
-        JLabel label = new JLabel(labelText);
+        label = new JLabel(labelText);
         label.setBounds(0,0,width,height/2);
         label.setHorizontalAlignment(textAlign);
         label.setVerticalAlignment(SwingConstants.BOTTOM);
