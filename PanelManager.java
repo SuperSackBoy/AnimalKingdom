@@ -153,8 +153,6 @@ public class PanelManager {
         surrenderButton.setBounds(0,225,150,65);
         surrenderButton.addActionListener(e -> surrender());
         surrenderButton.setFocusable(false);
-        surrenderButton.setFont(minecraft);
-        mainMenu.buttonImageLoader(surrenderButton);
         frame.add(surrenderButton);
 
         VPDisplay.setBounds(0,300,200,80);
@@ -182,7 +180,6 @@ public class PanelManager {
 
 
     public static void endTurn() {
-        //TODO code here :)
         System.out.println("END TURN");
         board.moveUp();
         player.setVP(0);
