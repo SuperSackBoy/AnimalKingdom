@@ -17,7 +17,7 @@ public class AIBase
     //note: these should not be static, static means the variable is global across all instances of the object
     //in this case, the ai is an object, don't access it with AIBase, access it through PanelManager.ai, or have it be public in main
     protected LinkedList<Card> AiHandList = new LinkedList<Card>();
-    protected static int AiHP, playedVP = 0, ran;
+    protected static int AiHP, playedVP = 0, ran, full, power, blocks, beat;
     private static final int AimaxHP = 150;
     //--------------------------------------------------
     public AIBase()
@@ -31,6 +31,8 @@ public class AIBase
     //--------------------------------------------------
     public void playAI()
     {
+        power = full = blocks = 0;
+        beat = Player.getHP();
         if (getHP() <= 0)
         {
             EventQueue.invokeLater(new Runnable() {
@@ -47,6 +49,31 @@ public class AIBase
         else
         {
             playedVP = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                if(AICardManager.AIPlayed[i] != null)
+                {
+                    if (Player.PlayerPlayedCards[i] != null)
+                    {
+                        if ((Player.PlayerPlayedCards[i].getCard().getHP() - AICardManager.AIPlayed[i].getCard().getATK()) < 0)
+                        {
+                            power = power + (AICardManager.AIPlayed[i].getCard().getATK() - Player.PlayerPlayedCards[i].getCard().getHP());
+                        }
+                    }
+                    else
+                    {
+                        power = power + AICardManager.AIPlayed[i].getCard().getATK();
+                    }
+                    full++;
+                }
+                if(Player.PlayerPlayedCards[i] != null)
+                {
+                    beat = beat + Player.PlayerPlayedCards[i].getCard().getHP();
+                    blocks++;
+                }
+            }
+            System.out.println("Full spaces: " + full + "\nCurrent: " + power + "\nPlaying: " + KillShotAI.BestATK(AiHandList, full, power));
+            System.out.println("User has " + blocks + " on the field.\nAttack has to be over " + beat);
             ran = (int)((Math.random()*100) + 1);
             if (ran > 0 && ran < 16)
             {
@@ -56,7 +83,8 @@ public class AIBase
             {
                 if (AiHP <= (PanelManager.player.getHP() - 20))
                 {
-                    AiHandList = DefensiveAI.Play(AiHandList);
+                    //AiHandList = DefensiveAI.Play(AiHandList);
+                    AiHandList = AggressiveAI.Play(AiHandList);
                 }
                 else
                 {
@@ -76,7 +104,7 @@ public class AIBase
             {
                 for (int ii = 0; ii < 5; ii++)
                 {
-                    if (AICardManager.AIPlayed[ii] == null)
+                    if (AICardManager.AIPlayed[ii] == null && Player.PlayerPlayedCards[ii] == null)
                     {
                         AICardManager.playCard(AiHandList.get(i), ii);
                         playedVP = playedVP + AiHandList.get(i).getVP();

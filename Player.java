@@ -8,7 +8,7 @@ May 11, 2023 * Fixed card deck object from instance
 import java.util.LinkedList;
 
 public class Player {
-    private int HP, VP;
+    private static int HP, VP;
     private final int maxHP = 150, maxVP = 5;
     //public boolean selections[] = new boolean[5];
     /**
@@ -18,7 +18,7 @@ public class Player {
     /**
      * List that holds the players cards as objects for the game field
      */
-    public PlayerCardPanel[] PlayerPlayedCards = new PlayerCardPanel[5];
+    public static PlayerCardPanel[] PlayerPlayedCards = new PlayerCardPanel[5];
 
 
     // constructor method called when object created
@@ -37,7 +37,7 @@ public class Player {
     }
 
     // returns the HP
-    public int getHP() {
+    public static int getHP() {
         return HP;
     }
 
