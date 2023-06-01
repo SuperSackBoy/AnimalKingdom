@@ -31,9 +31,9 @@ public class mainMenu extends JPanel {
     public mainMenu() {
         try{
             // load a custom font in your project folder
-            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/BigPixelFont.ttf")).deriveFont(40f);
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")).deriveFont(30f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/BigPixelFont.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")));
             minecraft = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")).deriveFont(20f);
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")));
         }

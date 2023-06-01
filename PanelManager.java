@@ -135,16 +135,16 @@ public class PanelManager {
     public static HealthBar AIHPBar;
     public static JLabel VPDisplay = new JLabel();;
     public static void createHud(JFrame frame) {
-        playerHPBar = new HealthBar(0,0,150, 65, 1f, "Player: " +player.getHP(), SwingConstants.LEFT);
+        playerHPBar = new HealthBar(6,6,150, 60, 1f, "Player: " +player.getHP(), SwingConstants.LEFT);
         playerHPBar.label.setFont(minecraft);
         frame.add(playerHPBar);
 
-        AIHPBar = new HealthBar(0,75,150, 65, 1f, "Opponent: " +ai.getHP(), SwingConstants.RIGHT);
+        AIHPBar = new HealthBar(6,70,150, 60, 1f, "Opponent: " +ai.getHP(), SwingConstants.RIGHT);
         AIHPBar.label.setFont(minecraft);
         frame.add(AIHPBar);
 
         endTurnButton = new JButton("End Turn");
-        endTurnButton.setBounds(0,150,150,65);
+        endTurnButton.setBounds(6,160,150,65);
         endTurnButton.addActionListener(e -> endTurn());
         endTurnButton.setFocusable(false);
         endTurnButton.setFont(minecraft);
@@ -152,14 +152,14 @@ public class PanelManager {
         frame.add(endTurnButton);
 
         JButton surrenderButton = new JButton("Surrender");
-        surrenderButton.setBounds(0,225,150,65);
+        surrenderButton.setBounds(6,235,150,65);
         surrenderButton.addActionListener(e -> surrender());
         surrenderButton.setFocusable(false);
         surrenderButton.setFont(minecraft);
         mainMenu.buttonImageLoader(surrenderButton);
         frame.add(surrenderButton);
 
-        VPDisplay.setBounds(0,300,200,80);
+        VPDisplay.setBounds(6,300,200,80);
         VPDisplay.setFont(minecraft);
         VPDisplay.setForeground(Color.white);
         frame.add(VPDisplay);
