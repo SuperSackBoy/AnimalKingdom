@@ -102,14 +102,52 @@ public class AIBase
         {
             if ((playedVP + AiHandList.get(i).getVP()) <= 5)
             {
-                for (int ii = 0; ii < 5; ii++)
+                b: for (int ii = 0; ii < 5; ii++)
                 {
-                    if (AICardManager.AIPlayed[ii] == null && Player.PlayerPlayedCards[ii] == null)
+                    if (AICardManager.AIPlayed[ii] == null)
                     {
-                        AICardManager.playCard(AiHandList.get(i), ii);
-                        playedVP = playedVP + AiHandList.get(i).getVP();
-                        AiHandList.set(i, CardDeck.drawCard());
-                        break;
+                        System.out.println(ii);
+                        if (Player.PlayerPlayedCards[ii] == null)
+                        {
+                            AICardManager.playCard(AiHandList.get(i), ii);
+                            playedVP = playedVP + AiHandList.get(i).getVP();
+                            AiHandList.set(i, CardDeck.drawCard());
+                            System.out.println("No issues");
+                            break;
+                        }
+                        else
+                        {
+                            for (int iii = ii; iii < 5; iii++)
+                            {
+                                if (AICardManager.AIPlayed[iii] == null)
+                                {
+                                    if (Player.PlayerPlayedCards[iii] == null)
+                                    {
+                                        AICardManager.playCard(AiHandList.get(i), iii);
+                                        playedVP = playedVP + AiHandList.get(i).getVP();
+                                        AiHandList.set(i, CardDeck.drawCard());
+                                        System.out.println("Null at " + iii);
+                                        break b;
+                                    }
+                                    else if (iii == 4) //make check for lowest health
+                                    {
+                                        AICardManager.playCard(AiHandList.get(i), ii);
+                                        playedVP = playedVP + AiHandList.get(i).getVP();
+                                        AiHandList.set(i, CardDeck.drawCard());
+                                        System.out.println("No nulls");
+                                        break b;
+                                    }
+                                }
+                                else if (iii == 4) //ditto as else if above
+                                {
+                                    AICardManager.playCard(AiHandList.get(i), ii);
+                                    playedVP = playedVP + AiHandList.get(i).getVP();
+                                    AiHandList.set(i, CardDeck.drawCard());
+                                    System.out.println("No nulls");
+                                    break b;
+                                }
+                            }
+                        }
                     }
                 }
             }
