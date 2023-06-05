@@ -33,11 +33,11 @@ public class mainMenu extends JPanel {
     public mainMenu() {
         try{
             // load a custom font in your project folder
-            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")).deriveFont(30f);
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(30f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")));
-            minecraft = Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")).deriveFont(20f);
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")));
+            minecraft = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(20f);
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")));
         }
         catch(IOException | FontFormatException ignored){
 

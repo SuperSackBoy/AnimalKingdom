@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -42,9 +43,9 @@ public class CardPanel extends JPanel implements CardInterface{
     public CardPanel(Card card) {
         try{
             // load a custom font in your project folder
-            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")).deriveFont(13f);
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(13f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")));
         }
         catch(IOException | FontFormatException e){
             e.printStackTrace();
@@ -123,17 +124,14 @@ public class CardPanel extends JPanel implements CardInterface{
      */
     private void loadBackgroundImage(Card cCard) {
         try {
-            File f = new File("src/"+cCard.cardImg);
-            if(f.exists() && !f.isDirectory()) {
-                lName.setVisible(false);
-                this.setOpaque(false);
-                bgImg = read(getClass().getResourceAsStream(cCard.cardImg));
-            } else {
-                return;
+            lName.setVisible(false);
+            this.setOpaque(false);
+            bgImg = ImageIO.read(getClass().getResourceAsStream(cCard.cardImg));
+        } catch (IOException | IllegalArgumentException e) {
+            if(e instanceof IOException) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle the exception gracefully
+
         }
     }
 

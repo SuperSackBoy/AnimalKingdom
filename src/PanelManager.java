@@ -53,8 +53,8 @@ public class PanelManager {
         try{
             // load a custom font in your project folder0f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            minecraft = Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")).deriveFont(13f);
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")));
+            minecraft = Font.createFont(Font.TRUETYPE_FONT, PanelManager.class.getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(13f);
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, PanelManager.class.getResourceAsStream("imageAssets/Minecraft.ttf")));
         }
         catch(IOException | FontFormatException ignored){
 
