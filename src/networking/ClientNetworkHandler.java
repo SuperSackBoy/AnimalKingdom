@@ -27,7 +27,8 @@ public class ClientNetworkHandler extends Thread{
         try {
             connectedSocket = new Socket(ip, port);
             dOut = new DataOutputStream(connectedSocket.getOutputStream());
-            PanelManager.start(false,false);
+            DataInputStream dIn = new DataInputStream(connectedSocket.getInputStream());
+            PanelManager.start(dIn.readBoolean(),false);
         } catch (SocketException exception) {
             exception.printStackTrace();
         } catch (IOException exception) {

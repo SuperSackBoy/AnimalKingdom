@@ -9,6 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.Arrays;
+import java.util.Random;
 
 public class ServerNetworkHandler extends Thread{
 
@@ -28,8 +29,11 @@ public class ServerNetworkHandler extends Thread{
             System.out.println("waiting");
             connectedSocket = serverSocket.accept();
             System.out.println("CONNECTED!");
-            PanelManager.start(true,false);
             dOut = new DataOutputStream(connectedSocket.getOutputStream());
+            boolean shouldStart = new Random().nextBoolean();
+            PanelManager.start(shouldStart,false);
+            dOut.writeBoolean(!shouldStart);
+            dOut.flush();
 
 
         } catch (IOException exception) {

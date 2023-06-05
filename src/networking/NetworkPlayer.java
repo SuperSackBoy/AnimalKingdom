@@ -2,6 +2,7 @@ package src.networking;
 
 import src.*;
 
+import java.awt.*;
 import java.util.Arrays;
 
 public class NetworkPlayer extends AIBase {
@@ -10,10 +11,16 @@ public class NetworkPlayer extends AIBase {
     public void playAI() {
         Card[] cards;
         if(networkMenu.isHost) {
-            networkMenu.serverNetworkHandler.sendCards();
+            if(!(Arrays.equals(PanelManager.player.PlayerPlayedCards, new PlayerCardPanel[]{null, null, null, null, null})
+                    && PanelManager.player.getHP() == PanelManager.player.getMaxHP())) {
+                networkMenu.serverNetworkHandler.sendCards();
+            }
             cards = networkMenu.serverNetworkHandler.receiveCards();
         } else {
-            if(!(Arrays.equals(PanelManager.player.PlayerPlayedCards, new PlayerCardPanel[]{null, null, null, null, null}) && PanelManager.player.getHP() == PanelManager.player.getMaxHP())) networkMenu.clientNetworkHandler.sendCards();
+            if(!(Arrays.equals(PanelManager.player.PlayerPlayedCards, new PlayerCardPanel[]{null, null, null, null, null})
+                    && PanelManager.player.getHP() == PanelManager.player.getMaxHP())) {
+                networkMenu.clientNetworkHandler.sendCards();
+            }
             cards = networkMenu.clientNetworkHandler.receiveCards();
         }
         for(int x = 0; x < cards.length; x++) {
@@ -22,5 +29,15 @@ public class NetworkPlayer extends AIBase {
             }
         }
         attack();
+        if (getHP() <= 0) {
+            EventQueue.invokeLater(() -> {
+                try {
+                    Main.frame.getContentPane().removeAll();
+                    Main.frame.add(Main.Wframe);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 }
