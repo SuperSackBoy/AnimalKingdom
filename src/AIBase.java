@@ -1,4 +1,4 @@
-/*
+package src;/*
 Name: Mateo Adebowale
 Class: ICS4U0
 Assignment: Animal Kingdom: Card Arena
@@ -92,7 +92,7 @@ public class AIBase
         }
     }
     //--------------------------------------------------
-    private void attack() {
+    protected void attack() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             int x;

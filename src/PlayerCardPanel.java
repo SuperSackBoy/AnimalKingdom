@@ -1,4 +1,4 @@
-/*
+package src;/*
 Aaron Kimbel
 ICS4U0-C
 Final Project
@@ -96,7 +96,7 @@ public class PlayerCardPanel extends CardPanel {
                         for(int x = 0; x < PanelManager.player.PlayerHand.length; x++) {
                             if (PanelManager.player.PlayerHand[x].equals(this)) {
                                 PanelManager.player.PlayerHand[x] = this;
-                                PanelManager.board.drawNewCard(x);
+                                PanelManager.board.drawNewCard(x, CardDeck.drawCard());
                                 PanelManager.player.PlayerPlayedCards[d.index] = this;
                             }
                         }

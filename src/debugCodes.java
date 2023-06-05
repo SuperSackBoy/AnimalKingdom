@@ -1,4 +1,4 @@
-/*
+package src;/*
 Luca Mazzotta
 ICS4U0-C
 Debug Code class
@@ -17,7 +17,7 @@ public class debugCodes {
         }
         if (code.equalsIgnoreCase("Oops all Jone!")) {
             CardDeck.deckReset();
-            CardDeck.cardList.add(new Card("Mr. Jone", "imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1));
+            CardDeck.cardList.add(new Card("Mr. Jone", "src/imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1));
             allJone = true;
             System.out.println(mainMenu.debugCode);
         }

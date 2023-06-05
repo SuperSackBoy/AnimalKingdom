@@ -1,4 +1,7 @@
-import javax.swing.*;
+package src;
+
+import src.networking.NetworkMenu;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -7,6 +10,7 @@ public class Main {
     public static GameFrame frame = new GameFrame();
     public static WinPanel Wframe = new WinPanel();
     public static LossPanel Lframe = new LossPanel();
+    public static NetworkMenu networkMenu = new NetworkMenu();
     public static void main(String[] args) {
         Player player = new Player();
 

@@ -1,4 +1,4 @@
-/*
+package src;/*
 Name: Mateo Adebowale
 Class: ICS4U0
 Assignment: Animal Kingdom: Card Arena

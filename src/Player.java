@@ -1,11 +1,10 @@
-/*
+package src;/*
 Luca Mazzotta
 ICS4U0-B
 Player Object
 Object that stores the user player's cards, selected cards, HP, Attack and value points
 May 11, 2023 * Fixed card deck object from instance
  */
-import java.util.LinkedList;
 
 public class Player {
     private int HP, VP;

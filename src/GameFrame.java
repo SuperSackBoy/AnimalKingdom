@@ -1,4 +1,4 @@
-/*
+package src;/*
 Aaron Kimbel
 ICS4U0-C
 Final Project
@@ -9,11 +9,6 @@ Just a frame to put everything on, nothing special
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
 
 
 public class GameFrame extends JFrame /*implements KeyListener*/ {

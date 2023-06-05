@@ -1,10 +1,12 @@
-/*
+package src;/*
 Aaron Kimbel
 ICS4U0-C
 Final Project
 Animal Kingdom: Card Arena
 Controls everything to do with the visualization of the game
 */
+
+import src.networking.NetworkPlayer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,25 +40,28 @@ public class PanelManager {
     public static Player player;
     public static JFrame frame;
     public static AIBase ai;
+    private static boolean useAI;
 
     public static void init(JFrame jframe, Player plyr) {
         player = plyr;
         frame = jframe;
-        //ai = new AIBase();
+
     }
 
-    public static void start(boolean playerStart) {
+    public static void start(boolean playerStart, boolean AI) {
+        useAI = AI;
         try{
             // load a custom font in your project folder0f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            minecraft = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")).deriveFont(13f);
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")));
+            minecraft = Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")).deriveFont(13f);
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")));
         }
         catch(IOException | FontFormatException ignored){
 
         }
 
-        ai = new AIBase();
+        if(useAI) ai = new AIBase();
+        else ai = new NetworkPlayer();
         frame.getContentPane().removeAll();
 
         center = frame.getContentPane().getWidth()/2-CardWidth/2;

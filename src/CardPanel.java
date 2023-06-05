@@ -1,4 +1,4 @@
-/*
+package src;/*
 Aaron Kimbel
 ICS4U0-C
 Final Project
@@ -42,9 +42,9 @@ public class CardPanel extends JPanel implements CardInterface{
     public CardPanel(Card card) {
         try{
             // load a custom font in your project folder
-            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")).deriveFont(13f);
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")).deriveFont(13f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")));
         }
         catch(IOException | FontFormatException e){
             e.printStackTrace();
@@ -123,7 +123,7 @@ public class CardPanel extends JPanel implements CardInterface{
      */
     private void loadBackgroundImage(Card cCard) {
         try {
-            File f = new File(cCard.cardImg);
+            File f = new File("src/"+cCard.cardImg);
             if(f.exists() && !f.isDirectory()) {
                 lName.setVisible(false);
                 this.setOpaque(false);

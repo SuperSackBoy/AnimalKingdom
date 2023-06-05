@@ -1,10 +1,12 @@
-/*
+package src;/*
 Aaron Kimbel
 ICS4U0-C
 Final Project
 Animal Kingdom: Card Arena
 Displays all of the cards, can be panned up or down
 */
+
+import src.networking.NetworkMenu;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -28,11 +30,12 @@ public class Board extends JPanel{ //manages the card locations and drop locatio
         this.setLayout(null);
         this.setBounds(x,(int) y,width,height);
 
-        drawNewCard(0); //draw cards for the player
-        drawNewCard(1);
-        drawNewCard(2);
-        drawNewCard(3);
-        drawNewCard(4);
+
+        drawNewCard(0, CardDeck.drawCard()); //draw cards for the player
+        drawNewCard(1, CardDeck.drawCard());
+        drawNewCard(2, CardDeck.drawCard());
+        drawNewCard(3, CardDeck.drawCard());
+        drawNewCard(4, CardDeck.drawCard());
         //creates drop locations
         createDrop(PanelManager.center-PanelManager.CardWidth*2-PanelManager.spacing*2,PanelManager.cardY+PanelManager.ScreenHeight/3,0);
         createDrop(PanelManager.center-PanelManager.CardWidth-PanelManager.spacing,PanelManager.cardY+PanelManager.ScreenHeight/3,1);
@@ -80,7 +83,7 @@ public class Board extends JPanel{ //manages the card locations and drop locatio
         return d;
     }
 
-    public PlayerCardPanel drawNewCard(int pos) {
+    public PlayerCardPanel drawNewCard(int pos, Card card) {
         assert pos >= 0 && pos <=4; //forces a crash if pos is out of this range
         int x = switch (pos) { //get the desired x position
             case 0 -> PanelManager.center - PanelManager.CardWidth * 2 - PanelManager.spacing * 2;
@@ -91,7 +94,7 @@ public class Board extends JPanel{ //manages the card locations and drop locatio
             default -> 0;
         };
         //create a card
-        PlayerCardPanel c = createCard(x,PanelManager.cardY+PanelManager.ScreenHeight+PanelManager.CardHeight, pos, CardDeck.drawCard());
+        PlayerCardPanel c = createCard(x,PanelManager.cardY+PanelManager.ScreenHeight+PanelManager.CardHeight, pos, card);
         this.add(c); //add the card to the screen
         this.setComponentZOrder(c,0); //set it to the top
         c.smoothTransition(new Point(c.x,c.y-PanelManager.CardHeight)); //smooth animations even if its never seen

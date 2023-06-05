@@ -1,10 +1,12 @@
-/*
+package src;/*
 Luca Mazzotta
 ICS4U0-C
 main Menu panel
 Main menu panel that opens on program launch
 May 15, 2023
 */
+import src.networking.NetworkMenu;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -31,11 +33,11 @@ public class mainMenu extends JPanel {
     public mainMenu() {
         try{
             // load a custom font in your project folder
-            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")).deriveFont(30f);
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")).deriveFont(30f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")));
-            minecraft = Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")).deriveFont(20f);
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("imageAssets/Minecraft.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")));
+            minecraft = Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")).deriveFont(20f);
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/imageAssets/Minecraft.ttf")));
         }
         catch(IOException | FontFormatException ignored){
 
@@ -92,7 +94,7 @@ public class mainMenu extends JPanel {
         //Action listener when button is pressed
         startButton.addActionListener(e -> {
             Random r = new Random();
-            PanelManager.start(r.nextBoolean());
+            PanelManager.start(r.nextBoolean(),true);
         });
         startButton.setText("START");
         startButton.setBorderPainted(false);
@@ -109,10 +111,16 @@ public class mainMenu extends JPanel {
         quitButton.setFont(pixelFont);
         quitButton.setBorderPainted(false);
         this.add(quitButton);
+
+        //multiplayer
+        JButton multiplayerButton = new JButton("Multiplayer");
+        multiplayerButton.setBounds(PanelManager.ScreenWidth/2-75,PanelManager.ScreenHeight/4*3,150,60);
+        multiplayerButton.addActionListener(e -> Main.networkMenu.init());
+        this.add(multiplayerButton);
     }
 
     public static void buttonImageLoader(JButton button) {
-        ImageIcon imageIcon = new ImageIcon("imageAssets/ButtonIcon.png"); // load the image to a imageIcon
+        ImageIcon imageIcon = new ImageIcon("src/imageAssets/ButtonIcon.png"); // load the image to a imageIcon
         Image image = imageIcon.getImage(); // transform it
         Image newimg = image.getScaledInstance(button.getWidth(), button.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
         imageIcon = new ImageIcon(newimg);  // transform it back
