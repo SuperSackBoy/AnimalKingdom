@@ -98,21 +98,19 @@ public class AIBase
     //--------------------------------------------------
     private void move()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++) //checking AI hand
         {
             if ((playedVP + AiHandList.get(i).getVP()) <= 5)
             {
-                b: for (int ii = 0; ii < 5; ii++)
+                b: for (int ii = 0; ii < 5; ii++) //AI comparisons
                 {
                     if (AICardManager.AIPlayed[ii] == null)
                     {
-                        System.out.println(ii);
                         if (Player.PlayerPlayedCards[ii] == null)
                         {
                             AICardManager.playCard(AiHandList.get(i), ii);
                             playedVP = playedVP + AiHandList.get(i).getVP();
                             AiHandList.set(i, CardDeck.drawCard());
-                            System.out.println("No issues");
                             break;
                         }
                         else
@@ -126,25 +124,65 @@ public class AIBase
                                         AICardManager.playCard(AiHandList.get(i), iii);
                                         playedVP = playedVP + AiHandList.get(i).getVP();
                                         AiHandList.set(i, CardDeck.drawCard());
-                                        System.out.println("Null at " + iii);
                                         break b;
                                     }
                                     else if (iii == 4) //make check for lowest health
                                     {
-                                        AICardManager.playCard(AiHandList.get(i), ii);
-                                        playedVP = playedVP + AiHandList.get(i).getVP();
-                                        AiHandList.set(i, CardDeck.drawCard());
-                                        System.out.println("No nulls");
-                                        break b;
+                                        int killable = 99, v = -1;
+                                        for (int iv = 0; iv < 5; iv++)
+                                        {
+                                            if (AICardManager.AIPlayed[iv] == null)
+                                            {
+                                                if (Player.PlayerPlayedCards[iv].getCard().getHP() < killable)
+                                                {
+                                                    killable = Player.PlayerPlayedCards[iv].getCard().getHP();
+                                                    v = iv;
+                                                    System.out.println("Best spot at " + v);
+                                                }
+                                            }
+                                            if (iv == 4)
+                                            {
+                                                AICardManager.playCard(AiHandList.get(i), v);
+                                                playedVP = playedVP + AiHandList.get(i).getVP();
+                                                AiHandList.set(i, CardDeck.drawCard());
+                                                break b;
+                                            }
+                                        }
                                     }
                                 }
                                 else if (iii == 4) //ditto as else if above
                                 {
-                                    AICardManager.playCard(AiHandList.get(i), ii);
-                                    playedVP = playedVP + AiHandList.get(i).getVP();
-                                    AiHandList.set(i, CardDeck.drawCard());
-                                    System.out.println("No nulls");
-                                    break b;
+                                    int killable = 99, v = -1;
+                                    for (int iv = 0; iv < 5; iv++)
+                                    {
+                                        if (AICardManager.AIPlayed[iv] == null)
+                                        {
+                                            if (Player.PlayerPlayedCards[iv].getCard().getHP() < killable)
+                                            {
+                                                killable = Player.PlayerPlayedCards[iv].getCard().getHP();
+                                                v = iv;
+                                                System.out.println("Best spot at " + v + " with " + killable + "HP");
+                                            }
+                                        }
+                                        if (iv == 4)
+                                        {
+                                            System.out.println("Moving on... " + v);
+                                            if (v != -1)
+                                            {
+                                                AICardManager.playCard(AiHandList.get(i), v);
+                                                playedVP = playedVP + AiHandList.get(i).getVP();
+                                                AiHandList.set(i, CardDeck.drawCard());
+                                                break b;
+                                            }
+                                            else
+                                            {
+                                                AICardManager.playCard(AiHandList.get(i), ii);
+                                                playedVP = playedVP + AiHandList.get(i).getVP();
+                                                AiHandList.set(i, CardDeck.drawCard());
+                                                break b;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
