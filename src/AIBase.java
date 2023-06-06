@@ -18,7 +18,7 @@ public class AIBase
     //in this case, the ai is an object, don't access it with AIBase, access it through PanelManager.ai, or have it be public in main
     protected LinkedList<Card> AiHandList = new LinkedList<Card>();
     protected static int AiHP, playedVP = 0, ran;
-    private static int AimaxHP = 150;
+    private static int AimaxHP = 250;
     //--------------------------------------------------
     public AIBase()
     {
