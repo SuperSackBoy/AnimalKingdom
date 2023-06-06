@@ -46,11 +46,11 @@ public class CardDeck {
         cards.add(new Card("Fisher", "imageAssets/cardSprites/FisherCard.png", 10, 5, 1));
         cards.add(new Card("Groundhog", "imageAssets/cardSprites/GroundHogCard.png", 10, 5, 1));
         cards.add(new Card("Stoat", "imageAssets/cardSprites/StoatCard.png", 10, 5, 1));
-        cards.add(new Card("Arctic Fox", "imageAssets/cardSprites/ArcticFoxCard.png", 15, 15, 1));
+        cards.add(new Card("Arctic Fox", "imageAssets/cardSprites/ArcticFoxCard.png", 15, 15, 2));
         cards.add(new Card("Beaver", "imageAssets/cardSprites/BeaverCard.png", 20, 10, 2));
         cards.add(new Card("Penguin", "imageAssets/cardSprites/PenguinCard.png", 20, 10, 2));
         cards.add(new Card("Racoon", "imageAssets/cardSprites/RaccoonCard.png", 10, 20, 2));
-        cards.add(new Card("Wolf", "imageAssets/cardSprites/WolfCard.png", 20, 20, 2));
+        cards.add(new Card("Wolf", "imageAssets/cardSprites/WolfCard.png", 20, 10, 2));
         cards.add(new Card("Canada Goose", "imageAssets/cardSprites/CanadaGooseCard.png", 10, 30, 3));
         cards.add(new Card("Canada Lynx", "imageAssets/cardSprites/CanadaLynxCard.png", 20, 20, 3));
         cards.add(new Card("Coyote", "imageAssets/cardSprites/CoyoteCard.png", 20, 20, 3));

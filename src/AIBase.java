@@ -18,7 +18,7 @@ public class AIBase
     //in this case, the ai is an object, don't access it with AIBase, access it through PanelManager.ai, or have it be public in main
     protected LinkedList<Card> AiHandList = new LinkedList<Card>();
     protected static int AiHP, playedVP = 0, ran;
-    private static int AimaxHP = 150;
+    private static int AimaxHP = 250;
     //--------------------------------------------------
     public AIBase()
     {
@@ -57,7 +57,8 @@ public class AIBase
             {
                 if (AiHP <= (PanelManager.player.getHP() - 20))
                 {
-                    AiHandList = DefensiveAI.Play(AiHandList);
+                    //AiHandList = DefensiveAI.Play(AiHandList);
+                    AiHandList = AggressiveAI.Play(AiHandList);
                 }
                 else
                 {
@@ -71,18 +72,92 @@ public class AIBase
     //--------------------------------------------------
     private void move()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++) //checking AI hand
         {
             if ((playedVP + AiHandList.get(i).getVP()) <= 5)
             {
-                for (int ii = 0; ii < 5; ii++)
+                b: for (int ii = 0; ii < 5; ii++) //AI comparisons
                 {
                     if (AICardManager.AIPlayed[ii] == null)
                     {
-                        AICardManager.playCard(AiHandList.get(i), ii);
-                        playedVP = playedVP + AiHandList.get(i).getVP();
-                        AiHandList.set(i, CardDeck.drawCard());
-                        break;
+                        if (Player.PlayerPlayedCards[ii] == null)
+                        {
+                            AICardManager.playCard(AiHandList.get(i), ii);
+                            playedVP = playedVP + AiHandList.get(i).getVP();
+                            AiHandList.set(i, CardDeck.drawCard());
+                            break;
+                        }
+                        else
+                        {
+                            for (int iii = ii; iii < 5; iii++)
+                            {
+                                if (AICardManager.AIPlayed[iii] == null)
+                                {
+                                    if (Player.PlayerPlayedCards[iii] == null)
+                                    {
+                                        AICardManager.playCard(AiHandList.get(i), iii);
+                                        playedVP = playedVP + AiHandList.get(i).getVP();
+                                        AiHandList.set(i, CardDeck.drawCard());
+                                        break b;
+                                    }
+                                    else if (iii == 4) //make check for lowest health
+                                    {
+                                        int killable = 99, v = -1;
+                                        for (int iv = 0; iv < 5; iv++)
+                                        {
+                                            if (AICardManager.AIPlayed[iv] == null)
+                                            {
+                                                if (Player.PlayerPlayedCards[iv].getCard().getHP() < killable)
+                                                {
+                                                    killable = Player.PlayerPlayedCards[iv].getCard().getHP();
+                                                    v = iv;
+                                                    System.out.println("Best spot at " + v);
+                                                }
+                                            }
+                                            if (iv == 4)
+                                            {
+                                                AICardManager.playCard(AiHandList.get(i), v);
+                                                playedVP = playedVP + AiHandList.get(i).getVP();
+                                                AiHandList.set(i, CardDeck.drawCard());
+                                                break b;
+                                            }
+                                        }
+                                    }
+                                }
+                                else if (iii == 4) //ditto as else if above
+                                {
+                                    int killable = 99, v = -1;
+                                    for (int iv = 0; iv < 5; iv++)
+                                    {
+                                        if (AICardManager.AIPlayed[iv] == null)
+                                        {
+                                            if (Player.PlayerPlayedCards[iv].getCard().getHP() < killable)
+                                            {
+                                                killable = Player.PlayerPlayedCards[iv].getCard().getHP();
+                                                v = iv;
+                                            }
+                                        }
+                                        if (iv == 4)
+                                        {
+                                            if (v != -1)
+                                            {
+                                                AICardManager.playCard(AiHandList.get(i), v);
+                                                playedVP = playedVP + AiHandList.get(i).getVP();
+                                                AiHandList.set(i, CardDeck.drawCard());
+                                                break b;
+                                            }
+                                            else
+                                            {
+                                                AICardManager.playCard(AiHandList.get(i), ii);
+                                                playedVP = playedVP + AiHandList.get(i).getVP();
+                                                AiHandList.set(i, CardDeck.drawCard());
+                                                break b;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
