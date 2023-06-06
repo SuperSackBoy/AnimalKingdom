@@ -134,12 +134,10 @@ public class AIBase
                                             {
                                                 killable = Player.PlayerPlayedCards[iv].getCard().getHP();
                                                 v = iv;
-                                                System.out.println("Best spot at " + v + " with " + killable + "HP");
                                             }
                                         }
                                         if (iv == 4)
                                         {
-                                            System.out.println("Moving on... " + v);
                                             if (v != -1)
                                             {
                                                 AICardManager.playCard(AiHandList.get(i), v);
