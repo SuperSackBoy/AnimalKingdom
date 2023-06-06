@@ -99,7 +99,7 @@ public class PanelManager {
                 for(PlayerDropLocation d : dropLocations) {
                     d.setBounds(d.x, d.y, d.width, d.height);
                 }
-                VPDisplay.setText("VP: " + player.getVP());
+                VPDisplay.setText("Value Points: " + player.getVP());
                 playerHPBar.setPercent((float) player.getHP() / (float) player.getMaxHP());
                 playerHPBar.label.setText("Player: "+player.getHP());
                 AIHPBar.setPercent((float) ai.getHP() / (float) ai.getMaxHP());
@@ -140,16 +140,16 @@ public class PanelManager {
     public static HealthBar AIHPBar;
     public static JLabel VPDisplay = new JLabel();;
     public static void createHud(JFrame frame) {
-        playerHPBar = new HealthBar(6,6,150, 60, 1f, "Player: " +player.getHP(), SwingConstants.LEFT);
+        playerHPBar = new HealthBar(6,25,150, 60, 1f, "Player: " +player.getHP(), SwingConstants.LEFT);
         playerHPBar.label.setFont(minecraft);
         frame.add(playerHPBar);
 
-        AIHPBar = new HealthBar(6,70,150, 60, 1f, "Opponent: " +ai.getHP(), SwingConstants.RIGHT);
+        AIHPBar = new HealthBar(6,75,150, 60, 1f, "Opponent: " +ai.getHP(), SwingConstants.RIGHT);
         AIHPBar.label.setFont(minecraft);
         frame.add(AIHPBar);
 
         endTurnButton = new JButton("End Turn");
-        endTurnButton.setBounds(6,160,150,65);
+        endTurnButton.setBounds(725,550,150,65);
         endTurnButton.addActionListener(e -> endTurn());
         endTurnButton.setFocusable(false);
         endTurnButton.setFont(minecraft);
@@ -157,14 +157,14 @@ public class PanelManager {
         frame.add(endTurnButton);
 
         JButton surrenderButton = new JButton("Surrender");
-        surrenderButton.setBounds(6,235,150,65);
+        surrenderButton.setBounds(6,550,150,65);
         surrenderButton.addActionListener(e -> surrender());
         surrenderButton.setFocusable(false);
         surrenderButton.setFont(minecraft);
         mainMenu.buttonImageLoader(surrenderButton);
         frame.add(surrenderButton);
 
-        VPDisplay.setBounds(6,300,200,80);
+        VPDisplay.setBounds(6,125,200,80);
         VPDisplay.setFont(minecraft);
         VPDisplay.setForeground(Color.white);
         frame.add(VPDisplay);
