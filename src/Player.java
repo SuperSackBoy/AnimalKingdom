@@ -18,7 +18,7 @@ public class Player {
     /**
      * List that holds the players cards as objects for the game field
      */
-    public PlayerCardPanel[] PlayerPlayedCards = new PlayerCardPanel[5];
+    public static PlayerCardPanel[] PlayerPlayedCards = new PlayerCardPanel[5];
 
 
     // constructor method called when object created
