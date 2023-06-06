@@ -10,8 +10,7 @@ import src.networking.NetworkPlayer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
@@ -22,6 +21,10 @@ public class PanelManager {
     public static PlayerDropLocation[] dropLocations = new PlayerDropLocation[5];
     public static AIDropLocation[] aiDropLocations = new AIDropLocation[5];
     public static Point mouse;
+
+
+    public static final ImageIcon selectIcon = new ImageIcon("src/imageAssets/cardSelectIcon.png");
+    public static JLabel selectLbl = new JLabel();
 
     public static JButton endTurnButton;
 
@@ -148,8 +151,14 @@ public class PanelManager {
         AIHPBar.label.setFont(minecraft);
         frame.add(AIHPBar);
 
+        selectLbl.setVisible(false);
+        selectLbl.setIcon(selectIcon);
+        selectLbl.setBounds(10,10,16*2,20*2);
+        frame.add(selectLbl);
+
         endTurnButton = new JButton("End Turn");
-        endTurnButton.setBounds(725,550,150,65);
+        endTurnButton.addMouseListener(mainMenu.buttonGrow(endTurnButton));
+        endTurnButton.setBounds(6,550,150,75);
         endTurnButton.addActionListener(e -> endTurn());
         endTurnButton.setFocusable(false);
         endTurnButton.setFont(minecraft);
@@ -157,7 +166,8 @@ public class PanelManager {
         frame.add(endTurnButton);
 
         JButton surrenderButton = new JButton("Surrender");
-        surrenderButton.setBounds(6,550,150,65);
+        surrenderButton.addMouseListener(mainMenu.buttonGrow(surrenderButton));
+        surrenderButton.setBounds(725,550,150,75);
         surrenderButton.addActionListener(e -> surrender());
         surrenderButton.setFocusable(false);
         surrenderButton.setFont(minecraft);
