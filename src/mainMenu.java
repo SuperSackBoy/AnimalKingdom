@@ -114,8 +114,12 @@ public class mainMenu extends JPanel {
 
         //multiplayer
         JButton multiplayerButton = new JButton("Multiplayer");
-        multiplayerButton.setBounds(PanelManager.ScreenWidth/2-75,PanelManager.ScreenHeight/4*3,150,60);
+        multiplayerButton.setBounds(PanelManager.ScreenWidth/2-250/2,(PanelManager.ScreenHeight/4*3)+30,250,60);
         multiplayerButton.addActionListener(e -> Main.networkMenu.init());
+        buttonImageLoader(multiplayerButton);
+        multiplayerButton.addMouseListener(buttonGrow(multiplayerButton));
+        multiplayerButton.setFont(pixelFont);
+        multiplayerButton.setBorderPainted(false);
         this.add(multiplayerButton);
     }
 

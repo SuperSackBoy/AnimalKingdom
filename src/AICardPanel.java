@@ -44,7 +44,8 @@ public class AICardPanel extends CardPanel{
                         public void run() {
                             try {
                                 Main.frame.getContentPane().removeAll();
-                                Main.frame.add(Main.Lframe);
+                                Main.frame.add(Main.Wframe);
+                                Main.Wframe.loadBackgroundImage(false);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

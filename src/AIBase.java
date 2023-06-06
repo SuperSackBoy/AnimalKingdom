@@ -38,6 +38,7 @@ public class AIBase
                     try {
                         Main.frame.getContentPane().removeAll();
                         Main.frame.add(Main.Wframe);
+                        Main.Wframe.loadBackgroundImage(true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

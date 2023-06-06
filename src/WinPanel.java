@@ -1,47 +1,62 @@
 package src;
 
-import java.awt.EventQueue;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Random;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class WinPanel extends JPanel {
+    private BufferedImage bgImg; //image variable
+    private Font pixelFont;
+    private Font minecraft;
 
     /**
      * Create the frame.
      */
     public WinPanel() {
-        setBounds(10, 10, 865, 615);
+        try{
+            // load a custom font in your project folder
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(30f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")));
+            minecraft = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(20f);
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")));
+        }
+        catch(IOException | FontFormatException ignored){
+        }
+        this.setLayout(null);
         this.setBackground(new Color(255, 255, 255));
         this.setForeground(new Color(64, 64, 64));
         this.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         this.setLayout(null);
 
-        JLabel CongratsLabel = new JLabel("Congratulations,");
-        CongratsLabel.setForeground(new Color(0, 153, 0));
-        CongratsLabel.setFont(new Font("Times New Roman", Font.BOLD, 26));
-        CongratsLabel.setBounds(325, 200, 205, 68);
-        this.add(CongratsLabel);
+        //quit button setup
+        JButton quitButton = new JButton();
+        quitButton.setBounds((PanelManager.ScreenWidth/2) - (125) +180, 400, 250, 120);
+        buttonImageLoader(quitButton);
+        quitButton.addMouseListener(buttonGrow(quitButton));
+        //Action listener when quit button is pressed
+        quitButton.addActionListener(e -> System.exit(0));
+        quitButton.setText("QUIT");
+        quitButton.setFont(pixelFont);
+        quitButton.setBorderPainted(false);
+        this.add(quitButton);
 
-        JButton QuitButton = new JButton("Quit Game");
-        QuitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.exit(EXIT_ON_CLOSE);//close panel
-            }
-        });
-        QuitButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        QuitButton.setBounds(10, 550, 140, 39);
-        this.add(QuitButton);
 
-        JButton Restartbutton = new JButton("Restart");
+        //Start button setup
+        JButton Restartbutton = new JButton("RESTART");
+        Restartbutton.setBounds((PanelManager.ScreenWidth/2) - (125) -180, 400, 250, 120);
+        buttonImageLoader(Restartbutton);
+        Restartbutton.addMouseListener(buttonGrow(Restartbutton));
+        Restartbutton.setBorderPainted(false);
+        Restartbutton.setFont(pixelFont);
         Restartbutton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
            AIBase.resetHP();
@@ -66,14 +81,72 @@ public class WinPanel extends JPanel {
 
             }
         });
-        Restartbutton.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        Restartbutton.setBounds(725, 550, 130, 39);
         this.add(Restartbutton);
 
-        JLabel lblNewLabel = new JLabel("You have won!");
-        lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 26));
-        lblNewLabel.setForeground(new Color(0, 153, 51));
-        lblNewLabel.setBounds(335, 250, 242, 39);
-        this.add(lblNewLabel);
+    }
+    public static void buttonImageLoader(JButton button) {
+        ImageIcon imageIcon = new ImageIcon("src/imageAssets/ButtonIcon.png"); // load the image to a imageIcon
+        Image image = imageIcon.getImage(); // transform it
+        Image newimg = image.getScaledInstance(button.getWidth(), button.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
+        imageIcon = new ImageIcon(newimg);  // transform it back
+        button.setIcon(imageIcon);
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setHorizontalTextPosition(JButton.CENTER);
+        button.setVerticalTextPosition(JButton.CENTER);
+    }
+    /**
+     * Sets bgImg to the files path
+     */
+    public void loadBackgroundImage(boolean win) {
+        if (win) {
+            try {
+                bgImg = ImageIO.read(getClass().getResourceAsStream("imageAssets/WinScreen.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle the exception gracefully
+            }
+        } else {
+            try {
+                bgImg = ImageIO.read(getClass().getResourceAsStream("imageAssets/LossScreen.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle the exception gracefully
+            }
+        }
+    }
+
+    /**
+     * Adds background image to panel bg
+     * @param g
+     */
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (bgImg != null) {
+            // Scale the image to fit the panel dimensions
+            Image scaledImage = bgImg.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
+            g.drawImage(scaledImage, 0, 0, null);
+        }
+    }
+    /**
+     * Makes a button grow when highlighted to make it feel more alive
+     * @param button uses the button set in parameters to grow on highlight
+     */
+    public MouseListener buttonGrow(JButton button) {
+        return new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBounds(button.getX() - 5, button.getY() - 5, button.getWidth() + 10, button.getHeight() + 10);
+                buttonImageLoader(button);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
+                buttonImageLoader(button);
+            }
+        };
     }
 }

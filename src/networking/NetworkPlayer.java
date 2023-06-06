@@ -34,6 +34,7 @@ public class NetworkPlayer extends AIBase {
                 try {
                     Main.frame.getContentPane().removeAll();
                     Main.frame.add(Main.Wframe);
+                    Main.Wframe.loadBackgroundImage(false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

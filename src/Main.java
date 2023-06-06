@@ -9,7 +9,7 @@ public class Main {
     public static mainMenu mainMenuPanel;
     public static GameFrame frame = new GameFrame();
     public static WinPanel Wframe = new WinPanel();
-    public static LossPanel Lframe = new LossPanel();
+    //public static LossPanel Lframe = new LossPanel();
     public static NetworkMenu networkMenu = new NetworkMenu();
     public static void main(String[] args) {
         Player player = new Player();
@@ -19,6 +19,7 @@ public class Main {
 
         mainMenuPanel = new mainMenu();
         mainMenuPanel.setBounds(0, 0, frame.getWidth(), frame.getHeight()); // Set panel size to match frame
+        Wframe.setBounds(0, 0, frame.getWidth(), frame.getHeight()); // Set panel size to match frame
         frame.add(mainMenuPanel);
 
         PanelManager.init(frame,player);
