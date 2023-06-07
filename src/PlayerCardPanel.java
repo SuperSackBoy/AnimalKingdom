@@ -1,4 +1,5 @@
-package src;/*
+package src;
+/*
 Aaron Kimbel
 ICS4U0-C
 Final Project
@@ -48,8 +49,10 @@ public class PlayerCardPanel extends CardPanel {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                PanelManager.selectLbl.setVisible(true);
-                PanelManager.selectLbl.setBounds(PlayerCardPanel.super.getX()+30,450,16*2,20*2);
+                if (!PanelManager.board.showHand) {//only shows when hand is visible
+                    PanelManager.selectLbl.setVisible(true);
+                    PanelManager.selectLbl.setBounds(PlayerCardPanel.super.getX() + 30, 450, 16 * 2, 20 * 2);
+                }
             }
 
             @Override

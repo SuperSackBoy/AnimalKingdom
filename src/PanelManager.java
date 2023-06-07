@@ -162,6 +162,7 @@ public class PanelManager {
         endTurnButton.addActionListener(e -> endTurn());
         endTurnButton.setFocusable(false);
         endTurnButton.setFont(minecraft);
+        endTurnButton.setBorderPainted(false);
         mainMenu.buttonImageLoader(endTurnButton);
         frame.add(endTurnButton);
 
@@ -171,6 +172,7 @@ public class PanelManager {
         surrenderButton.addActionListener(e -> surrender());
         surrenderButton.setFocusable(false);
         surrenderButton.setFont(minecraft);
+        surrenderButton.setBorderPainted(false);
         mainMenu.buttonImageLoader(surrenderButton);
         frame.add(surrenderButton);
 

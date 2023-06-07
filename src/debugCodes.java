@@ -17,7 +17,7 @@ public class debugCodes {
         }
         if (code.equalsIgnoreCase("Oops all Jone!")) {
             CardDeck.deckReset();
-            CardDeck.cardList.add(new Card("Mr. Jone", "src/imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1));
+            CardDeck.cardList.add(new Card("Mr. Jone", "imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1));
             allJone = true;
             System.out.println(mainMenu.debugCode);
         }
@@ -37,12 +37,13 @@ public class debugCodes {
             System.out.println(mainMenu.debugCode);
         }
         if (code.equalsIgnoreCase("AI HP "+ codeNum)) {
-            PanelManager.ai.AiHP = codeNumInt;
+            PanelManager.ai.setMaxHP(codeNumInt);
+            PanelManager.ai.setHP(codeNumInt);
             System.out.println(mainMenu.debugCode);
         }
 
         if (code.equalsIgnoreCase("Player VP " + codeNum)) {
-            //Player.setMaxVP(codeNumInt);
+            Player.setMaxVP(codeNumInt);
             PanelManager.player.setVP(codeNumInt);
             System.out.println(mainMenu.debugCode);
         }
