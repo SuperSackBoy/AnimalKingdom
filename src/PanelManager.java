@@ -235,8 +235,10 @@ public class PanelManager {
     }
 
     public static void showhand() {
-        System.out.println("SHOW HAND/Field");
-        board.moveDown();
+
+        System.out.println("SHOW Hand/Field");
+
+
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
