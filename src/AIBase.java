@@ -17,7 +17,8 @@ public class AIBase
     //note: these should not be static, static means the variable is global across all instances of the object
     //in this case, the ai is an object, don't access it with AIBase, access it through PanelManager.ai, or have it be public in main
     protected LinkedList<Card> AiHandList = new LinkedList<Card>();
-    protected static int AiHP, playedVP = 0, ran;
+    protected boolean Kill = false;
+    protected static int AiHP, playedVP = 0, ran, full, beat, current, direct;
     private static int AimaxHP = 250;
     //--------------------------------------------------
     public AIBase()
@@ -48,13 +49,62 @@ public class AIBase
         else
         {
             playedVP = 0;
-            ran = (int)((Math.random()*100) + 1);
+            //ran = (int)((Math.random()*100) + 1);
+            ran = 20;
             if (ran > 0 && ran < 16)
             {
                 AiHandList = RecklessAI.Play(AiHandList);
             }
             else
             {
+                full = 0;
+                beat = PanelManager.player.getHP();
+                current = 0;
+                direct = 0;
+                for (int i = 0; i < 5; i++)
+                {
+                    if (AICardManager.AIPlayed[i] != null)
+                    {
+                        full++;
+                        if (Player.PlayerPlayedCards[i] == null)
+                        {
+                            current = current + AICardManager.AIPlayed[i].getCard().getATK();
+                        }
+                        else
+                        {
+                            if (AICardManager.AIPlayed[i].getCard().getATK() > Player.PlayerPlayedCards[i].getCard().getHP())
+                            {
+                                current = current + (AICardManager.AIPlayed[i].getCard().getATK() - Player.PlayerPlayedCards[i].getCard().getHP());
+                            }
+                        }
+                    }
+                    else if (Player.PlayerPlayedCards[i] == null)
+                    {
+                        direct++;
+                    }
+                }
+                show();
+                System.out.println(full + ", " + beat + ", " + current);
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                System.out.println(KillShotAI.getAmt());
+                if (direct >= KillShotAI.getAmt())
+                {
+                    if ((current + KillShotAI.BestATK(AiHandList, full)) >= beat)
+                    {
+                        Kill = true;
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < (5 - direct); i++)
+                    {
+                        for (int ii = 0; ii < 5; ii++)
+                        {
+                            //here
+                        }
+                    }
+                }
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 if (AiHP <= (PanelManager.player.getHP() - 20))
                 {
                     //AiHandList = DefensiveAI.Play(AiHandList);
@@ -111,7 +161,6 @@ public class AIBase
                                                 {
                                                     killable = Player.PlayerPlayedCards[iv].getCard().getHP();
                                                     v = iv;
-                                                    System.out.println("Best spot at " + v);
                                                 }
                                             }
                                             if (iv == 4)
