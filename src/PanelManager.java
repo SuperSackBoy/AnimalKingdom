@@ -28,6 +28,8 @@ public class PanelManager {
 
     public static JButton endTurnButton;
 
+    public static JButton showhandButton;
+
     private static Font minecraft;
 
     public static int CardWidth = 96;
@@ -158,7 +160,7 @@ public class PanelManager {
 
         endTurnButton = new JButton("End Turn");
         endTurnButton.addMouseListener(mainMenu.buttonGrow(endTurnButton));
-        endTurnButton.setBounds(6,550,150,75);
+        endTurnButton.setBounds(725,550,150,75);
         endTurnButton.addActionListener(e -> endTurn());
         endTurnButton.setFocusable(false);
         endTurnButton.setFont(minecraft);
@@ -168,13 +170,23 @@ public class PanelManager {
 
         JButton surrenderButton = new JButton("Surrender");
         surrenderButton.addMouseListener(mainMenu.buttonGrow(surrenderButton));
-        surrenderButton.setBounds(725,550,150,75);
+        surrenderButton.setBounds(725,15,150,75);
         surrenderButton.addActionListener(e -> surrender());
         surrenderButton.setFocusable(false);
         surrenderButton.setFont(minecraft);
         surrenderButton.setBorderPainted(false);
         mainMenu.buttonImageLoader(surrenderButton);
         frame.add(surrenderButton);
+
+        JButton showhandButton = new JButton ("Show Hand/Field");
+        showhandButton.addMouseListener(mainMenu.buttonGrow(showhandButton));
+        showhandButton.setBounds(6,550,150,75);
+        showhandButton.addActionListener(e -> showhand());
+        showhandButton.setFocusable(false);
+        showhandButton.setFont(minecraft);
+        frame.add(showhandButton);
+
+
 
         VPDisplay.setBounds(6,125,200,80);
         VPDisplay.setFont(minecraft);
@@ -220,6 +232,28 @@ public class PanelManager {
                 }
             }
         },200,100);
+    }
+
+    public static void showhand() {
+        System.out.println("SHOW HAND/Field");
+        board.moveDown();
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            int x;
+            @Override
+            public void run() {
+                if(player.PlayerPlayedCards[x] != null )
+                    player.PlayerPlayedCards[x].attack();
+                x++;
+                if(x > player.PlayerPlayedCards.length-1) {
+                    ai.playAI();
+                    this.cancel();
+                }
+            }
+        },200,100);
+
+
     }
 
     public static void mouseHandle() {
