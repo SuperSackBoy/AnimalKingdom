@@ -18,7 +18,7 @@ public class AIBase
     //in this case, the ai is an object, don't access it with AIBase, access it through PanelManager.ai, or have it be public in main
     protected LinkedList<Card> AiHandList = new LinkedList<Card>();
     protected boolean Kill = false;
-    protected static int AiHP, playedVP = 0, ran, full, beat, current, direct;
+    protected static int AiHP, playedVP = 0, ran, full, beat, current, direct, killable, v;
     private static int AimaxHP = 250;
     //--------------------------------------------------
     public AIBase()
@@ -83,8 +83,6 @@ public class AIBase
                         direct++;
                     }
                 }
-                show();
-                System.out.println(full + ", " + beat + ", " + current);
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 System.out.println(KillShotAI.getAmt());
                 if (direct >= KillShotAI.getAmt())
@@ -96,14 +94,37 @@ public class AIBase
                 }
                 else
                 {
-                    for (int i = 0; i < (5 - direct); i++)
+                    killable = 99;
+                    v = -1;
+                    int old = -1;
+                    for (int i = 0; i < (KillShotAI.getAmt() - direct); i++)
                     {
                         for (int ii = 0; ii < 5; ii++)
                         {
-                            //here
+                            if (AICardManager.AIPlayed[ii] == null && Player.PlayerPlayedCards[ii].getCard().getHP() < killable)
+                            {
+                                if (i == 0)
+                                {
+                                    killable = Player.PlayerPlayedCards[ii].getCard().getHP();
+                                    v = ii;
+                                }
+                                else if (ii != old && Player.PlayerPlayedCards[ii].getCard().getHP() >= Player.PlayerPlayedCards[old].getCard().getHP())
+                                {
+                                    killable = Player.PlayerPlayedCards[ii].getCard().getHP();
+                                    v = ii;
+                                }
+                            }
+                            if (ii == 4)
+                            {
+                                beat = beat + Player.PlayerPlayedCards[v].getCard().getHP();
+                                killable = 99;
+                                old = v;
+                            }
                         }
                     }
                 }
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                System.out.println(full + ", " + beat + ", " + current);
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 if (AiHP <= (PanelManager.player.getHP() - 20))
                 {
@@ -152,7 +173,8 @@ public class AIBase
                                     }
                                     else if (iii == 4) //make check for lowest health
                                     {
-                                        int killable = 99, v = -1;
+                                        killable = 99;
+                                        v = -1;
                                         for (int iv = 0; iv < 5; iv++)
                                         {
                                             if (AICardManager.AIPlayed[iv] == null)
@@ -175,7 +197,8 @@ public class AIBase
                                 }
                                 else if (iii == 4) //ditto as else if above
                                 {
-                                    int killable = 99, v = -1;
+                                    killable = 99;
+                                    v = -1;
                                     for (int iv = 0; iv < 5; iv++)
                                     {
                                         if (AICardManager.AIPlayed[iv] == null)
