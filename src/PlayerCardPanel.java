@@ -1,4 +1,5 @@
-package src;/*
+package src;
+/*
 Aaron Kimbel
 ICS4U0-C
 Final Project
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class PlayerCardPanel extends CardPanel {
     private boolean pressed = false;
@@ -30,6 +31,7 @@ public class PlayerCardPanel extends CardPanel {
             @Override
             public void mousePressed(MouseEvent e) {
                 if(e.getButton() == 1) { //left mouse
+                    PanelManager.selectLbl.setVisible(false);
                     PlayerDropLocation d = onDropLocation(); //if the card is on a drop zone, or exceeds the players VP, dont activate it
                     if(d == null && card.getVP() <= PanelManager.player.getVP()) {
                         pressed = true;
@@ -40,18 +42,22 @@ public class PlayerCardPanel extends CardPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if(e.getButton() == 1) {
+                    PanelManager.selectLbl.setVisible(false);
                     pressed = false;
                 }
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                if (!PanelManager.board.showHand) {//only shows when hand is visible
+                    PanelManager.selectLbl.setVisible(true);
+                    PanelManager.selectLbl.setBounds(PlayerCardPanel.super.getX() + 30, 450, 16 * 2, 20 * 2);
+                }
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-
+                PanelManager.selectLbl.setVisible(false);
             }
         });
     }

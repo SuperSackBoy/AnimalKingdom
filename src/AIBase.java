@@ -256,4 +256,12 @@ public class AIBase
             System.out.println(AiHandList.get(i).getName() + " {" + AiHandList.get(i).getHP() + "/" + AiHandList.get(i).getATK() + "/" + AiHandList.get(i).getVP() + "}");
         }
     }
+
+    public static void setMaxHP(int newValue) {
+        AimaxHP = newValue;
+    }
+    public static void setHP(int newValue)
+    {
+        AiHP = newValue;
+    }
 }

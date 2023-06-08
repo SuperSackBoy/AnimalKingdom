@@ -164,7 +164,7 @@ public class mainMenu extends JPanel {
      * Makes a button grow when highlighted to make it feel more alive
      * @param button uses the button set in parameters to grow on highlight
      */
-    public MouseListener buttonGrow(JButton button) {
+    public static MouseListener buttonGrow(JButton button) {
         return new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
