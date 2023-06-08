@@ -19,8 +19,8 @@ import java.util.Random;
 public class mainMenu extends JPanel {
 
     private BufferedImage bgImg; //image variable
-    private JButton startButton = new JButton(); //start button initializer
-    private JButton quitButton = new JButton(); //Quit button initializer
+    public static JButton startButton = new JButton(); //start button initializer
+    public static JButton quitButton = new JButton(); //Quit button initializer
     private JTextField debugBox = new JTextField(); //debug box initializer
     private JButton debugAccept = new JButton();
     private Font pixelFont;
@@ -176,6 +176,14 @@ public class mainMenu extends JPanel {
             public void mouseExited(MouseEvent e) {
                 button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
                 buttonImageLoader(button);
+
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (!button.getText().equals("End Turn")) {
+                    button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
+                    buttonImageLoader(button);
+                }
             }
         };
     }

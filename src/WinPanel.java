@@ -41,7 +41,7 @@ public class WinPanel extends JPanel {
         JButton quitButton = new JButton();
         quitButton.setBounds((PanelManager.ScreenWidth/2) - (125) +180, 400, 250, 120);
         buttonImageLoader(quitButton);
-        quitButton.addMouseListener(buttonGrow(quitButton));
+        quitButton.addMouseListener(mainMenu.buttonGrow(quitButton));
         //Action listener when quit button is pressed
         quitButton.addActionListener(e -> System.exit(0));
         quitButton.setText("QUIT");
@@ -54,16 +54,15 @@ public class WinPanel extends JPanel {
         JButton Restartbutton = new JButton("RESTART");
         Restartbutton.setBounds((PanelManager.ScreenWidth/2) - (125) -180, 400, 250, 120);
         buttonImageLoader(Restartbutton);
-        Restartbutton.addMouseListener(buttonGrow(Restartbutton));
+        Restartbutton.addMouseListener(mainMenu.buttonGrow(Restartbutton));
         Restartbutton.setBorderPainted(false);
         Restartbutton.setFont(pixelFont);
         Restartbutton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e) {
            AIBase.resetHP();
            PanelManager.player.resetHP();
            PanelManager.player.resetVP();
-
-                EventQueue.invokeLater(new Runnable() {
+           EventQueue.invokeLater(new Runnable() {
                     public void run() {
                         try {
                             Main.frame.getContentPane().removeAll();
@@ -73,12 +72,6 @@ public class WinPanel extends JPanel {
                         }
                     }
                 });
-
-
-
-
-           //dispose();
-
             }
         });
         this.add(Restartbutton);
@@ -129,24 +122,5 @@ public class WinPanel extends JPanel {
             Image scaledImage = bgImg.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
             g.drawImage(scaledImage, 0, 0, null);
         }
-    }
-    /**
-     * Makes a button grow when highlighted to make it feel more alive
-     * @param button uses the button set in parameters to grow on highlight
-     */
-    public MouseListener buttonGrow(JButton button) {
-        return new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                button.setBounds(button.getX() - 5, button.getY() - 5, button.getWidth() + 10, button.getHeight() + 10);
-                buttonImageLoader(button);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
-                buttonImageLoader(button);
-            }
-        };
     }
 }
