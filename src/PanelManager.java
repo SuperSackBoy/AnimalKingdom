@@ -180,13 +180,11 @@ public class PanelManager {
 
         JButton showhandButton = new JButton ("Show Hand/Field");
         showhandButton.addMouseListener(mainMenu.buttonGrow(showhandButton));
-        showhandButton.setBounds(6,550,150,75);
+        showhandButton.setBounds(6,550,150,60);
         showhandButton.addActionListener(e -> showhand());
         showhandButton.setFocusable(false);
         showhandButton.setFont(minecraft);
         frame.add(showhandButton);
-
-
 
         VPDisplay.setBounds(6,125,200,80);
         VPDisplay.setFont(minecraft);
@@ -236,26 +234,8 @@ public class PanelManager {
 
     public static void showhand() {
 
-        System.out.println("SHOW Hand/Field");
-
-
-
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            int x;
-            @Override
-            public void run() {
-                if(player.PlayerPlayedCards[x] != null )
-                    player.PlayerPlayedCards[x].attack();
-                x++;
-                if(x > player.PlayerPlayedCards.length-1) {
-                    ai.playAI();
-                    this.cancel();
-                }
-            }
-        },200,100);
-
-
+        System.out.println("Show Hand/Field");
+        board.move();
     }
 
     public static void mouseHandle() {
