@@ -34,6 +34,13 @@ public class AIBase
     {
         if (getHP() <= 0)
         {
+            /*
+            Timer timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {}
+            },700,100);
+            */
             EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     try {
@@ -57,7 +64,7 @@ public class AIBase
             }
             else
             {
-                //--------------------------------------------------Killshot
+                //--------------------------------------------------Killshot start
                 full = 0;
                 beat = PanelManager.player.getHP();
                 current = 0;
@@ -85,11 +92,11 @@ public class AIBase
                     }
                 }
                 KillShotAI.BestATK(AiHandList, full);
-                System.out.println(KillShotAI.getAmt());
                 if (direct >= KillShotAI.getAmt())
                 {
                     if ((current + KillShotAI.BestATK(AiHandList, full)) >= beat)
                     {
+                        System.out.println("DIE! DIE! DIE!");
                         Kill = true;
                     }
                 }
@@ -102,7 +109,7 @@ public class AIBase
                     {
                         for (int ii = 0; ii < 5; ii++)
                         {
-                            if (AICardManager.AIPlayed[ii] == null && Player.PlayerPlayedCards[ii].getCard().getHP() < killable)
+                            if (AICardManager.AIPlayed[ii] == null && Player.PlayerPlayedCards[ii] != null && Player.PlayerPlayedCards[ii].getCard().getHP() < killable)
                             {
                                 if (i == 0)
                                 {
@@ -115,7 +122,7 @@ public class AIBase
                                     v = ii;
                                 }
                             }
-                            if (ii == 4)
+                            if (ii == 4 && v >= 0)
                             {
                                 beat = beat + Player.PlayerPlayedCards[v].getCard().getHP();
                                 killable = 99;
@@ -123,10 +130,13 @@ public class AIBase
                             }
                         }
                     }
+                    if ((current + KillShotAI.BestATK(AiHandList, full)) >= beat)
+                    {
+                        System.out.println("DIE! DIE! DIE!");
+                        Kill = true;
+                    }
                 }
-                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                System.out.println(beat + ", " + current);
-                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                //--------------------------------------------------Killshot end
                 if (AiHP <= (PanelManager.player.getHP() - 20))
                 {
                     //AiHandList = DefensiveAI.Play(AiHandList);
@@ -144,35 +154,61 @@ public class AIBase
     //--------------------------------------------------
     private void move()
     {
-        for (int i = 0; i < 5; i++) //checking AI hand
+        if (Kill)
         {
-            if ((playedVP + AiHandList.get(i).getVP()) <= 5)
+            for (int i = 0; i < 5; i++) //checking AI hand
             {
-                b: for (int ii = 0; ii < 5; ii++) //AI comparisons
+                if ((playedVP + AiHandList.get(i).getVP()) <= 5)
                 {
-                    if (AICardManager.AIPlayed[ii] == null)
+                    b: for (int ii = 0; ii < 5; ii++) //AI comparisons
                     {
-                        if (Player.PlayerPlayedCards[ii] == null)
+                        if (AICardManager.AIPlayed[ii] == null)
                         {
-                            AICardManager.playCard(AiHandList.get(i), ii);
-                            playedVP = playedVP + AiHandList.get(i).getVP();
-                            AiHandList.set(i, CardDeck.drawCard());
-                            break;
-                        }
-                        else
-                        {
-                            for (int iii = ii; iii < 5; iii++)
+                            if (Player.PlayerPlayedCards[ii] == null)
                             {
-                                if (AICardManager.AIPlayed[iii] == null)
+                                AICardManager.playCard(AiHandList.get(i), ii);
+                                playedVP = playedVP + AiHandList.get(i).getVP();
+                                AiHandList.set(i, CardDeck.drawCard());
+                                break;
+                            }
+                            else
+                            {
+                                for (int iii = ii; iii < 5; iii++)
                                 {
-                                    if (Player.PlayerPlayedCards[iii] == null)
+                                    if (AICardManager.AIPlayed[iii] == null)
                                     {
-                                        AICardManager.playCard(AiHandList.get(i), iii);
-                                        playedVP = playedVP + AiHandList.get(i).getVP();
-                                        AiHandList.set(i, CardDeck.drawCard());
-                                        break b;
+                                        if (Player.PlayerPlayedCards[iii] == null)
+                                        {
+                                            AICardManager.playCard(AiHandList.get(i), iii);
+                                            playedVP = playedVP + AiHandList.get(i).getVP();
+                                            AiHandList.set(i, CardDeck.drawCard());
+                                            break b;
+                                        }
+                                        else if (iii == 4) //make check for lowest health
+                                        {
+                                            killable = 99;
+                                            v = -1;
+                                            for (int iv = 0; iv < 5; iv++)
+                                            {
+                                                if (AICardManager.AIPlayed[iv] == null)
+                                                {
+                                                    if (Player.PlayerPlayedCards[iv].getCard().getHP() < killable)
+                                                    {
+                                                        killable = Player.PlayerPlayedCards[iv].getCard().getHP();
+                                                        v = iv;
+                                                    }
+                                                }
+                                                if (iv == 4)
+                                                {
+                                                    AICardManager.playCard(AiHandList.get(i), v);
+                                                    playedVP = playedVP + AiHandList.get(i).getVP();
+                                                    AiHandList.set(i, CardDeck.drawCard());
+                                                    break b;
+                                                }
+                                            }
+                                        }
                                     }
-                                    else if (iii == 4) //make check for lowest health
+                                    else if (iii == 4) //ditto as else if above
                                     {
                                         killable = 99;
                                         v = -1;
@@ -188,43 +224,20 @@ public class AIBase
                                             }
                                             if (iv == 4)
                                             {
-                                                AICardManager.playCard(AiHandList.get(i), v);
-                                                playedVP = playedVP + AiHandList.get(i).getVP();
-                                                AiHandList.set(i, CardDeck.drawCard());
-                                                break b;
-                                            }
-                                        }
-                                    }
-                                }
-                                else if (iii == 4) //ditto as else if above
-                                {
-                                    killable = 99;
-                                    v = -1;
-                                    for (int iv = 0; iv < 5; iv++)
-                                    {
-                                        if (AICardManager.AIPlayed[iv] == null)
-                                        {
-                                            if (Player.PlayerPlayedCards[iv].getCard().getHP() < killable)
-                                            {
-                                                killable = Player.PlayerPlayedCards[iv].getCard().getHP();
-                                                v = iv;
-                                            }
-                                        }
-                                        if (iv == 4)
-                                        {
-                                            if (v != -1)
-                                            {
-                                                AICardManager.playCard(AiHandList.get(i), v);
-                                                playedVP = playedVP + AiHandList.get(i).getVP();
-                                                AiHandList.set(i, CardDeck.drawCard());
-                                                break b;
-                                            }
-                                            else
-                                            {
-                                                AICardManager.playCard(AiHandList.get(i), ii);
-                                                playedVP = playedVP + AiHandList.get(i).getVP();
-                                                AiHandList.set(i, CardDeck.drawCard());
-                                                break b;
+                                                if (v != -1)
+                                                {
+                                                    AICardManager.playCard(AiHandList.get(i), v);
+                                                    playedVP = playedVP + AiHandList.get(i).getVP();
+                                                    AiHandList.set(i, CardDeck.drawCard());
+                                                    break b;
+                                                }
+                                                else
+                                                {
+                                                    AICardManager.playCard(AiHandList.get(i), ii);
+                                                    playedVP = playedVP + AiHandList.get(i).getVP();
+                                                    AiHandList.set(i, CardDeck.drawCard());
+                                                    break b;
+                                                }
                                             }
                                         }
                                     }
@@ -233,10 +246,35 @@ public class AIBase
                         }
                     }
                 }
+                else
+                {
+                    break;
+                }
             }
-            else
+            Kill = false;
+        }
+        else
+        {
+            for (int i = 0; i < 5; i++)
             {
-                break;
+                if ((playedVP + AiHandList.get(i).getVP()) <= 5)
+                {
+                    for (int ii = 0; ii < 5; ii++)
+                    {
+                        if (AICardManager.AIPlayed[ii] == null)
+                            if (AICardManager.AIPlayed[ii] == null)
+                            {
+                                AICardManager.playCard(AiHandList.get(i), ii);
+                                playedVP = playedVP + AiHandList.get(i).getVP();
+                                AiHandList.set(i, CardDeck.drawCard());
+                                break;
+                            }
+                    }
+                }
+                else
+                {
+                    break;
+                }
             }
         }
     }
