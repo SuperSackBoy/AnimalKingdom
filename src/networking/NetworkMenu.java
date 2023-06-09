@@ -3,10 +3,16 @@ package src.networking;
 import src.Main;
 import src.PanelManager;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.net.*;
+import java.util.Objects;
 
 public class NetworkMenu extends JPanel{
+    private BufferedImage bgImg; //image variable
     public ServerNetworkHandler serverNetworkHandler;
     public ClientNetworkHandler clientNetworkHandler;
     public boolean isHost = true;

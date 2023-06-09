@@ -62,6 +62,11 @@ public class WinPanel extends JPanel {
            AIBase.resetHP();
            PanelManager.player.resetHP();
            PanelManager.player.resetVP();
+           for (int i = 0; i < 5; i++)
+           {
+               AICardManager.AIPlayed[i] = null;
+               Player.PlayerPlayedCards[i] = null;
+           }
 
                 EventQueue.invokeLater(new Runnable() {
                     public void run() {
