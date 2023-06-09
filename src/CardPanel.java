@@ -41,6 +41,7 @@ public class CardPanel extends JPanel implements CardInterface{
     protected Card card;
 
     public CardPanel(Card card) {
+        this.card = new Card(card.getName(),card.cardImg,card.getHP(),card.getATK(), card.getVP());
         try{
             // load a custom font in your project folder
             pixelFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(13f);
@@ -50,12 +51,11 @@ public class CardPanel extends JPanel implements CardInterface{
         catch(IOException | FontFormatException e){
             e.printStackTrace();
         }
-        loadBackgroundImage(card);//sets panel to background image
+        loadBackgroundImage(this.card);//sets panel to background image
         this.setLayout(null); //formatting
         this.setBounds(x, y, width, height);
         this.setBackground(Color.BLACK);
-        this.card = card;
-        lName.setText(card.getName());
+        lName.setText(this.card.getName());
         lName.setBounds(2,0,PanelManager.CardWidth,30);
         lHP.setBounds(29+2,89-12,PanelManager.CardWidth,30);
         lAP.setBounds(36+2,107-12,PanelManager.CardWidth,30);

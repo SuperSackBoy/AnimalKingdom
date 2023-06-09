@@ -4,9 +4,32 @@ import src.*;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class NetworkPlayer extends AIBase {
     NetworkMenu networkMenu = Main.networkMenu;
+
+    public NetworkPlayer() {
+        super();
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (getHP() <= 0) {
+                    EventQueue.invokeLater(() -> {
+                        try {
+                            Main.frame.getContentPane().removeAll();
+                            Main.frame.add(Main.Wframe);
+                            Main.Wframe.loadBackgroundImage(true);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        },100, 100);
+    }
     @Override
     public void playAI() {
         Card[] cards;
@@ -29,16 +52,5 @@ public class NetworkPlayer extends AIBase {
             }
         }
         attack();
-        if (getHP() <= 0) {
-            EventQueue.invokeLater(() -> {
-                try {
-                    Main.frame.getContentPane().removeAll();
-                    Main.frame.add(Main.Wframe);
-                    Main.Wframe.loadBackgroundImage(false);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-        }
     }
 }
