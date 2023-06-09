@@ -70,6 +70,7 @@ public class PlayerCardPanel extends CardPanel {
                 desiredLocation = new Point(x,y);
             }
             if(pressed) { //if the card is clicked
+                PanelManager.board.setComponentZOrder(this,0);
                 if(!latch) { //called only once as soon as the card is clicked
                     latch = true;
                     PanelManager.board.moveUp(); //show the play area
@@ -97,6 +98,7 @@ public class PlayerCardPanel extends CardPanel {
                     if(d != null) { //set desired location to the drop point
                         desiredLocation.x = d.x;
                         desiredLocation.y = d.y;
+                        PanelManager.board.setComponentZOrder(this,6);
                         d.active = true; //activate the drop location
                         playCard();
                         for(int x = 0; x < PanelManager.player.PlayerHand.length; x++) {
