@@ -57,6 +57,7 @@ public class AIBase
             }
             else
             {
+                //--------------------------------------------------Killshot
                 full = 0;
                 beat = PanelManager.player.getHP();
                 current = 0;
@@ -83,7 +84,7 @@ public class AIBase
                         direct++;
                     }
                 }
-                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                KillShotAI.BestATK(AiHandList, full);
                 System.out.println(KillShotAI.getAmt());
                 if (direct >= KillShotAI.getAmt())
                 {
@@ -124,7 +125,7 @@ public class AIBase
                     }
                 }
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                System.out.println(full + ", " + beat + ", " + current);
+                System.out.println(beat + ", " + current);
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 if (AiHP <= (PanelManager.player.getHP() - 20))
                 {
