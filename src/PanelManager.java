@@ -29,7 +29,7 @@ public class PanelManager {
 
     public static JButton endTurnButton;
 
-    public static JButton showhandButton = new JButton();
+    public static JButton showhandButton;
 
     private static Font minecraft;
 
@@ -78,9 +78,10 @@ public class PanelManager {
         }
         spacing = 10;
 
+        board = new Board();
+
         createHud(frame);
 
-        board = new Board();
         frame.add(board);
 
 
@@ -160,6 +161,7 @@ public class PanelManager {
         mainMenu.buttonImageLoader(surrenderButton);
         frame.add(surrenderButton);
 
+        showhandButton = new JButton();
         showhandButton.setBounds(6,550,30*3,24*3);
         arrowImgUpdater();
         showhandButton.setText("arrow");
@@ -180,16 +182,19 @@ public class PanelManager {
     }
 
     public static void arrowImgUpdater(){
-        if(board == null) return;
         ImageIcon imageIcon;
 
-        if (board.showHand) imageIcon = new ImageIcon("src/imageAssets/ArrowUp.png");
-        else imageIcon = new ImageIcon("src/imageAssets/ArrowDown.png");
+        if(board != null) {
+            if (board.showHand) imageIcon = new ImageIcon("src/imageAssets/ArrowUp.png");
+            else imageIcon = new ImageIcon("src/imageAssets/ArrowDown.png");
+        } else {
+            imageIcon = new ImageIcon("src/imageAssets/ArrowUp.png");
+        }
 
-            Image image = imageIcon.getImage(); // transform it
-            Image newimg = image.getScaledInstance(showhandButton.getWidth(), showhandButton.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
-            imageIcon = new ImageIcon(newimg);  // transform it back
-            showhandButton.setIcon(imageIcon);
+        Image image = imageIcon.getImage(); // transform it
+        Image newimg = image.getScaledInstance(showhandButton.getWidth(), showhandButton.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
+        imageIcon = new ImageIcon(newimg);  // transform it back
+        showhandButton.setIcon(imageIcon);
     }
 
     /**
