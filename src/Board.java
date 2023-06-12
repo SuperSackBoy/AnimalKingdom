@@ -107,14 +107,13 @@ public class Board extends JPanel{ //manages the card locations and drop locatio
     int destination = 0;
     public void move() { //the board to show either the players hand or the play area
         Timer timer = new Timer();
+        PanelManager.arrowImgUpdater(false);
 
         if(showHand) {
             destination = -PanelManager.ScreenHeight; //set destination to hand
-            PanelManager.arrowImgUpdater();
         }
         else {
             destination = -PanelManager.ScreenHeight/2; //set destination to board
-            PanelManager.arrowImgUpdater();
         }
 
         timer.scheduleAtFixedRate(new TimerTask() {

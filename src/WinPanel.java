@@ -92,7 +92,7 @@ public class WinPanel extends JPanel {
 
     }
     public static void buttonImageLoader(JButton button) {
-        ImageIcon imageIcon = new ImageIcon("src/imageAssets/ButtonIcon.png"); // load the image to a imageIcon
+        ImageIcon imageIcon = new ImageIcon(Main.class.getResource("imageAssets/ButtonIcon.png")); // load the image to a imageIcon
         Image image = imageIcon.getImage(); // transform it
         Image newimg = image.getScaledInstance(button.getWidth(), button.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
         imageIcon = new ImageIcon(newimg);  // transform it back
