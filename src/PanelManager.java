@@ -180,10 +180,11 @@ public class PanelManager {
     }
 
     public static void arrowImgUpdater(){
+        if(board == null) return;
         ImageIcon imageIcon;
 
-       if (Board.showHand) imageIcon = new ImageIcon("src/imageAssets/ArrowUp.png");
-       else imageIcon = new ImageIcon("src/imageAssets/ArrowDown.png");
+        if (board.showHand) imageIcon = new ImageIcon("src/imageAssets/ArrowUp.png");
+        else imageIcon = new ImageIcon("src/imageAssets/ArrowDown.png");
 
             Image image = imageIcon.getImage(); // transform it
             Image newimg = image.getScaledInstance(showhandButton.getWidth(), showhandButton.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way

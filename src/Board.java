@@ -103,7 +103,7 @@ public class Board extends JPanel{ //manages the card locations and drop locatio
 
 
 
-    public static boolean showHand = false;
+    public boolean showHand = false;
     int destination = 0;
     public void move() { //the board to show either the players hand or the play area
         Timer timer = new Timer();

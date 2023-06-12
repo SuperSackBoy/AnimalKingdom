@@ -19,8 +19,8 @@ public class AIBase
     //in this case, the ai is an object, don't access it with AIBase, access it through PanelManager.ai, or have it be public in main
     protected LinkedList<Card> AiHandList = new LinkedList<Card>();
     protected boolean Kill = false;
-    protected static int AiHP, playedVP = 0, ran, full, beat, current, direct, killable, v;
-    private static int AimaxHP = 250;
+    protected int AiHP, playedVP = 0, ran, full, beat, current, direct, killable, v;
+    private int AimaxHP = 250;
     //--------------------------------------------------
     public AIBase()
     {
@@ -33,6 +33,7 @@ public class AIBase
     //--------------------------------------------------
     public void playAI()
     {
+        Player Player = PanelManager.player;
         if (getHP() <= 0)
         {
             /*
@@ -154,6 +155,7 @@ public class AIBase
     //--------------------------------------------------
     private void move()
     {
+        Player Player = PanelManager.player;
         if (Kill)
         {
             for (int i = 0; i < 5; i++) //checking AI hand
@@ -309,7 +311,7 @@ public class AIBase
         return this.AimaxHP;
     }
     //--------------------------------------------------
-    public static void resetHP() { AiHP = AimaxHP; }
+    public void resetHP() { AiHP = AimaxHP; }
     //--------------------------------------------------
     public void show ()
     {
@@ -319,10 +321,10 @@ public class AIBase
         }
     }
 
-    public static void setMaxHP(int newValue) {
+    public void setMaxHP(int newValue) {
         AimaxHP = newValue;
     }
-    public static void setHP(int newValue)
+    public void setHP(int newValue)
     {
         AiHP = newValue;
     }

@@ -43,7 +43,7 @@ public class debugCodes {
         }
 
         if (code.equalsIgnoreCase("Player VP " + codeNum)) {
-            Player.setMaxVP(codeNumInt);
+            PanelManager.player.setMaxVP(codeNumInt);
             PanelManager.player.setVP(codeNumInt);
             mainMenu.debugBox.setText("Code Applied");
         }

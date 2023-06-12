@@ -8,7 +8,6 @@ Panel to display a card
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,7 +16,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import static javax.imageio.ImageIO.read;
 
 public class CardPanel extends JPanel implements CardInterface{
     private BufferedImage bgImg; //image variable

@@ -1,3 +1,11 @@
+/*
+Aaron Kimbel
+ICS4U0-C
+Final Project
+Animal Kingdom: Card Arena
+A text field for entering ip
+*/
+
 package src.networking;
 
 import javax.swing.*;
@@ -9,7 +17,7 @@ import java.util.TimerTask;
 
 public class EnterIP extends JPanel {
     protected JTextField text = new JTextField();
-    protected JLabel label = new JLabel("ENTER PORT:");
+    protected JLabel label = new JLabel("ENTER IP:");
 
     public EnterIP(int x, int y, int width, int height, String defaultText) {
         this(x,y,width,height);
