@@ -21,7 +21,7 @@ public class mainMenu extends JPanel {
     private BufferedImage bgImg; //image variable
     public static JButton startButton = new JButton(); //start button initializer
     public static JButton quitButton = new JButton(); //Quit button initializer
-    private JTextField debugBox = new JTextField(); //debug box initializer
+    public static JTextField debugBox = new JTextField(); //debug box initializer
     private JButton debugAccept = new JButton();
     public Font pixelFont;
     private Font minecraft;

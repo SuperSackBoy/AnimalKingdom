@@ -13,13 +13,13 @@ public class debugCodes {
         if (code.equalsIgnoreCase("Mr. Jone")){
             CardDeck.deckReset();
             mrJone = true;
-            System.out.println(mainMenu.debugCode);
+            mainMenu.debugBox.setText("Code Applied");
         }
         if (code.equalsIgnoreCase("Oops all Jone!")) {
             CardDeck.deckReset();
             CardDeck.cardList.add(new Card("Mr. Jone", "imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1));
             allJone = true;
-            System.out.println(mainMenu.debugCode);
+            mainMenu.debugBox.setText("Code Applied");
         }
 
         String codeNum = code;
@@ -34,18 +34,20 @@ public class debugCodes {
         if (code.equalsIgnoreCase("Player HP " + codeNum)) {
             PanelManager.player.setHP(codeNumInt);
             PanelManager.player.setMaxHP(codeNumInt);
-            System.out.println(mainMenu.debugCode);
+            mainMenu.debugBox.setText("Code Applied");
         }
         if (code.equalsIgnoreCase("AI HP "+ codeNum)) {
             PanelManager.ai.setMaxHP(codeNumInt);
             PanelManager.ai.setHP(codeNumInt);
-            System.out.println(mainMenu.debugCode);
+            mainMenu.debugBox.setText("Code Applied");
         }
 
         if (code.equalsIgnoreCase("Player VP " + codeNum)) {
             Player.setMaxVP(codeNumInt);
             PanelManager.player.setVP(codeNumInt);
-            System.out.println(mainMenu.debugCode);
+            mainMenu.debugBox.setText("Code Applied");
         }
+
+        if (!mainMenu.debugBox.getText().equals("Code Applied")) mainMenu.debugBox.setText("Code DNE");
     }
 }
