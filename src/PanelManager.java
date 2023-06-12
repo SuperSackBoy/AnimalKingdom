@@ -186,7 +186,7 @@ public class PanelManager {
         showhandButton.setContentAreaFilled(false);
         showhandButton.setFocusable(false);
         showhandButton.setFocusPainted(false);
-        showhandButton.addMouseListener(mainMenu.buttonGrow(showhandButton));
+        showhandButton.addMouseListener(buttonGrow(showhandButton));
         showhandButton.addActionListener(e -> showhand());
         frame.add(showhandButton);
 
@@ -197,20 +197,35 @@ public class PanelManager {
     }
 
     public static void arrowImgUpdater(){
-       if (Board.showHand){
-            ImageIcon imageIcon = new ImageIcon("src/imageAssets/ArrowUp.png"); // load the image to a imageIcon
+        ImageIcon imageIcon;
+
+       if (Board.showHand) imageIcon = new ImageIcon("src/imageAssets/ArrowUp.png");
+       else imageIcon = new ImageIcon("src/imageAssets/ArrowDown.png");
+
             Image image = imageIcon.getImage(); // transform it
             Image newimg = image.getScaledInstance(showhandButton.getWidth(), showhandButton.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
             imageIcon = new ImageIcon(newimg);  // transform it back
             showhandButton.setIcon(imageIcon);
-        }
-        else{
-           ImageIcon imageIcon = new ImageIcon("src/imageAssets/ArrowDown.png");
-           Image image = imageIcon.getImage(); // transform it
-            Image newimg = image.getScaledInstance(showhandButton.getWidth(), showhandButton.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
-            imageIcon = new ImageIcon(newimg);  // transform it back
-            showhandButton.setIcon(imageIcon);
-        }
+    }
+
+    /**
+     * Makes a button grow when highlighted to make it feel more alive
+     * @param button uses the button set in parameters to grow on highlight
+     */
+    public static MouseListener buttonGrow(JButton button) {
+        return new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBounds(button.getX() - 5, button.getY() - 5, button.getWidth() + 10, button.getHeight() + 10);
+                arrowImgUpdater();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
+                arrowImgUpdater();
+            }
+        };
     }
 
     public static void surrender() {

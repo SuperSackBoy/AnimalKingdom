@@ -110,19 +110,11 @@ public class Board extends JPanel{ //manages the card locations and drop locatio
 
         if(showHand) {
             destination = -PanelManager.ScreenHeight; //set destination to hand
-            ImageIcon imageIcon = new ImageIcon("src/imageAssets/ArrowUp.png"); // load the image to a imageIcon
-            Image image = imageIcon.getImage(); // transform it
-            Image newimg = image.getScaledInstance(PanelManager.showhandButton.getWidth(), PanelManager.showhandButton.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
-            imageIcon = new ImageIcon(newimg);  // transform it back
-            PanelManager.showhandButton.setIcon(imageIcon);
+            PanelManager.arrowImgUpdater();
         }
         else {
             destination = -PanelManager.ScreenHeight/2; //set destination to board
-            ImageIcon imageIcon = new ImageIcon("src/imageAssets/ArrowDown.png"); // load the image to a imageIcon
-            Image image = imageIcon.getImage(); // transform it
-            Image newimg = image.getScaledInstance(PanelManager.showhandButton.getWidth(), PanelManager.showhandButton.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
-            imageIcon = new ImageIcon(newimg);  // transform it back
-            PanelManager.showhandButton.setIcon(imageIcon);
+            PanelManager.arrowImgUpdater();
         }
 
         timer.scheduleAtFixedRate(new TimerTask() {

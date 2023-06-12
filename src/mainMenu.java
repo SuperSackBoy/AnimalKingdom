@@ -169,23 +169,19 @@ public class mainMenu extends JPanel {
             @Override
             public void mouseEntered(MouseEvent e) {
                 button.setBounds(button.getX() - 5, button.getY() - 5, button.getWidth() + 10, button.getHeight() + 10);
-                if (button!= PanelManager.showhandButton) buttonImageLoader(button);
-                else PanelManager.arrowImgUpdater();
+                buttonImageLoader(button);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
-                if (button!= PanelManager.showhandButton) buttonImageLoader(button);
-                else PanelManager.arrowImgUpdater();
+                buttonImageLoader(button);
             }
             @Override
             public void mousePressed(MouseEvent e) {
                 if (button != PanelManager.endTurnButton) {
-                    if (button != PanelManager.showhandButton) {//need 2 separate if statements for some reason or else there's an error, no fucking clue why
-                        button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
-                        buttonImageLoader(button);
-                    }
+                    button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
+                    buttonImageLoader(button);
                 }
             }
         };
