@@ -97,7 +97,6 @@ public class AIBase
                 {
                     if ((current + KillShotAI.BestATK(AiHandList, full)) >= beat)
                     {
-                        System.out.println("DIE! DIE! DIE!");
                         Kill = true;
                     }
                 }

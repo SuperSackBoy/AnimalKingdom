@@ -215,7 +215,7 @@ public class PanelManager {
 
     public static void endTurn() {
         endTurnButton.setEnabled(false);
-        System.out.println("END TURN");
+        //System.out.println("END TURN"); (Couldn't bring myself to delete this momentus line of code
         board.moveUp();
         player.setVP(0);
         Timer timer = new Timer();
