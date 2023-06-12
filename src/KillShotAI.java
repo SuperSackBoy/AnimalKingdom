@@ -17,7 +17,7 @@ public class KillShotAI {
         return Combo;
     }
     //--------------------------------------------------
-    public static int BestATK(LinkedList<Card> Hand, int cards, int current)
+    public static int BestATK(LinkedList<Card> Hand, int cards)
     {
         //--------------------------------------------------
         //Sort the array in ascending order using two for loops
@@ -42,7 +42,6 @@ public class KillShotAI {
                 }
             }
         }
-        //--------------------------------------------------
         Best_ATK = 0;
         Best_amt = 0;
         for (int i = 0; i < 5; i++)
@@ -141,10 +140,7 @@ public class KillShotAI {
         return Best_ATK;
     }
     //--------------------------------------------------
-    public static int getAmt()
-    {
-        return Best_amt;
-    }
+    public static int getAmt() {return Compare_amt;}
     //--------------------------------------------------
     public static void comparing (int cards, int amt, int ATK1, int ATK2, int ATK3, int ATK4, int ATK5)
     {
@@ -154,13 +150,14 @@ public class KillShotAI {
             if (Compare_ATK > Best_ATK)
             {
                 Best_ATK = Compare_ATK;
+                Compare_amt = Best_amt = amt;
             }
             else if (Compare_ATK == Best_ATK)
             {
                 if (amt < Best_amt)
                 {
                     Best_ATK = Compare_ATK;
-                    Best_amt = amt;
+                    Compare_amt = Best_amt = amt;
                 }
             }
         }

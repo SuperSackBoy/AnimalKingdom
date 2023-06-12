@@ -114,25 +114,6 @@ public class PanelManager {
 
         }, 0, 1);
         frame.requestFocus();
-        frame.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == 32) {//space
-                    board.move();
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        });
-
 
         if(!playerStart) {
             board.y = (float) -ScreenHeight /2;
@@ -249,7 +230,7 @@ public class PanelManager {
 
     public static void endTurn() {
         endTurnButton.setEnabled(false);
-        System.out.println("END TURN");
+        //System.out.println("END TURN"); (Couldn't bring myself to delete this momentus line of code
         board.moveUp();
         player.setVP(0);
         Timer timer = new Timer();
