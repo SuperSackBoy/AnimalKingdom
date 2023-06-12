@@ -161,12 +161,14 @@ public class PanelManager {
         frame.add(surrenderButton);
 
         showhandButton.setBounds(6,550,30*3,24*3);
+        arrowImgUpdater();
         showhandButton.setText("arrow");
         showhandButton.setFont(new Font("TimesRoman", Font.PLAIN, 1));
         showhandButton.setOpaque(false);
         showhandButton.setContentAreaFilled(false);
         showhandButton.setFocusable(false);
         showhandButton.setFocusPainted(false);
+        showhandButton.setBorderPainted(false);
         showhandButton.addMouseListener(buttonGrow(showhandButton));
         showhandButton.addActionListener(e -> showhand());
         frame.add(showhandButton);

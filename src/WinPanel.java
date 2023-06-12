@@ -59,6 +59,8 @@ public class WinPanel extends JPanel {
         Restartbutton.setFont(pixelFont);
         Restartbutton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Restartbutton.setBounds((PanelManager.ScreenWidth/2) - (125) -180, 400, 250, 120);
+                buttonImageLoader(Restartbutton);
            AIBase.resetHP();
            PanelManager.player.resetHP();
            PanelManager.player.resetVP();
