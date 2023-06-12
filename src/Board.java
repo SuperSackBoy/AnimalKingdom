@@ -15,7 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 
 public class Board extends JPanel{ //manages the card locations and drop locations on screen, can be panned
@@ -103,13 +103,27 @@ public class Board extends JPanel{ //manages the card locations and drop locatio
 
 
 
-    public boolean showHand = false;
+    public static boolean showHand = false;
     int destination = 0;
     public void move() { //the board to show either the players hand or the play area
         Timer timer = new Timer();
 
-        if(showHand) destination = -PanelManager.ScreenHeight; //set destination to hand
-        else destination = -PanelManager.ScreenHeight/2; //set destination to board
+        if(showHand) {
+            destination = -PanelManager.ScreenHeight; //set destination to hand
+            ImageIcon imageIcon = new ImageIcon("src/imageAssets/ArrowUp.png"); // load the image to a imageIcon
+            Image image = imageIcon.getImage(); // transform it
+            Image newimg = image.getScaledInstance(PanelManager.showhandButton.getWidth(), PanelManager.showhandButton.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
+            imageIcon = new ImageIcon(newimg);  // transform it back
+            PanelManager.showhandButton.setIcon(imageIcon);
+        }
+        else {
+            destination = -PanelManager.ScreenHeight/2; //set destination to board
+            ImageIcon imageIcon = new ImageIcon("src/imageAssets/ArrowDown.png"); // load the image to a imageIcon
+            Image image = imageIcon.getImage(); // transform it
+            Image newimg = image.getScaledInstance(PanelManager.showhandButton.getWidth(), PanelManager.showhandButton.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
+            imageIcon = new ImageIcon(newimg);  // transform it back
+            PanelManager.showhandButton.setIcon(imageIcon);
+        }
 
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -150,9 +164,7 @@ public class Board extends JPanel{ //manages the card locations and drop locatio
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (bgImg != null) {
-            // Scale the image to fit the panel dimensions
-            Image scaledImage = bgImg.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
-            g.drawImage(scaledImage, 0, 0, null);
+            g.drawImage(bgImg, 0, 0,this.getWidth(),this.getHeight(), null);
         }
     }
 }

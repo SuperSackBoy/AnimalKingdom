@@ -16,19 +16,20 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static java.awt.Font.*;
+
 public class PanelManager {
     public static Board board;
     public static PlayerDropLocation[] dropLocations = new PlayerDropLocation[5];
     public static AIDropLocation[] aiDropLocations = new AIDropLocation[5];
     public static Point mouse;
 
-
     public static final ImageIcon selectIcon = new ImageIcon("src/imageAssets/cardSelectIcon.png");
     public static JLabel selectLbl = new JLabel();
 
     public static JButton endTurnButton;
 
-    public static JButton showhandButton;
+    public static JButton showhandButton = new JButton();
 
     private static Font minecraft;
 
@@ -58,8 +59,8 @@ public class PanelManager {
         try{
             // load a custom font in your project folder0f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            minecraft = Font.createFont(Font.TRUETYPE_FONT, PanelManager.class.getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(13f);
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, PanelManager.class.getResourceAsStream("imageAssets/Minecraft.ttf")));
+            minecraft = createFont(TRUETYPE_FONT, PanelManager.class.getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(13f);
+            ge.registerFont(createFont(TRUETYPE_FONT, PanelManager.class.getResourceAsStream("imageAssets/Minecraft.ttf")));
         }
         catch(IOException | FontFormatException ignored){
 
@@ -143,7 +144,7 @@ public class PanelManager {
     }
     public static HealthBar playerHPBar;
     public static HealthBar AIHPBar;
-    public static JLabel VPDisplay = new JLabel();;
+    public static JLabel VPDisplay = new JLabel();
     public static void createHud(JFrame frame) {
         playerHPBar = new HealthBar(6,25,150, 60, 1f, "Player: " +player.getHP(), SwingConstants.LEFT);
         playerHPBar.label.setFont(minecraft);
@@ -178,18 +179,38 @@ public class PanelManager {
         mainMenu.buttonImageLoader(surrenderButton);
         frame.add(surrenderButton);
 
-        JButton showhandButton = new JButton ("Show Hand/Field");
-        showhandButton.addMouseListener(mainMenu.buttonGrow(showhandButton));
-        showhandButton.setBounds(6,550,150,60);
-        showhandButton.addActionListener(e -> showhand());
+        showhandButton.setBounds(6,550,30*3,24*3);
+        showhandButton.setText("arrow");
+        showhandButton.setFont(new Font("TimesRoman", Font.PLAIN, 1));
+        showhandButton.setOpaque(false);
+        showhandButton.setContentAreaFilled(false);
         showhandButton.setFocusable(false);
-        showhandButton.setFont(minecraft);
+        showhandButton.setFocusPainted(false);
+        showhandButton.addMouseListener(mainMenu.buttonGrow(showhandButton));
+        showhandButton.addActionListener(e -> showhand());
         frame.add(showhandButton);
 
         VPDisplay.setBounds(6,125,200,80);
         VPDisplay.setFont(minecraft);
         VPDisplay.setForeground(Color.white);
         frame.add(VPDisplay);
+    }
+
+    public static void arrowImgUpdater(){
+       if (Board.showHand){
+            ImageIcon imageIcon = new ImageIcon("src/imageAssets/ArrowUp.png"); // load the image to a imageIcon
+            Image image = imageIcon.getImage(); // transform it
+            Image newimg = image.getScaledInstance(showhandButton.getWidth(), showhandButton.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
+            imageIcon = new ImageIcon(newimg);  // transform it back
+            showhandButton.setIcon(imageIcon);
+        }
+        else{
+           ImageIcon imageIcon = new ImageIcon("src/imageAssets/ArrowDown.png");
+           Image image = imageIcon.getImage(); // transform it
+            Image newimg = image.getScaledInstance(showhandButton.getWidth(), showhandButton.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
+            imageIcon = new ImageIcon(newimg);  // transform it back
+            showhandButton.setIcon(imageIcon);
+        }
     }
 
     public static void surrender() {
@@ -233,8 +254,6 @@ public class PanelManager {
     }
 
     public static void showhand() {
-
-        System.out.println("Show Hand/Field");
         board.move();
     }
 

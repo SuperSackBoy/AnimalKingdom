@@ -144,8 +144,7 @@ public class CardPanel extends JPanel implements CardInterface{
         super.paintComponent(g);
         if (bgImg != null) {
             // Scale the image to fit the panel dimensions
-            Image scaledImage = bgImg.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
-            g.drawImage(scaledImage, 0, 0, null);
+            g.drawImage(bgImg, 0, 0, this.getWidth(), this.getHeight(), null);
         }
     }
 }

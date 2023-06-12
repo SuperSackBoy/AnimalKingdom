@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.*;
 import java.util.Objects;
+import java.util.Random;
 
 public class NetworkMenu extends JPanel{
     private BufferedImage bgImg; //image variable
@@ -26,9 +27,19 @@ public class NetworkMenu extends JPanel{
         EnterPort enterPort = new EnterPort(0,100,100,50,7777);
 
         JButton btnHost = new JButton("HOST");
-        btnHost.setBounds(0,0,100,50);
+        //Start button setup
+        btnHost.setBounds((PanelManager.ScreenWidth/2) - (125) -180, 400, 250, 120);
+        Main.mainMenuPanel.buttonImageLoader(btnHost);
+        btnHost.addMouseListener(Main.mainMenuPanel.buttonGrow(btnHost));
+        btnHost.setBorderPainted(false);
+        btnHost.setFont(Main.mainMenuPanel.pixelFont);
+
         JButton btnJoin = new JButton("JOIN");
-        btnJoin.setBounds(0,50,100,50);
+        btnJoin.setBounds((PanelManager.ScreenWidth/2) - (125) +180, 400, 250, 120);
+        Main.mainMenuPanel.buttonImageLoader(btnJoin);
+        btnJoin.addMouseListener(Main.mainMenuPanel.buttonGrow(btnJoin));
+        btnJoin.setBorderPainted(false);
+        btnJoin.setFont(Main.mainMenuPanel.pixelFont);
 
         btnHost.addActionListener(e -> {
             this.removeAll();
