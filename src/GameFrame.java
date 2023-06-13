@@ -9,6 +9,8 @@ Just a frame to put everything on, nothing special
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 
 public class GameFrame extends JFrame /*implements KeyListener*/ {
@@ -26,6 +28,15 @@ public class GameFrame extends JFrame /*implements KeyListener*/ {
 
         setContentPane(contentPane);
 
+        this.addKeyListener(new KeyListener() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == 32) {//space
+                    if(PanelManager.board != null) PanelManager.board.move();
+                }
+            }
+            public void keyTyped(KeyEvent e) {} public void keyReleased(KeyEvent e) {}
+        });
     }
 
 }
