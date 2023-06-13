@@ -24,12 +24,12 @@ public class PanelManager {
     public static AIDropLocation[] aiDropLocations = new AIDropLocation[5];
     public static Point mouse;
 
-    public static final ImageIcon selectIcon = new ImageIcon("src/imageAssets/cardSelectIcon.png");
+    public static final ImageIcon selectIcon = new ImageIcon(Main.class.getResource("imageAssets/CardSelectIcon.png"));
     public static JLabel selectLbl = new JLabel();
 
     public static JButton endTurnButton;
 
-    public static JButton showhandButton = new JButton();
+    public static JButton showhandButton;
 
     private static Font minecraft;
 
@@ -78,9 +78,10 @@ public class PanelManager {
         }
         spacing = 10;
 
+        board = new Board();
+
         createHud(frame);
 
-        board = new Board();
         frame.add(board);
 
 
@@ -114,7 +115,7 @@ public class PanelManager {
             endTurn();
         }
         board.setBounds(board.x,(int) board.y,board.width,board.height);
-
+        arrowImgUpdater(true);
     }
     public static HealthBar playerHPBar;
     public static HealthBar AIHPBar;
@@ -153,8 +154,9 @@ public class PanelManager {
         mainMenu.buttonImageLoader(surrenderButton);
         frame.add(surrenderButton);
 
+        showhandButton = new JButton();
         showhandButton.setBounds(6,550,30*3,24*3);
-        arrowImgUpdater();
+        arrowImgUpdater(false);
         showhandButton.setText("arrow");
         showhandButton.setFont(new Font("TimesRoman", Font.PLAIN, 1));
         showhandButton.setOpaque(false);
@@ -172,16 +174,20 @@ public class PanelManager {
         frame.add(VPDisplay);
     }
 
-    public static void arrowImgUpdater(){
+    public static void arrowImgUpdater(boolean invert){
+        if (board == null) return;
         ImageIcon imageIcon;
 
-       if (Board.showHand) imageIcon = new ImageIcon("src/imageAssets/ArrowUp.png");
-       else imageIcon = new ImageIcon("src/imageAssets/ArrowDown.png");
+        boolean bool = board.showHand;
+        if(invert) bool = !bool;
 
-            Image image = imageIcon.getImage(); // transform it
-            Image newimg = image.getScaledInstance(showhandButton.getWidth(), showhandButton.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
-            imageIcon = new ImageIcon(newimg);  // transform it back
-            showhandButton.setIcon(imageIcon);
+        if (bool) imageIcon = new ImageIcon(Main.class.getResource("imageAssets/ArrowUp.png"));
+        else imageIcon = new ImageIcon(Main.class.getResource("imageAssets/ArrowDown.png"));
+
+        Image image = imageIcon.getImage(); // transform it
+        Image newimg = image.getScaledInstance(showhandButton.getWidth(), showhandButton.getHeight(),  Image.SCALE_SMOOTH); // scale it the smooth way
+        imageIcon = new ImageIcon(newimg);  // transform it back
+        showhandButton.setIcon(imageIcon);
     }
 
     /**
@@ -193,13 +199,13 @@ public class PanelManager {
             @Override
             public void mouseEntered(MouseEvent e) {
                 button.setBounds(button.getX() - 5, button.getY() - 5, button.getWidth() + 10, button.getHeight() + 10);
-                arrowImgUpdater();
+                arrowImgUpdater(true);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
-                arrowImgUpdater();
+                arrowImgUpdater(true);
             }
         };
     }

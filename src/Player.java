@@ -9,7 +9,7 @@ May 11, 2023 * Fixed card deck object from instance
 public class Player {
     private int HP, VP;
     private int maxHP = 250;
-    private static int maxVP = 5;
+    private int maxVP = 5;
     //public boolean selections[] = new boolean[5];
     /**
      * List that holds 5 of the players cards in their hand as separate objects
@@ -18,7 +18,7 @@ public class Player {
     /**
      * List that holds the players cards as objects for the game field
      */
-    public static PlayerCardPanel[] PlayerPlayedCards = new PlayerCardPanel[5];
+    public PlayerCardPanel[] PlayerPlayedCards = new PlayerCardPanel[5];
 
 
     // constructor method called when object created
@@ -28,7 +28,7 @@ public class Player {
 
     }
 
-    public static void setMaxVP(int newValue) {
+    public void setMaxVP(int newValue) {
         maxVP = newValue;
     }
 

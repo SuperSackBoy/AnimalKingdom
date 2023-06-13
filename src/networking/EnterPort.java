@@ -1,3 +1,11 @@
+/*
+Aaron Kimbel
+ICS4U0-C
+Final Project
+Animal Kingdom: Card Arena
+A text field that can only have 4 numbers maximum
+*/
+
 package src.networking;
 
 import javax.swing.*;

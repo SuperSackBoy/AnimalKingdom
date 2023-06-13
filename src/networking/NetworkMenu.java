@@ -1,3 +1,11 @@
+/*
+Aaron Kimbel
+ICS4U0-C
+Final Project
+Animal Kingdom: Card Arena
+Set up the connection between host/client
+*/
+
 package src.networking;
 
 import src.Main;
