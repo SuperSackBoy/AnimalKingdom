@@ -15,7 +15,7 @@ import java.awt.event.KeyListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class EnterPort extends JPanel {
+public class EnterPort extends JPanel { //im not commenting this i refuse
     protected JTextField text = new JTextField();
     protected JLabel label = new JLabel("ENTER PORT:");
 

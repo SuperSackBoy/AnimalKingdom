@@ -23,12 +23,7 @@ public class HealthBar extends JPanel {
     private final JPanel hp;
     private final int height;
     private final int width;
-    //constructor for changing the color
-    public HealthBar(int x, int y, int width, int height, float percent, String labelText, int textAlign, Color color) {
-        this(x,y,width,height,percent,labelText,textAlign);
-        this.color = color;
-        this.hp.setBackground(color);
-    }
+
     //default constructor
     public HealthBar(int x, int y, int width, int height, float percent, String labelText, int textAlign) {
         this.setBounds(x,y,width,height);
@@ -60,6 +55,8 @@ public class HealthBar extends JPanel {
         this.add(panel);
     }
 
+    private final float threshold = 0.035f;
+
     /** sets how much of the bar is coloured red
      *
      * @param percent
@@ -68,7 +65,11 @@ public class HealthBar extends JPanel {
     public void setPercent(float percent) {
         assert percent <= 1 && percent >= 0;
         this.percent = percent;
-        hp.setBounds(0+2,(height/2)+2, (int) ((width*this.percent)-4),(height/2)-4);
+        if(this.percent >= threshold) {
+            hp.setBounds(0 + 2, (height / 2) + 2, (int) ((width * this.percent) - 4), (height / 2) - 4);
+        } else {
+            hp.setVisible(false);
+        }
     }
 
     public void setColor(Color color) {
@@ -105,7 +106,7 @@ public class HealthBar extends JPanel {
             Image scaledImage = bgImg.getScaledInstance(panel.getWidth(), panel.getHeight(), Image.SCALE_SMOOTH);
             g.drawImage(scaledImage, panel.getX(), panel.getY(), null);
         }
-        if (hpImg != null) {
+        if (hpImg != null && this.percent >= threshold) {
             // Scale the image to fit the panel dimensions
             Image scaledImage = hpImg.getScaledInstance(hp.getWidth(), hp.getHeight(), Image.SCALE_SMOOTH);
             g.drawImage(scaledImage, hp.getX(), hp.getY(), null);
