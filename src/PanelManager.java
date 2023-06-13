@@ -51,7 +51,7 @@ public class PanelManager {
     public static void init(JFrame jframe, Player plyr) {
         player = plyr;
         frame = jframe;
-
+        ai = new AIBase();
     }
 
     public static void start(boolean playerStart, boolean AI) {
@@ -66,8 +66,7 @@ public class PanelManager {
 
         }
 
-        if(useAI) ai = new AIBase();
-        else ai = new NetworkPlayer();
+        if(!useAI) ai = new NetworkPlayer();
         frame.getContentPane().removeAll();
 
         center = frame.getContentPane().getWidth()/2-CardWidth/2;
