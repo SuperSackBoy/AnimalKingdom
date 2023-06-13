@@ -65,7 +65,7 @@ public class debugCodes {
         PanelManager.player.setMaxHP(250);
         PanelManager.ai.setMaxHP(250);
         PanelManager.ai.setHP(250);
-        Player.setMaxVP(5);
+        PanelManager.player.setMaxVP(5);
         PanelManager.player.setVP(5);
     }
 }
