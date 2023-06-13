@@ -9,6 +9,7 @@ import src.networking.NetworkMenu;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -21,10 +22,13 @@ public class mainMenu extends JPanel {
     private BufferedImage bgImg; //image variable
     public static JButton startButton = new JButton(); //start button initializer
     public static JButton quitButton = new JButton(); //Quit button initializer
+    public static JButton helpButton = new JButton(); //Quit button initializer
+    public static JButton xHelp = new JButton(); //Quit button initializer
     public static JTextField debugBox = new JTextField(); //debug box initializer
     private JButton debugAccept = new JButton();
+    private JTextPane helpBox = new JTextPane();
     public Font pixelFont;
-    private Font minecraft;
+    public Font minecraft;
     public static String debugCode = "";
 
     /**
@@ -64,6 +68,31 @@ public class mainMenu extends JPanel {
         loadBackgroundImage();//sets panel to background image
         this.setLayout(null);
 
+        xHelp.setBounds( PanelManager.ScreenWidth-155,105,50, 40);
+        xHelp.setVerticalTextPosition(JButton.CENTER);
+        xHelp.setText("X");
+        xHelp.setFont(minecraft);
+        xHelp.setVisible(false);
+        xHelp.setBackground(Color.white);
+        xHelp.setFocusPainted(false);
+        xHelp.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                helpBox.setVisible(false);
+                xHelp.setVisible(false);
+            }
+        });
+        this.add(xHelp);
+
+        helpBox.setBounds(100 ,100,PanelManager.ScreenWidth-200, PanelManager.ScreenHeight-200);
+        helpBox.setFont(minecraft);
+        helpBox.setVisible(false);
+        helpBox.setEditable(false);
+        helpBox.setRequestFocusEnabled(false);
+        Border border = BorderFactory.createLineBorder(Color.black, 5);
+        helpBox.setBorder(border);
+        helpBox.setText(" How to Play:");
+        this.add(helpBox);
+
         //Debug box setup
         debugBox.setBounds((PanelManager.ScreenWidth/2) - (125+55), 320, 250, 50);
         debugBox.setText("Debug Box");
@@ -88,7 +117,7 @@ public class mainMenu extends JPanel {
         this.add(debugAccept);
 
         //Start button setup
-        startButton.setBounds((PanelManager.ScreenWidth/2) - (125) -180, 400, 250, 120);
+        startButton.setBounds((PanelManager.ScreenWidth/2) - (125) -150, 400, 250, 120);
         buttonImageLoader(startButton);
         startButton.addMouseListener(buttonGrow(startButton));
         //Action listener when button is pressed
@@ -102,7 +131,7 @@ public class mainMenu extends JPanel {
         this.add(startButton);
 
         //quit button setup
-        quitButton.setBounds((PanelManager.ScreenWidth/2) - (125) +180, 400, 250, 120);
+        quitButton.setBounds((PanelManager.ScreenWidth/2) - (125) +150, 400, 250, 120);
         buttonImageLoader(quitButton);
         quitButton.addMouseListener(buttonGrow(quitButton));
         //Action listener when quit button is pressed
@@ -112,15 +141,31 @@ public class mainMenu extends JPanel {
         quitButton.setBorderPainted(false);
         this.add(quitButton);
 
+        //quit button setup
+        helpButton.setBounds((PanelManager.ScreenWidth/2) - (250/2) +150,(PanelManager.ScreenHeight/4*3)+30,250,60);
+        buttonImageLoader(helpButton);
+        helpButton.addMouseListener(buttonGrow(helpButton));
+        helpButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                helpBox.setVisible(true);
+                xHelp.setVisible(true);
+            }
+        });
+        helpButton.setText("Help");
+        helpButton.setFont(pixelFont);
+        helpButton.setBorderPainted(false);
+        this.add(helpButton);
+
         //multiplayer
         JButton multiplayerButton = new JButton("Multiplayer");
-        multiplayerButton.setBounds(PanelManager.ScreenWidth/2-250/2,(PanelManager.ScreenHeight/4*3)+30,250,60);
+        multiplayerButton.setBounds((PanelManager.ScreenWidth/2) - (250/2) -150,(PanelManager.ScreenHeight/4*3)+30,250,60);
         multiplayerButton.addActionListener(e -> Main.networkMenu.init());
         buttonImageLoader(multiplayerButton);
         multiplayerButton.addMouseListener(buttonGrow(multiplayerButton));
         multiplayerButton.setFont(pixelFont);
         multiplayerButton.setBorderPainted(false);
         this.add(multiplayerButton);
+
     }
 
     public static void buttonImageLoader(JButton button) {
@@ -180,8 +225,10 @@ public class mainMenu extends JPanel {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (button != PanelManager.endTurnButton) {
-                    button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
-                    buttonImageLoader(button);
+                    if (button != helpButton) {
+                        button.setBounds(button.getX() + 5, button.getY() + 5, button.getWidth() - 10, button.getHeight() - 10);
+                        buttonImageLoader(button);
+                    }
                 }
             }
         };

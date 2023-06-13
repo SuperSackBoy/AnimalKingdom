@@ -58,10 +58,12 @@ public class WinPanel extends JPanel {
         Restartbutton.setBorderPainted(false);
         Restartbutton.setFont(pixelFont);
         Restartbutton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Restartbutton.setBounds((PanelManager.ScreenWidth/2) - (125) -180, 400, 250, 120);
-                buttonImageLoader(Restartbutton);
+           public void actionPerformed(ActionEvent e) {
+           Restartbutton.setBounds((PanelManager.ScreenWidth/2) - (125) -180, 400, 250, 120);
+           buttonImageLoader(Restartbutton);
            debugCodes.NoCodes();
+           mainMenu.debugBox.setText("Debug Box");
+
            for (int i = 0; i < 5; i++)
            {
                AICardManager.AIPlayed[i] = null;
@@ -78,12 +80,7 @@ public class WinPanel extends JPanel {
                         }
                     }
                 });
-
-
-
-
            //dispose();
-
             }
         });
         this.add(Restartbutton);

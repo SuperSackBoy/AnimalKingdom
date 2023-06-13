@@ -8,6 +8,8 @@ A text field for entering ip
 
 package src.networking;
 
+import src.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -27,7 +29,9 @@ public class EnterIP extends JPanel {
         this.setBounds(x,y,width,height);
         this.setLayout(null);
         label.setBounds(0,0,width,height/2);
+        label.setFont(Main.mainMenuPanel.minecraft);
         text.setBounds(0,height/2,width,height/2);
+        text.setFont(Main.mainMenuPanel.minecraft);
         this.add(text); this.add(label);
     }
 
