@@ -37,6 +37,7 @@ public class CardPanel extends JPanel implements CardInterface{
     private Font pixelFont;
 
     protected Card card;
+    private float opacity = 1f;
 
     public CardPanel(Card card) {
         this.card = new Card(card.getName(),card.cardImg,card.getHP(),card.getATK(), card.getVP());
@@ -142,7 +143,60 @@ public class CardPanel extends JPanel implements CardInterface{
         super.paintComponent(g);
         if (bgImg != null) {
             // Scale the image to fit the panel dimensions
+            ((Graphics2D) g).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
             g.drawImage(bgImg, 0, 0, this.getWidth(), this.getHeight(), null);
         }
     }
+
+    public void destroy() {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                opacity -= 0.01f;
+                if(opacity <= 0) {
+                    opacity = 0;
+                    destroyCard();
+                    this.cancel();
+                }
+            }
+        },0,5);
+    }
+
+    public void attackAnimation(boolean goUp, int delay) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                attackAnimation(goUp);
+            }
+        },delay);
+    }
+    public void attackAnimation(boolean goUp) {
+        int distance = 50;
+        if(goUp) distance = distance * -1;
+
+
+        Timer timer = new Timer();
+        int finalDistance = distance;
+        timer.scheduleAtFixedRate(new TimerTask() { //timer called every 10ms
+            boolean latch = false; //toggled when it should move the other way
+            int lastY = y; //last location it was in
+            @Override
+            public void run() {
+                if(!latch) y = (int) PanelManager.lerp(y,startY+ finalDistance,0.1); //linear interpolate down
+                else y = (int) PanelManager.lerp(y, startY, 0.1); //linear interpolate up
+                if(y == lastY) { //if it is in the same position as it was last time it was called
+                    if(!latch) latch = true; //toggle the latch
+                    else {
+                        y = startY; //snap to the original location
+                        this.cancel(); //stop the timer
+                    }
+                }
+                lastY = y;
+            }
+        }, 1, 10);
+    }
+
+    public void destroyCard() {}
 }

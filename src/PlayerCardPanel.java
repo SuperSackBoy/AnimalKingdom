@@ -121,8 +121,8 @@ public class PlayerCardPanel extends CardPanel {
     public void playCard() { //Called when the card is moved to a drop zone
         PanelManager.player.removeVP(card.getVP());
     }
-
-    public void destroy() {
+    @Override
+    public void destroyCard() {
         JPanel parent = (JPanel) this.getParent(); //get the parent panel
         PlayerDropLocation d = onDropLocation(); //get the cards drop location
         if(d != null) d.active = false; //if the card is on a drop location set it to be open
@@ -137,7 +137,7 @@ public class PlayerCardPanel extends CardPanel {
     }
 
     public void attack() { //Called when the card should attack
-        attackAnimation();
+        attackAnimation(true);
         AICardPanel[] cards = AICardManager.AIPlayed;
         PlayerCardPanel[] plyrCards = PanelManager.player.PlayerPlayedCards;
         for(int x = 0; x < 5; x++) {
@@ -145,8 +145,10 @@ public class PlayerCardPanel extends CardPanel {
                 if(cards[x] != null) {
                     if(this.card.getATK() < cards[x].card.getHP()) {
                         cards[x].card.removeHP(this.card.getATK());
+                        cards[x].attackAnimation(true,100);
                     } else {
                         PanelManager.ai.AiHP -= this.card.getATK() - cards[x].card.getHP();
+                        cards[x].attackAnimation(true,100);
                         cards[x].destroy();
                     }
                 } else {
@@ -157,26 +159,6 @@ public class PlayerCardPanel extends CardPanel {
         }
     }
 
-    public void attackAnimation() { //moves the card up then back down
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            boolean latch = false;
-            int lastY = y;
-            @Override
-            public void run() {
-                if(!latch) y = (int) PanelManager.lerp(y,startY-50,0.1);
-                else y = (int) PanelManager.lerp(y, startY, 0.1);
-                if(y == lastY) {
-                    if(!latch) latch = true;
-                    else {
-                        y = startY;
-                        this.cancel();
-                    }
-                }
-                lastY = y;
-            }
-        }, 1, 10);
-    }
 
     public PlayerDropLocation onDropLocation() { //returns the DropLocation the card is hovering over, null if none
         Rectangle card = new Rectangle(x,y,width,height);
