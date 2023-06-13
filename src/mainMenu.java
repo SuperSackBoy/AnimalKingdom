@@ -68,6 +68,7 @@ public class mainMenu extends JPanel {
         loadBackgroundImage();//sets panel to background image
         this.setLayout(null);
 
+        //x button for the help box text
         xHelp.setBounds( PanelManager.ScreenWidth-155,105,50, 40);
         xHelp.setVerticalTextPosition(JButton.CENTER);
         xHelp.setText("X");
@@ -77,12 +78,13 @@ public class mainMenu extends JPanel {
         xHelp.setFocusPainted(false);
         xHelp.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                helpBox.setVisible(false);
+                helpBox.setVisible(false);//closes textbox
                 xHelp.setVisible(false);
             }
         });
         this.add(xHelp);
 
+        //help text box for instructions
         helpBox.setBounds(100 ,100,PanelManager.ScreenWidth-200, PanelManager.ScreenHeight-200);
         helpBox.setFont(minecraft);
         helpBox.setVisible(false);
@@ -108,9 +110,9 @@ public class mainMenu extends JPanel {
         debugAccept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                debugCode = debugBox.getText();
-                debugBox.setText("");
-                debugCodes.useCodes(debugCode);
+                debugCode = debugBox.getText();//sets the debug code to user entered text
+                debugBox.setText("");//reset box
+                debugCodes.useCodes(debugCode);//opens debug codes method using entered code
             }
         });
         debugAccept.setVisible(false);
@@ -141,13 +143,13 @@ public class mainMenu extends JPanel {
         quitButton.setBorderPainted(false);
         this.add(quitButton);
 
-        //quit button setup
+        //help button setup
         helpButton.setBounds((PanelManager.ScreenWidth/2) - (250/2) +150,(PanelManager.ScreenHeight/4*3)+30,250,60);
         buttonImageLoader(helpButton);
         helpButton.addMouseListener(buttonGrow(helpButton));
         helpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                helpBox.setVisible(true);
+                helpBox.setVisible(true);//opens help box
                 xHelp.setVisible(true);
             }
         });
@@ -156,7 +158,7 @@ public class mainMenu extends JPanel {
         helpButton.setBorderPainted(false);
         this.add(helpButton);
 
-        //multiplayer
+        //multiplayer button setup
         JButton multiplayerButton = new JButton("Multiplayer");
         multiplayerButton.setBounds((PanelManager.ScreenWidth/2) - (250/2) -150,(PanelManager.ScreenHeight/4*3)+30,250,60);
         multiplayerButton.addActionListener(e -> Main.networkMenu.init());
@@ -168,6 +170,10 @@ public class mainMenu extends JPanel {
 
     }
 
+    /**
+     * loads the image onto the button inputted
+     * @param button
+     */
     public static void buttonImageLoader(JButton button) {
         ImageIcon imageIcon = new ImageIcon(Main.class.getResource("imageAssets/ButtonIcon.png")); // load the image to a imageIcon
         Image image = imageIcon.getImage(); // transform it

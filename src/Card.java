@@ -8,11 +8,11 @@ Cards that are used in the game and are put into the card deck to be used by pla
 May 5, 2023
 */
 public class Card {
-    String name, cardImg;
+    String name, cardImg;//storage for name and image path
     int HP, ATK, VP;
 
     // empty constructor
-    public Card() {
+    public Card() {//sets all variables to null
         name = "";
         HP = 0;
         ATK = 0;
@@ -47,10 +47,6 @@ public class Card {
     public int getHP() {
         return HP;
     }// changes the Attack
-
-    public void setATK(int newValue) {
-        ATK = newValue;
-    }
 
     // returns the Attack
     public int getATK() {

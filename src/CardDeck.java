@@ -20,7 +20,7 @@ public class CardDeck {
         if (cardList.size() <= 0) {
             deckReset();
         }
-        if (debugCodes.allJone) {
+        if (debugCodes.allJone) {//if the all jones cheat is active, only return jone cards
             return cardList.getLast();
         } else {
             Card CardDrew = new Card();//creates an instance of the Card object to be returned
@@ -48,6 +48,9 @@ public class CardDeck {
         cardList.addAll(cards);
     }
 
+    /**
+     * adds all cards to the deck
+     */
     public static void init() {
         cards.add(new Card("Arctic Hare", "imageAssets/cardSprites/ArcticHareCard.png", 10, 5, 1));
         cards.add(new Card("Blue Jay", "imageAssets/cardSprites/BlueJayCard.png", 10, 5, 1));
@@ -69,9 +72,7 @@ public class CardDeck {
         cards.add(new Card("Brown Bear", "imageAssets/cardSprites/BrownBearCard.png", 35, 15, 4));
         cards.add(new Card("Moose", "imageAssets/cardSprites/MooseCard.png", 35, 25, 5));
         cards.add(new Card("Polar Bear", "imageAssets/cardSprites/PolarBearCard.png", 40, 20, 5));
-        if (debugCodes.mrJone){
-            CardDeck.cards.add(new Card("Mr. Jone", "imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1));
-        }
+        if (debugCodes.mrJone) CardDeck.cards.add(new Card("Mr. Jone", "imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1));//if the jone cheat is active, adds jone card
     }
 
     public static Card findCard(String name) {
