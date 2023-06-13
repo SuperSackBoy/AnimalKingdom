@@ -34,20 +34,20 @@ public class NetworkMenu extends JPanel{
 
         EnterPort enterPort = new EnterPort(0,100,100,50,7777);
 
-        JButton btnHost = new JButton("HOST");
+        JButton btnHost = new JButton("Host");
         //Start button setup
-        btnHost.setBounds((PanelManager.ScreenWidth/2) - (125) -180, 400, 250, 120);
+        btnHost.setBounds(10, 10, 100, 55);
         Main.mainMenuPanel.buttonImageLoader(btnHost);
         btnHost.addMouseListener(Main.mainMenuPanel.buttonGrow(btnHost));
         btnHost.setBorderPainted(false);
-        btnHost.setFont(Main.mainMenuPanel.pixelFont);
+        btnHost.setFont(Main.mainMenuPanel.minecraft);
 
-        JButton btnJoin = new JButton("JOIN");
-        btnJoin.setBounds((PanelManager.ScreenWidth/2) - (125) +180, 400, 250, 120);
+        JButton btnJoin = new JButton("Join");
+        btnJoin.setBounds(10, 75, 100, 55);
         Main.mainMenuPanel.buttonImageLoader(btnJoin);
         btnJoin.addMouseListener(Main.mainMenuPanel.buttonGrow(btnJoin));
         btnJoin.setBorderPainted(false);
-        btnJoin.setFont(Main.mainMenuPanel.pixelFont);
+        btnJoin.setFont(Main.mainMenuPanel.minecraft);
 
         btnHost.addActionListener(e -> {
             this.removeAll();
