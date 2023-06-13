@@ -67,7 +67,7 @@ public class WinPanel extends JPanel {
            for (int i = 0; i < 5; i++)
            {
                AICardManager.AIPlayed[i] = null;
-               Player.PlayerPlayedCards[i] = null;
+               PanelManager.player.PlayerPlayedCards[i] = null;
            }
 
                 EventQueue.invokeLater(new Runnable() {

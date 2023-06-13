@@ -24,7 +24,7 @@ public class DropLocation extends JPanel {
         this.x = x;
         this.y = y;
 
-        this.setBounds(x, y, width, height); //draws an ugly square where the player can put cards
+        this.setBounds(x, y, width, height);
         this.setOpaque(false);
     }
 

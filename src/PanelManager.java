@@ -1,5 +1,5 @@
 package src;/*
-Aaron Kimbel
+Aaron Kimbel, Mateo Adebowale, Luca Mazzotta, Rudra Barot
 ICS4U0-C
 Final Project
 Animal Kingdom: Card Arena
@@ -11,7 +11,6 @@ import src.networking.NetworkPlayer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;

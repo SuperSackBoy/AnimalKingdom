@@ -1,5 +1,5 @@
 package src;/*
-Aaron Kimbel
+Aaron Kimbel & Luca Mazzotta
 ICS4U0-C
 Final Project
 Animal Kingdom: Card Arena
@@ -98,13 +98,13 @@ public class CardPanel extends JPanel implements CardInterface{
         this.ap = card.getATK();
         this.vp = card.getVP();
 
-        lHP.setText(""+hp);
+        lHP.setText(String.valueOf(hp));
         lHP.setFont(pixelFont);
         lHP.setForeground(Color.BLACK);
-        lAP.setText(""+ap);
+        lAP.setText(String.valueOf(ap));
         lAP.setFont(pixelFont);
         lAP.setForeground(Color.BLACK);
-        lVP.setText(""+vp);
+        lVP.setText(String.valueOf(vp));
         lVP.setFont(pixelFont);
         lVP.setForeground(Color.BLACK);
         this.setBounds(x,y,width,height); //update cards x and y

@@ -13,8 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
-public class GameFrame extends JFrame /*implements KeyListener*/ {
-    //private ArrayList<String> validCodes = new ArrayList<String> (Arrays.asList("Mr.Jone"));
+public class GameFrame extends JFrame {
     public GameFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(false);
@@ -28,7 +27,7 @@ public class GameFrame extends JFrame /*implements KeyListener*/ {
 
         setContentPane(contentPane);
 
-        this.addKeyListener(new KeyListener() {
+        this.addKeyListener(new KeyListener() { //code for moving the board when space is pressed
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == 32) {//space

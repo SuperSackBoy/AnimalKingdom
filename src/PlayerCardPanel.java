@@ -22,12 +22,6 @@ public class PlayerCardPanel extends CardPanel {
     public PlayerCardPanel(Card card) {
         super(card);
         this.addMouseListener(new MouseListener() { //To drag cards around
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
             @Override
             public void mousePressed(MouseEvent e) {
                 if(e.getButton() == 1) { //left mouse
@@ -59,6 +53,8 @@ public class PlayerCardPanel extends CardPanel {
             public void mouseExited(MouseEvent e) {
                 PanelManager.selectLbl.setVisible(false);
             }
+
+            public void mouseClicked(MouseEvent e) {}
         });
     }
     private boolean latch;
@@ -136,7 +132,7 @@ public class PlayerCardPanel extends CardPanel {
         }
     }
 
-    public void attack() { //Called when the card should attack
+    public void attack() { //Called when the card should attack, see AICardPanel
         attackAnimation(true);
         AICardPanel[] cards = AICardManager.AIPlayed;
         PlayerCardPanel[] plyrCards = PanelManager.player.PlayerPlayedCards;
@@ -171,7 +167,7 @@ public class PlayerCardPanel extends CardPanel {
         return null;
     }
 
-    public PlayerDropLocation getClosestDrop() {
+    public PlayerDropLocation getClosestDrop() { //gets the closest drop location the card is over
         ArrayList<PlayerDropLocation> drops = getDrops();
         PlayerDropLocation closest = new PlayerDropLocation(-99,-99,99);
         if(drops != null) {
@@ -188,7 +184,7 @@ public class PlayerCardPanel extends CardPanel {
 
     public ArrayList<PlayerDropLocation> getDrops() { //returns the DropLocation the card is hovering over, null if none
         ArrayList<PlayerDropLocation> drops = new ArrayList<>();
-        Rectangle card = new Rectangle((int) x,(int) y,width,height);
+        Rectangle card = new Rectangle(x,y,width,height);
         for(PlayerDropLocation d : PanelManager.dropLocations) {
             Rectangle drop = new Rectangle(d.x,d.y,d.width,d.height);
             if(card.intersects(drop)) {

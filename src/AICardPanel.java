@@ -1,9 +1,15 @@
+/*
+Aaron Kimbel
+ICS4U0-C
+Final Project
+Animal Kingdom: Card Arena
+Displays the AI's cards
+*/
+
 package src;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class AICardPanel extends CardPanel{
     public AICardPanel(Card card) { //Base constructor
@@ -41,7 +47,7 @@ public class AICardPanel extends CardPanel{
                 } else { //reduce health from the player
                     PanelManager.player.removeHP(this.card.getATK());
                 }
-                if (PanelManager.player.getHP() <= 0)
+                if (PanelManager.player.getHP() <= 0) //check loss condition
                 {
                     EventQueue.invokeLater(new Runnable() {
                         public void run() {

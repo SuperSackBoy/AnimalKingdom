@@ -1,3 +1,10 @@
+/*
+Aaron Kimbel, Mateo Adebowale, Luca Mazzotta, Rudra Barot
+ICS4U0-C
+Final Project
+Animal Kingdom: Card Arena
+Main class
+*/
 package src;
 
 import src.networking.NetworkMenu;

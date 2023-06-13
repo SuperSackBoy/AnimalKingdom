@@ -1,5 +1,5 @@
 package src;/*
-Aaron Kimbel
+Aaron Kimbel & Luca Mazzotta
 ICS4U0-C
 Final Project
 Animal Kingdom: Card Arena
@@ -19,7 +19,6 @@ public class HealthBar extends JPanel {
     private BufferedImage hpImg;
     public JLabel label;
     private float percent;
-    private Color color = Color.RED;
     private final JPanel hp;
     private final int height;
     private final int width;
@@ -47,7 +46,6 @@ public class HealthBar extends JPanel {
         panel.setBounds(0,height/2, width,height/2);
 
         hp = new JPanel();
-        hp.setBackground(color);
         hp.setBounds(0,height/2, (int) (width*this.percent),height);
         hp.setOpaque(false);
 
@@ -66,15 +64,10 @@ public class HealthBar extends JPanel {
         assert percent <= 1 && percent >= 0;
         this.percent = percent;
         if(this.percent >= threshold) {
-            hp.setBounds(0 + 2, (height / 2) + 2, (int) ((width * this.percent) - 4), (height / 2) - 4);
+            hp.setBounds(2, (height / 2) + 2, (int) ((width * this.percent) - 4), (height / 2) - 4);
         } else {
             hp.setVisible(false);
         }
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-        this.hp.setBackground(color);
     }
 
     private void loadBackgroundImage() {
