@@ -26,7 +26,7 @@ public class AIBase
     {
         for (int i = 0; i < 5; i++)
         {
-            AiHandList.add(CardDeck.drawCard());
+            AiHandList.add(draw());
         }
         AiHP = AimaxHP;
     }
@@ -35,13 +35,6 @@ public class AIBase
     {
         if (getHP() <= 0)
         {
-            /*
-            Timer timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {}
-            },700,100);
-            */
             EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     try {
@@ -56,9 +49,12 @@ public class AIBase
         }
         else
         {
+            if (debugCodes.peek)
+            {
+                show();
+            }
             playedVP = 0;
-            //ran = (int)((Math.random()*100) + 1);
-            ran = 20;
+            ran = (int)((Math.random()*100) + 1);
             if (ran > 0 && ran < 16)
             {
                 AiHandList = RecklessAI.Play(AiHandList);
@@ -132,18 +128,17 @@ public class AIBase
                     }
                     if ((current + KillShotAI.BestATK(AiHandList, full)) >= beat)
                     {
-                        System.out.println("DIE! DIE! DIE!");
                         Kill = true;
                     }
                 }
                 //--------------------------------------------------Killshot end
-                if (AiHP <= (PanelManager.player.getHP() - 20))
+                if (AiHP >= (PanelManager.player.getHP() - 20) || Kill)
                 {
-                    //AiHandList = DefensiveAI.Play(AiHandList);
                     AiHandList = AggressiveAI.Play(AiHandList);
                 }
                 else
                 {
+                    //AiHandList = DefensiveAI.Play(AiHandList);
                     AiHandList = AggressiveAI.Play(AiHandList);
                 }
             }
@@ -168,7 +163,7 @@ public class AIBase
                             {
                                 AICardManager.playCard(AiHandList.get(i), ii);
                                 playedVP = playedVP + AiHandList.get(i).getVP();
-                                AiHandList.set(i, CardDeck.drawCard());
+                                AiHandList.set(i, draw());
                                 break;
                             }
                             else
@@ -181,7 +176,7 @@ public class AIBase
                                         {
                                             AICardManager.playCard(AiHandList.get(i), iii);
                                             playedVP = playedVP + AiHandList.get(i).getVP();
-                                            AiHandList.set(i, CardDeck.drawCard());
+                                            AiHandList.set(i, draw());
                                             break b;
                                         }
                                         else if (iii == 4) //make check for lowest health
@@ -202,7 +197,7 @@ public class AIBase
                                                 {
                                                     AICardManager.playCard(AiHandList.get(i), v);
                                                     playedVP = playedVP + AiHandList.get(i).getVP();
-                                                    AiHandList.set(i, CardDeck.drawCard());
+                                                    AiHandList.set(i, draw());
                                                     break b;
                                                 }
                                             }
@@ -228,14 +223,14 @@ public class AIBase
                                                 {
                                                     AICardManager.playCard(AiHandList.get(i), v);
                                                     playedVP = playedVP + AiHandList.get(i).getVP();
-                                                    AiHandList.set(i, CardDeck.drawCard());
+                                                    AiHandList.set(i, draw());
                                                     break b;
                                                 }
                                                 else
                                                 {
                                                     AICardManager.playCard(AiHandList.get(i), ii);
                                                     playedVP = playedVP + AiHandList.get(i).getVP();
-                                                    AiHandList.set(i, CardDeck.drawCard());
+                                                    AiHandList.set(i, draw());
                                                     break b;
                                                 }
                                             }
@@ -266,7 +261,7 @@ public class AIBase
                             {
                                 AICardManager.playCard(AiHandList.get(i), ii);
                                 playedVP = playedVP + AiHandList.get(i).getVP();
-                                AiHandList.set(i, CardDeck.drawCard());
+                                AiHandList.set(i, draw());
                                 break;
                             }
                     }
@@ -303,7 +298,6 @@ public class AIBase
         return this.AiHP;
     }
     //--------------------------------------------------
-    //--------------------------------------------------
     public int getMaxHP()
     {
         return this.AimaxHP;
@@ -315,8 +309,9 @@ public class AIBase
     {
         for (int i = 0; i < 5; i++)
         {
-            System.out.println(AiHandList.get(i).getName() + " {" + AiHandList.get(i).getHP() + "/" + AiHandList.get(i).getATK() + "/" + AiHandList.get(i).getVP() + "}");
+            System.out.println(AiHandList.get(i).getName() + " {HP" + AiHandList.get(i).getHP() + "/ATK" + AiHandList.get(i).getATK() + "/VP" + AiHandList.get(i).getVP() + "}");
         }
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
     public static void setMaxHP(int newValue) {
@@ -325,5 +320,15 @@ public class AIBase
     public static void setHP(int newValue)
     {
         AiHP = newValue;
+    }
+    //--------------------------------------------------
+    public Card draw ()
+    {
+        Card pull = CardDeck.drawCard();
+        while (pull.getName().equals("Mr. Jone"))
+        {
+            pull = CardDeck.drawCard();
+        }
+        return pull;
     }
 }

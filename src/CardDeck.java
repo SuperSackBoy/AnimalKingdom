@@ -24,9 +24,17 @@ public class CardDeck {
             return cardList.getLast();
         } else {
             Card CardDrew = new Card();//creates an instance of the Card object to be returned
-            int rNum = (int) (Math.random() * cardList.size());//gets random number from the Card list index
-            CardDrew = cardList.get(rNum);//sets the drawn Card to the Card in the list of the rNum index
-            cardList.remove(rNum);//removes that Card from the deck
+            int J_check = (int) (Math.random() * 1000);
+            if (J_check == 1)
+            {
+                CardDrew = new Card("Mr. Jone", "imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1);
+            }
+            else
+            {
+                int rNum = (int) (Math.random() * cardList.size());//gets random number from the Card list index
+                CardDrew = cardList.get(rNum);//sets the drawn Card to the Card in the list of the rNum index
+                cardList.remove(rNum);//removes that Card from the deck
+            }
             return CardDrew;//sends Card out of method
         }
     }

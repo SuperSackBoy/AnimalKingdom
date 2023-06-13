@@ -94,14 +94,7 @@ public class PanelManager {
                         ((CardInterface) c).update();
                     }
                 }
-                /*
-                for(PlayerCardPanel c : player.PlayerHand) {
-                    if(c!=null) c.update();
-                }
-                for(PlayerCardPanel c : player.PlayerPlayedCards) {
-                    if(c!=null) c.update();
-                }
-                 */
+
                 for(PlayerDropLocation d : dropLocations) {
                     d.setBounds(d.x, d.y, d.width, d.height);
                 }
@@ -213,7 +206,6 @@ public class PanelManager {
 
     public static void surrender() {
         {
-            System.out.println("Surrender");
             EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     try {

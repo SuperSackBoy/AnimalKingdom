@@ -61,9 +61,7 @@ public class WinPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 Restartbutton.setBounds((PanelManager.ScreenWidth/2) - (125) -180, 400, 250, 120);
                 buttonImageLoader(Restartbutton);
-           AIBase.resetHP();
-           PanelManager.player.resetHP();
-           PanelManager.player.resetVP();
+           debugCodes.NoCodes();
            for (int i = 0; i < 5; i++)
            {
                AICardManager.AIPlayed[i] = null;
