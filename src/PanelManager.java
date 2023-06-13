@@ -107,6 +107,24 @@ public class PanelManager {
 
         }, 0, 1);
         frame.requestFocus();
+        frame.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == 32) {//space
+                    board.move();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
 
         if(!playerStart) {
             board.y = (float) -ScreenHeight /2;
