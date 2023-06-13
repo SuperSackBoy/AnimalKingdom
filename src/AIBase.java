@@ -329,7 +329,14 @@ public class AIBase
         Card pull = CardDeck.drawCard();
         while (pull.getName().equals("Mr. Jone"))
         {
-            pull = CardDeck.drawCard();
+            if (debugCodes.allJone)
+            {
+                pull = CardDeck.findCard("Canada Goose");
+            }
+            else
+            {
+                pull = CardDeck.drawCard();
+            }
         }
         return pull;
     }
