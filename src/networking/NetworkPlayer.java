@@ -18,9 +18,9 @@ import java.util.TimerTask;
 public class NetworkPlayer extends AIBase {
     NetworkMenu networkMenu = Main.networkMenu;
 
-    public NetworkPlayer() {
-        super();
-        Timer timer = new Timer();
+    public NetworkPlayer() { //initializer
+        super(); //run aibase initializer
+        Timer timer = new Timer(); //lazy win check
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -39,8 +39,8 @@ public class NetworkPlayer extends AIBase {
         },100, 100);
     }
     @Override
-    public void playAI() {
-        Card[] cards;
+    public void playAI() { //override for playAI
+        Card[] cards; //sends its cards and reads other players cards
         if(networkMenu.isHost) {
             if(!(Arrays.equals(PanelManager.player.PlayerPlayedCards, new PlayerCardPanel[]{null, null, null, null, null})
                     && PanelManager.player.getHP() == PanelManager.player.getMaxHP())) {
@@ -54,11 +54,11 @@ public class NetworkPlayer extends AIBase {
             }
             cards = networkMenu.clientNetworkHandler.receiveCards();
         }
-        for(int x = 0; x < cards.length; x++) {
+        for(int x = 0; x < cards.length; x++) { //plays cards
             if(cards[x] != null) {
                 AICardManager.playCard(cards[x],x);
             }
         }
-        attack();
+        attack(); //attacks
     }
 }

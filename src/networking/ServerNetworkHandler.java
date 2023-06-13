@@ -27,18 +27,18 @@ public class ServerNetworkHandler extends Thread{
     private DataOutputStream dOut;
 
     public ServerNetworkHandler(int port) {
-        super();
+        super(); //initialize thread
         this.port = port;
     }
 
     public void run() {
         try {
-            serverSocket = new ServerSocket(port);
+            serverSocket = new ServerSocket(port); //create server socket
             System.out.println("waiting");
-            connectedSocket = serverSocket.accept();
+            connectedSocket = serverSocket.accept(); //wait for a player to connect
             System.out.println("CONNECTED!");
-            dOut = new DataOutputStream(connectedSocket.getOutputStream());
-            boolean shouldStart = new Random().nextBoolean();
+            dOut = new DataOutputStream(connectedSocket.getOutputStream()); //get an output stream
+            boolean shouldStart = new Random().nextBoolean(); //tell the player if the server or client will start
             PanelManager.start(shouldStart,false);
             dOut.writeBoolean(!shouldStart);
             dOut.flush();
@@ -50,16 +50,7 @@ public class ServerNetworkHandler extends Thread{
         }
     }
 
-    public void closeSocket() {
-        try {
-            if(!connectedSocket.isClosed()) connectedSocket.close();
-            if(!serverSocket.isClosed()) connectedSocket.close();
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
-    }
-
-    public void sendCards() {
+    public void sendCards() { //see clientnetworkhandler
         for(PlayerCardPanel card : PanelManager.player.PlayerPlayedCards) {
             try {
                 if (card != null) {
@@ -72,7 +63,7 @@ public class ServerNetworkHandler extends Thread{
         }
     }
 
-    public Card[] receiveCards() {
+    public Card[] receiveCards() { //see clientnetworkhandler
         Card[] cards = new Card[5];
         try {
             DataInputStream dIn = new DataInputStream(connectedSocket.getInputStream());

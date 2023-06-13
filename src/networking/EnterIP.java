@@ -19,11 +19,11 @@ public class EnterIP extends JPanel {
     protected JTextField text = new JTextField();
     protected JLabel label = new JLabel("ENTER IP:");
 
-    public EnterIP(int x, int y, int width, int height, String defaultText) {
+    public EnterIP(int x, int y, int width, int height, String defaultText) { //initializer with default text
         this(x,y,width,height);
         text.setText(defaultText);
     }
-    public EnterIP(int x, int y, int width, int height) {
+    public EnterIP(int x, int y, int width, int height) { //initializer
         this.setBounds(x,y,width,height);
         this.setLayout(null);
         label.setBounds(0,0,width,height/2);
@@ -31,7 +31,7 @@ public class EnterIP extends JPanel {
         this.add(text); this.add(label);
     }
 
-    public String getIP() {
+    public String getIP() { //return the input
         if(text.getText().length() == 0) {
             showWarn();
             return null;
@@ -40,7 +40,7 @@ public class EnterIP extends JPanel {
         }
     }
 
-    private void showWarn() {
+    private void showWarn() { //show a warning if the ip is invalid
         String original = label.getText();
         label.setText("Enter an IP!");
         label.setForeground(Color.red);

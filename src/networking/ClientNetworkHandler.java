@@ -25,16 +25,16 @@ public class ClientNetworkHandler extends Thread{
     private DataOutputStream dOut;
 
     public ClientNetworkHandler(String ip, int port) {
-        super();
-        this.ip = ip;
+        super(); //initialize thread stuff
+        this.ip = ip; //set ip/port
         this.port = port;
     }
 
     public void run() {
         try {
-            connectedSocket = new Socket(ip, port);
-            dOut = new DataOutputStream(connectedSocket.getOutputStream());
-            DataInputStream dIn = new DataInputStream(connectedSocket.getInputStream());
+            connectedSocket = new Socket(ip, port); //create the socket
+            dOut = new DataOutputStream(connectedSocket.getOutputStream()); //create an output stream
+            DataInputStream dIn = new DataInputStream(connectedSocket.getInputStream()); //read who should start
             PanelManager.start(dIn.readBoolean(),false);
         } catch (SocketException exception) {
             exception.printStackTrace();
@@ -44,23 +44,7 @@ public class ClientNetworkHandler extends Thread{
         }
     }
 
-    public void closeSocket() {
-        try {
-            if(!connectedSocket.isClosed()) connectedSocket.close();
-        } catch (IOException exception) {
-            exception.printStackTrace();
-            System.exit(0);
-        }
-    }
-
-    public void sendConnected() throws IOException {
-        dOut.writeBoolean(true);
-        dOut.flush();
-        System.out.println("CONNECTED");
-        System.out.println(connectedSocket.isConnected());
-    }
-
-    public void sendCards() {
+    public void sendCards() { //send everything in the array across the output stream
         for(PlayerCardPanel card : PanelManager.player.PlayerPlayedCards) {
             try {
                 if (card != null) {
@@ -73,7 +57,7 @@ public class ClientNetworkHandler extends Thread{
         }
     }
 
-    public Card[] receiveCards() {
+    public Card[] receiveCards() { //read everything from the input stream
         Card[] cards = new Card[5];
         try {
             DataInputStream dIn = new DataInputStream(connectedSocket.getInputStream());
