@@ -139,8 +139,7 @@ public class AIBase
                 }
                 else
                 {
-                    //AiHandList = DefensiveAI.Play(AiHandList);
-                    AiHandList = AggressiveAI.Play(AiHandList);
+                    AiHandList = DefensiveAI.Play(AiHandList);
                 }
             }
             move();

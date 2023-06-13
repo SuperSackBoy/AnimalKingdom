@@ -20,6 +20,7 @@ public class DefensiveAI extends AIBase
     //--------------------------------------------------
     public static LinkedList<Card> Play(LinkedList<Card> Hand)
     {
+        Combo.clear();
         //--------------------------------------------------
         //Sort the array in ascending order using two for loops
         for (int i = 0; i < 5; i++) //loops for the amount of cards that can be held
@@ -83,7 +84,9 @@ public class DefensiveAI extends AIBase
         //--------------------------------------------------
         for (int i = 0; i < Combo.size(); i++)
         {
+            System.out.println(order);
             order = Hand.indexOf(Combo.get(i));
+            System.out.println(order);
             Card temp = Hand.get(i);
             Hand.set(i, Combo.get(i));
             Hand.set(order, temp);
