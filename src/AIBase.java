@@ -396,9 +396,14 @@ public class AIBase
                 x++;
                 if(x > AICardManager.AIPlayed.length-1) {
                     PanelManager.player.resetVP();
-                    PanelManager.board.moveDown();
                     PanelManager.endTurnButton.setEnabled(true);
                     this.cancel();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            PanelManager.board.moveDown();
+                        }
+                    },500);
                 }
             }
         },700,100);
