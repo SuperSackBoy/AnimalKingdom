@@ -85,14 +85,16 @@ public class Board extends JPanel{ //manages the card locations and drop locatio
 
     public PlayerCardPanel drawNewCard(int pos, Card card) {
         assert pos >= 0 && pos <=4; //forces a crash if pos is out of this range
-        int x = switch (pos) { //get the desired x position
-            case 0 -> PanelManager.center - PanelManager.CardWidth * 2 - PanelManager.spacing * 2;
-            case 1 -> PanelManager.center - PanelManager.CardWidth - PanelManager.spacing;
-            case 2 -> PanelManager.center;
-            case 3 -> PanelManager.center + PanelManager.CardWidth + PanelManager.spacing;
-            case 4 -> PanelManager.center + PanelManager.CardWidth * 2 + PanelManager.spacing * 2;
-            default -> 0;
-        };
+        //get the desired x position
+        int x;
+        switch (pos) {
+            case 0: x = PanelManager.center - PanelManager.CardWidth * 2 - PanelManager.spacing * 2; break;
+            case 1: x = PanelManager.center - PanelManager.CardWidth - PanelManager.spacing; break;
+            case 2: x = PanelManager.center; break;
+            case 3: x = PanelManager.center + PanelManager.CardWidth + PanelManager.spacing; break;
+            case 4: x = PanelManager.center + PanelManager.CardWidth * 2 + PanelManager.spacing * 2; break;
+            default: x = 0; break;
+        }
         //create a card
         PlayerCardPanel c = createCard(x,PanelManager.cardY+PanelManager.ScreenHeight+PanelManager.CardHeight, pos, card);
         this.add(c); //add the card to the screen
