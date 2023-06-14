@@ -19,6 +19,7 @@ public class RecklessAI extends AIBase
     //--------------------------------------------------
     public static LinkedList<Card> Play(LinkedList<Card> Hand)
     {
+        Combo.clear();
         for (int i = 0; i < 5; i++)
         {
             Combo.add(null);
@@ -35,7 +36,10 @@ public class RecklessAI extends AIBase
                 i--;
             }
         }
-        Hand = Combo;
+        for (int i = 0; i < 5; i++)
+        {
+            Hand.set(i, Combo.get(i));
+        }
         return Hand;
     }
 }

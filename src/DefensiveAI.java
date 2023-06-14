@@ -84,9 +84,7 @@ public class DefensiveAI extends AIBase
         //--------------------------------------------------
         for (int i = 0; i < Combo.size(); i++)
         {
-            System.out.println(order);
             order = Hand.indexOf(Combo.get(i));
-            System.out.println(order);
             Card temp = Hand.get(i);
             Hand.set(i, Combo.get(i));
             Hand.set(order, temp);
