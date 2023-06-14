@@ -23,7 +23,7 @@ public class PanelManager {
     public static AIDropLocation[] aiDropLocations = new AIDropLocation[5];
     public static Point mouse;
 
-    public static final ImageIcon selectIcon = new ImageIcon(Main.class.getResource("imageAssets/CardSelectIcon.png"));
+    public static final ImageIcon selectIcon = new ImageIcon(Main.class.getResource("imageAssets/cardSelectIcon.png"));
     public static JLabel selectLbl = new JLabel();
 
     public static JButton endTurnButton;
