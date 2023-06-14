@@ -92,7 +92,13 @@ public class mainMenu extends JPanel {
         helpBox.setRequestFocusEnabled(false);
         Border border = BorderFactory.createLineBorder(Color.black, 5);
         helpBox.setBorder(border);
-        helpBox.setText(" How to Play:");
+        helpBox.setText(" How to Play:\n 1. To win the game; bring your opponent’s health to 0.\n" +
+                "\n 2. You get 5 value points at the start of your turn. They are used to play cards. If you run out of value points, you can't play cards that turn.\n" +
+                "\n 3. There are 5 spaces on the field that you can drag your cards to. If you run out of field space, you can't play cards that turn.\n" +
+                "\n 4. Once a card is played, another is drawn from the deck to your hand.\n" +
+                "\n 5. Cards will attack whatever is in front of them when the turn ends.\n" +
+                "\n 6. When a card has nothing in front of it, it attacks the opponent. When a card has a card in front of it, it attacks the card.\n" +
+                "\n 7. If a card runs out of health, it dies and is discarded from the table. The remaining damage that would have been dealt to the card gets dealt to the card's owner instead.");
         this.add(helpBox);
 
         //Debug box setup
