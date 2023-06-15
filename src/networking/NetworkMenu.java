@@ -8,6 +8,7 @@ Set up the connection between host/client
 
 package src.networking;
 
+import src.GraphicsComponents;
 import src.Main;
 import src.PanelManager;
 
@@ -37,15 +38,15 @@ public class NetworkMenu extends JPanel{
         JButton btnHost = new JButton("Host");
         //Start button setup
         btnHost.setBounds(10, 10, 100, 55);
-        Main.mainMenuPanel.buttonImageLoader(btnHost);
-        btnHost.addMouseListener(Main.mainMenuPanel.buttonGrow(btnHost));
+        GraphicsComponents.buttonImageLoader(btnHost);
+        btnHost.addMouseListener(GraphicsComponents.buttonGrow(btnHost));
         btnHost.setBorderPainted(false);
         btnHost.setFont(Main.mainMenuPanel.minecraft);
 
         JButton btnJoin = new JButton("Join");
         btnJoin.setBounds(10, 75, 100, 55);
-        Main.mainMenuPanel.buttonImageLoader(btnJoin);
-        btnJoin.addMouseListener(Main.mainMenuPanel.buttonGrow(btnJoin));
+        GraphicsComponents.buttonImageLoader(btnJoin);
+        btnJoin.addMouseListener(GraphicsComponents.buttonGrow(btnJoin));
         btnJoin.setBorderPainted(false);
         btnJoin.setFont(Main.mainMenuPanel.minecraft);
 

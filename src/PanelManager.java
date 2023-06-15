@@ -133,23 +133,23 @@ public class PanelManager {
         frame.add(selectLbl);
 
         endTurnButton = new JButton("End Turn");
-        endTurnButton.addMouseListener(mainMenu.buttonGrow(endTurnButton));
+        endTurnButton.addMouseListener(GraphicsComponents.buttonGrow(endTurnButton));
         endTurnButton.setBounds(725,550,150,75);
         endTurnButton.addActionListener(e -> endTurn());
         endTurnButton.setFocusable(false);
         endTurnButton.setFont(minecraft);
         endTurnButton.setBorderPainted(false);
-        mainMenu.buttonImageLoader(endTurnButton);
+        GraphicsComponents.buttonImageLoader(endTurnButton);
         frame.add(endTurnButton);
 
         JButton surrenderButton = new JButton("Surrender");
-        surrenderButton.addMouseListener(mainMenu.buttonGrow(surrenderButton));
+        surrenderButton.addMouseListener(GraphicsComponents.buttonGrow(surrenderButton));
         surrenderButton.setBounds(725,15,150,75);
         surrenderButton.addActionListener(e -> surrender());
         surrenderButton.setFocusable(false);
         surrenderButton.setFont(minecraft);
         surrenderButton.setBorderPainted(false);
-        mainMenu.buttonImageLoader(surrenderButton);
+        GraphicsComponents.buttonImageLoader(surrenderButton);
         frame.add(surrenderButton);
 
         showhandButton = new JButton();
