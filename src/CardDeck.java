@@ -27,7 +27,7 @@ public class CardDeck {
             int J_check = (int) (Math.random() * 1000);
             if (J_check == 1)
             {
-                CardDrew = new Card("Mr. Jone", "imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1);
+                CardDrew = new Card("Mr. Jone", "src/imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1);
             }
             else
             {
@@ -52,27 +52,27 @@ public class CardDeck {
      * adds all cards to the deck
      */
     public static void init() {
-        cards.add(new Card("Arctic Hare", "imageAssets/cardSprites/ArcticHareCard.png", 10, 5, 1));
-        cards.add(new Card("Blue Jay", "imageAssets/cardSprites/BlueJayCard.png", 10, 5, 1));
-        cards.add(new Card("Chipmunk", "imageAssets/cardSprites/ChipmunkCard.png", 10, 5, 1));
-        cards.add(new Card("Fisher", "imageAssets/cardSprites/FisherCard.png", 10, 5, 1));
-        cards.add(new Card("Groundhog", "imageAssets/cardSprites/GroundhogCard.png", 10, 5, 1));
-        cards.add(new Card("Stoat", "imageAssets/cardSprites/StoatCard.png", 10, 5, 1));
-        cards.add(new Card("Arctic Fox", "imageAssets/cardSprites/ArcticFoxCard.png", 15, 15, 2));
-        cards.add(new Card("Beaver", "imageAssets/cardSprites/BeaverCard.png", 20, 10, 2));
-        cards.add(new Card("Penguin", "imageAssets/cardSprites/PenguinCard.png", 20, 10, 2));
-        cards.add(new Card("Racoon", "imageAssets/cardSprites/RaccoonCard.png", 10, 20, 2));
-        cards.add(new Card("Wolf", "imageAssets/cardSprites/WolfCard.png", 20, 10, 2));
-        cards.add(new Card("Canada Goose", "imageAssets/cardSprites/CanadaGooseCard.png", 10, 30, 3));
-        cards.add(new Card("Canada Lynx", "imageAssets/cardSprites/CanadaLynxCard.png", 20, 20, 3));
-        cards.add(new Card("Coyote", "imageAssets/cardSprites/CoyoteCard.png", 20, 20, 3));
-        cards.add(new Card("Snowy Owl", "imageAssets/cardSprites/SnowyOwlCard.png", 15, 25, 3));
-        cards.add(new Card("Bison", "imageAssets/cardSprites/BisonCard.png", 30, 20, 4));
-        cards.add(new Card("Black Bear", "imageAssets/cardSprites/BlackBearCard.png", 30, 20, 4));
-        cards.add(new Card("Brown Bear", "imageAssets/cardSprites/BrownBearCard.png", 35, 15, 4));
-        cards.add(new Card("Moose", "imageAssets/cardSprites/MooseCard.png", 35, 25, 5));
-        cards.add(new Card("Polar Bear", "imageAssets/cardSprites/PolarBearCard.png", 40, 20, 5));
-        if (debugCodes.mrJone) CardDeck.cards.add(new Card("Mr. Jone", "imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1));//if the jone cheat is active, adds jone card
+        cards.add(new Card("Arctic Hare", "src/imageAssets/cardSprites/ArcticHareCard.png", 10, 5, 1));
+        cards.add(new Card("Blue Jay", "src/imageAssets/cardSprites/BlueJayCard.png", 10, 5, 1));
+        cards.add(new Card("Chipmunk", "src/imageAssets/cardSprites/ChipmunkCard.png", 10, 5, 1));
+        cards.add(new Card("Fisher", "src/imageAssets/cardSprites/FisherCard.png", 10, 5, 1));
+        cards.add(new Card("Groundhog", "src/imageAssets/cardSprites/GroundhogCard.png", 10, 5, 1));
+        cards.add(new Card("Stoat", "src/imageAssets/cardSprites/StoatCard.png", 10, 5, 1));
+        cards.add(new Card("Arctic Fox", "src/imageAssets/cardSprites/ArcticFoxCard.png", 15, 15, 2));
+        cards.add(new Card("Beaver", "src/imageAssets/cardSprites/BeaverCard.png", 20, 10, 2));
+        cards.add(new Card("Penguin", "src/imageAssets/cardSprites/PenguinCard.png", 20, 10, 2));
+        cards.add(new Card("Racoon", "src/imageAssets/cardSprites/RaccoonCard.png", 10, 20, 2));
+        cards.add(new Card("Wolf", "src/imageAssets/cardSprites/WolfCard.png", 20, 10, 2));
+        cards.add(new Card("Canada Goose", "src/imageAssets/cardSprites/CanadaGooseCard.png", 10, 30, 3));
+        cards.add(new Card("Canada Lynx", "src/imageAssets/cardSprites/CanadaLynxCard.png", 20, 20, 3));
+        cards.add(new Card("Coyote", "src/imageAssets/cardSprites/CoyoteCard.png", 20, 20, 3));
+        cards.add(new Card("Snowy Owl", "src/imageAssets/cardSprites/SnowyOwlCard.png", 15, 25, 3));
+        cards.add(new Card("Bison", "src/imageAssets/cardSprites/BisonCard.png", 30, 20, 4));
+        cards.add(new Card("Black Bear", "src/imageAssets/cardSprites/BlackBearCard.png", 30, 20, 4));
+        cards.add(new Card("Brown Bear", "src/imageAssets/cardSprites/BrownBearCard.png", 35, 15, 4));
+        cards.add(new Card("Moose", "src/imageAssets/cardSprites/MooseCard.png", 35, 25, 5));
+        cards.add(new Card("Polar Bear", "src/imageAssets/cardSprites/PolarBearCard.png", 40, 20, 5));
+        if (debugCodes.mrJone) CardDeck.cards.add(new Card("Mr. Jone", "src/imageAssets/cardSprites/MrJoneCard.png", 99, 99, 1));//if the jone cheat is active, adds jone card
     }
 
     public static Card findCard(String name) {

@@ -5,16 +5,11 @@ main Menu panel
 Main menu panel that opens on program launch
 May 15, 2023
 */
-import src.networking.NetworkMenu;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
 public class mainMenu extends JPanel {
@@ -25,30 +20,18 @@ public class mainMenu extends JPanel {
     public static JTextField debugBox = new JTextField(); //debug box initializer
     private JButton debugAccept = new JButton();
     private JTextPane helpBox = new JTextPane();
-    public Font pixelFont;
-    public Font minecraft;
     public static String debugCode = "";
 
     /**
      * Main Menu Constructor
      */
     public mainMenu() {
-        try{
-            // load a custom font in your project folder
-            pixelFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(30f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")));
-            minecraft = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(20f);
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")));
-        }
-        catch(IOException | FontFormatException ignored){
-
-        }
         this.setFocusable(true); // Ensure the panel can receive focus
         this.requestFocusInWindow(); // Request focus for the panel
         int condition = JComponent.WHEN_IN_FOCUSED_WINDOW;
         InputMap inputMap = this.getInputMap(condition);
         ActionMap actionMap = this.getActionMap();
+        this.setBounds(0, 0, Main.frame.getWidth(), Main.frame.getHeight()); // Set panel size to match frame
 
         // Create a key stroke for the "C" key
         KeyStroke cKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, 0);
@@ -63,13 +46,12 @@ public class mainMenu extends JPanel {
             }
         });
         this.setLayout(null);
-        GraphicsComponents.loadBackgroundImage("src/imageAssets/TitleScreen1.png", this);//sets panel to background image
 
         //x button for the help box text
         xHelp.setBounds( PanelManager.ScreenWidth-155,105,50, 40);
         xHelp.setVerticalTextPosition(JButton.CENTER);
         xHelp.setText("X");
-        xHelp.setFont(minecraft);
+        xHelp.setFont(GraphicsComponents.pixelFontMid);
         xHelp.setVisible(false);
         xHelp.setBackground(Color.white);
         xHelp.setFocusPainted(false);
@@ -83,7 +65,7 @@ public class mainMenu extends JPanel {
 
         //help text box for instructions
         helpBox.setBounds(100 ,100,PanelManager.ScreenWidth-200, PanelManager.ScreenHeight-200);
-        helpBox.setFont(minecraft);
+        helpBox.setFont(GraphicsComponents.pixelFontMid);
         helpBox.setVisible(false);
         helpBox.setEditable(false);
         helpBox.setRequestFocusEnabled(false);
@@ -101,14 +83,14 @@ public class mainMenu extends JPanel {
         //Debug box setup
         debugBox.setBounds((PanelManager.ScreenWidth/2) - (125+55), 320, 250, 50);
         debugBox.setText("Debug Box");
-        debugBox.setFont(minecraft);
+        debugBox.setFont(GraphicsComponents.pixelFontMid);
         debugBox.setVisible(false);
         this.add(debugBox);
 
         //Debug Button setup
         debugAccept.setBounds(debugBox.getX()+252, debugBox.getY(), 105, 50);
         debugAccept.setText("Enter");
-        debugAccept.setFont(minecraft);
+        debugAccept.setFont(GraphicsComponents.pixelFontMid);
         debugAccept.setBackground(Color.white);
         debugAccept.addActionListener(new ActionListener() {
             @Override
@@ -132,7 +114,7 @@ public class mainMenu extends JPanel {
         });
         startButton.setText("START");
         startButton.setBorderPainted(false);
-        startButton.setFont(pixelFont);
+        startButton.setFont(GraphicsComponents.pixelFontLarge);
         this.add(startButton);
 
         //quit button setup
@@ -142,7 +124,7 @@ public class mainMenu extends JPanel {
         //Action listener when quit button is pressed
         quitButton.addActionListener(e -> System.exit(0));
         quitButton.setText("QUIT");
-        quitButton.setFont(pixelFont);
+        quitButton.setFont(GraphicsComponents.pixelFontLarge);
         quitButton.setBorderPainted(false);
         this.add(quitButton);
 
@@ -157,7 +139,7 @@ public class mainMenu extends JPanel {
             }
         });
         helpButton.setText("Help");
-        helpButton.setFont(pixelFont);
+        helpButton.setFont(GraphicsComponents.pixelFontLarge);
         helpButton.setBorderPainted(false);
         this.add(helpButton);
 
@@ -167,9 +149,10 @@ public class mainMenu extends JPanel {
         multiplayerButton.addActionListener(e -> Main.networkMenu.init());
         GraphicsComponents.buttonImageLoader(multiplayerButton);
         multiplayerButton.addMouseListener(GraphicsComponents.buttonGrow(multiplayerButton));
-        multiplayerButton.setFont(pixelFont);
+        multiplayerButton.setFont(GraphicsComponents.pixelFontLarge);
         multiplayerButton.setBorderPainted(false);
         this.add(multiplayerButton);
 
+        GraphicsComponents.loadBackgroundImage("src/imageAssets/TitleScreen1.png", this);//sets panel to background image
     }
 }

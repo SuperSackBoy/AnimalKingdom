@@ -16,15 +16,14 @@ public class Main {
     public static mainMenu mainMenuPanel;
     public static GameFrame frame = new GameFrame();
     public static WinPanel Wframe = new WinPanel();
+    public static GraphicsComponents graphicsComponents;
     public static NetworkMenu networkMenu = new NetworkMenu();
     public static void main(String[] args) {
         Player player = new Player();
-
         frame.setVisible(true);
-        //frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
+        graphicsComponents = new GraphicsComponents();
         mainMenuPanel = new mainMenu();
-        mainMenuPanel.setBounds(0, 0, frame.getWidth(), frame.getHeight()); // Set panel size to match frame
         Wframe.setBounds(0, 0, frame.getWidth(), frame.getHeight()); // Set panel size to match frame
         frame.add(mainMenuPanel);
 
@@ -39,6 +38,5 @@ public class Main {
                 frame.revalidate();
             }
         }, 1, 1);
-
     }
 }

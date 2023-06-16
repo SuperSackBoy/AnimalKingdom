@@ -26,7 +26,6 @@ public class Board extends JPanel{ //manages the card locations and drop locatio
     public int height = PanelManager.ScreenHeight*2;
 
     public Board() {
-        loadBackgroundImage();
         this.setLayout(null);
         this.setBounds(x,(int) y,width,height);
 
@@ -50,6 +49,7 @@ public class Board extends JPanel{ //manages the card locations and drop locatio
 		createAIDrop(PanelManager.center+PanelManager.CardWidth+PanelManager.spacing,PanelManager.cardY-PanelManager.cardY/16,3);
 		createAIDrop(PanelManager.center+PanelManager.CardWidth*2+PanelManager.spacing*2,PanelManager.cardY-PanelManager.cardY/16,4);
 
+        GraphicsComponents.loadBackgroundImage("src/imageAssets/BackgroundImageLong.png", this);//sets panel to background image
     }
     public PlayerCardPanel createCard(int x, int y, int pos, Card card) {
         PlayerCardPanel c = new PlayerCardPanel(card); //creates a new card panel
@@ -142,22 +142,6 @@ public class Board extends JPanel{ //manages the card locations and drop locatio
     public void moveDown() {
         if(showHand) {
             move();
-        }
-    }
-    private void loadBackgroundImage() {
-        try {
-            bgImg = ImageIO.read(getClass().getResourceAsStream("imageAssets/BackgroundImageLong.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle the exception gracefully
-        }
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (bgImg != null) {
-            g.drawImage(bgImg, 0, 0,this.getWidth(),this.getHeight(), null);
         }
     }
 }

@@ -12,14 +12,9 @@ import src.GraphicsComponents;
 import src.Main;
 import src.PanelManager;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.net.*;
-import java.util.Objects;
-import java.util.Random;
 
 public class NetworkMenu extends JPanel{
     private BufferedImage bgImg; //image variable
@@ -41,14 +36,14 @@ public class NetworkMenu extends JPanel{
         GraphicsComponents.buttonImageLoader(btnHost);
         btnHost.addMouseListener(GraphicsComponents.buttonGrow(btnHost));
         btnHost.setBorderPainted(false);
-        btnHost.setFont(Main.mainMenuPanel.minecraft);
+        btnHost.setFont(GraphicsComponents.pixelFontMid);
 
         JButton btnJoin = new JButton("Join");
         btnJoin.setBounds(10, 75, 100, 55);
         GraphicsComponents.buttonImageLoader(btnJoin);
         btnJoin.addMouseListener(GraphicsComponents.buttonGrow(btnJoin));
         btnJoin.setBorderPainted(false);
-        btnJoin.setFont(Main.mainMenuPanel.minecraft);
+        btnJoin.setFont(GraphicsComponents.pixelFontMid);
 
         btnHost.addActionListener(e -> {
             this.removeAll();

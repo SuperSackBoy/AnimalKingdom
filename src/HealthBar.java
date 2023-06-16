@@ -26,8 +26,8 @@ public class HealthBar extends JPanel {
     //default constructor
     public HealthBar(int x, int y, int width, int height, float percent, String labelText, int textAlign) {
         this.setBounds(x,y,width,height);
-        loadBackgroundImage();
-        loadHpImage();
+        //loadBackgroundImage();
+        //loadHpImage();
         this.setLayout(null);
         this.setOpaque(false);
         this.percent = percent;
@@ -51,6 +51,8 @@ public class HealthBar extends JPanel {
 
         this.add(hp);
         this.add(panel);
+        GraphicsComponents.loadBackgroundImage("src/imageAssets/HpBar.png", panel);
+        GraphicsComponents.loadBackgroundImage("src/imageAssets/HpRed.png", hp);
     }
 
     private final float threshold = 0.035f;
@@ -70,7 +72,7 @@ public class HealthBar extends JPanel {
         }
     }
 
-    private void loadBackgroundImage() {
+    /*private void loadBackgroundImage() {
         try {
             bgImg = ImageIO.read(getClass().getResourceAsStream("imageAssets/HpBar.png"));
         } catch (IOException e) {
@@ -78,7 +80,7 @@ public class HealthBar extends JPanel {
             // Handle the exception gracefully
         }
     }
-    private void loadHpImage() {
+    /*private void loadHpImage() {
         try {
             hpImg = ImageIO.read(getClass().getResourceAsStream("imageAssets/HpRed.png"));
         } catch (IOException e) {
@@ -90,7 +92,7 @@ public class HealthBar extends JPanel {
     /**
      * Adds background image to panel bg
      * @param g
-     */
+     *
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -104,5 +106,5 @@ public class HealthBar extends JPanel {
             Image scaledImage = hpImg.getScaledInstance(hp.getWidth(), hp.getHeight(), Image.SCALE_SMOOTH);
             g.drawImage(scaledImage, hp.getX(), hp.getY(), null);
         }
-    }
+    }*/
 }

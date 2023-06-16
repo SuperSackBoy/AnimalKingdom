@@ -20,32 +20,11 @@ public class DropLocation extends JPanel {
     public int width = PanelManager.CardWidth;
     public int height = PanelManager.CardHeight;
     public DropLocation(int x, int y) {
-        loadBackgroundImage();
         this.x = x;
         this.y = y;
 
         this.setBounds(x, y, width, height);
         this.setOpaque(false);
-    }
-
-    private void loadBackgroundImage() {
-        try {
-            bgImg = ImageIO.read(getClass().getResourceAsStream("imageAssets/DropCard.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle the exception gracefully
-        }
-    }
-
-    /**
-     * Adds background image to panel bg
-     * @param g
-     */
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (bgImg != null) {
-            g.drawImage(bgImg, 0, 0, this.getWidth(), this.getHeight(), null);
-        }
+        GraphicsComponents.loadBackgroundImage("src/imageAssets/DropCard.png", this);
     }
 }

@@ -8,11 +8,9 @@ Panel to display a card
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -33,36 +31,22 @@ public class CardPanel extends JPanel implements CardInterface{
     private final JLabel lHP = new JLabel(Integer.toString(hp));
     private final JLabel lAP = new JLabel(Integer.toString(ap));
     private final JLabel lVP = new JLabel(Integer.toString(vp));
-    private final JLabel lName = new JLabel("name");
-    private Font pixelFont;
 
     protected Card card;
     private float opacity = 1f;
 
     public CardPanel(Card card) {
         this.card = new Card(card.getName(),card.cardImg,card.getHP(),card.getATK(), card.getVP());
-        try{
-            // load a custom font in your project folder
-            pixelFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(13f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")));
-        }
-        catch(IOException | FontFormatException e){
-            e.printStackTrace();
-        }
-        loadBackgroundImage(this.card);//sets panel to background image
         this.setLayout(null); //formatting
         this.setBounds(x, y, width, height);
         this.setBackground(Color.BLACK);
-        lName.setText(this.card.getName());
-        lName.setBounds(2,0,PanelManager.CardWidth,30);
         lHP.setBounds(29+2,89-12,PanelManager.CardWidth,30);
         lAP.setBounds(36+2,107-12,PanelManager.CardWidth,30);
         lVP.setBounds(30+2,125-12,PanelManager.CardWidth,30);
-        this.add(lName);
         this.add(lHP);
         this.add(lAP);
         this.add(lVP);
+        GraphicsComponents.loadBackgroundImage(this.card.cardImg, this);
     }
 
     public Card getCard() {
@@ -99,13 +83,13 @@ public class CardPanel extends JPanel implements CardInterface{
         this.vp = card.getVP();
 
         lHP.setText(String.valueOf(hp));
-        lHP.setFont(pixelFont);
+        lHP.setFont(GraphicsComponents.pixelFontSmall);
         lHP.setForeground(Color.BLACK);
         lAP.setText(String.valueOf(ap));
-        lAP.setFont(pixelFont);
+        lAP.setFont(GraphicsComponents.pixelFontSmall);
         lAP.setForeground(Color.BLACK);
         lVP.setText(String.valueOf(vp));
-        lVP.setFont(pixelFont);
+        lVP.setFont(GraphicsComponents.pixelFontSmall);
         lVP.setForeground(Color.BLACK);
         this.setBounds(x,y,width,height); //update cards x and y
     }
@@ -117,35 +101,6 @@ public class CardPanel extends JPanel implements CardInterface{
     public void setY(int y) {
         this.y = y;
         this.startY = y;
-    }
-    /**
-     * Sets bgImg to the files path
-     */
-    private void loadBackgroundImage(Card cCard) {
-        try {
-            lName.setVisible(false);
-            this.setOpaque(false);
-            bgImg = ImageIO.read(getClass().getResourceAsStream(cCard.cardImg));
-        } catch (IOException | IllegalArgumentException e) {
-            if(e instanceof IOException) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    /**
-     * Adds background image to panel bg
-     * @param g
-     */
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (bgImg != null) {
-            // Scale the image to fit the panel dimensions
-            ((Graphics2D) g).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
-            g.drawImage(bgImg, 0, 0, this.getWidth(), this.getHeight(), null);
-        }
     }
 
     public void destroy() {

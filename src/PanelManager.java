@@ -11,11 +11,8 @@ import src.networking.NetworkPlayer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static java.awt.Font.*;
 
 public class PanelManager {
     public static Board board;
@@ -29,8 +26,6 @@ public class PanelManager {
     public static JButton endTurnButton;
 
     public static JButton showhandButton;
-
-    private static Font minecraft;
 
     public static int CardWidth = 96;
     public static int CardHeight = 144;
@@ -55,16 +50,6 @@ public class PanelManager {
 
     public static void start(boolean playerStart, boolean AI) {
         useAI = AI;
-        try{
-            // load a custom font in your project folder0f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            minecraft = createFont(TRUETYPE_FONT, PanelManager.class.getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(13f);
-            ge.registerFont(createFont(TRUETYPE_FONT, PanelManager.class.getResourceAsStream("imageAssets/Minecraft.ttf")));
-        }
-        catch(IOException | FontFormatException ignored){
-
-        }
-
         if(!useAI) ai = new NetworkPlayer();
         frame.getContentPane().removeAll();
 
@@ -120,11 +105,11 @@ public class PanelManager {
     public static JLabel VPDisplay = new JLabel();
     public static void createHud(JFrame frame) {
         playerHPBar = new HealthBar(6,25,150, 60, 1f, "Player: " +player.getHP(), SwingConstants.LEFT);
-        playerHPBar.label.setFont(minecraft);
+        playerHPBar.label.setFont(GraphicsComponents.pixelFontSmall);
         frame.add(playerHPBar);
 
         AIHPBar = new HealthBar(6,75,150, 60, 1f, "Opponent: " +ai.getHP(), SwingConstants.RIGHT);
-        AIHPBar.label.setFont(minecraft);
+        AIHPBar.label.setFont(GraphicsComponents.pixelFontSmall);
         frame.add(AIHPBar);
 
         selectLbl.setVisible(false);
@@ -137,7 +122,7 @@ public class PanelManager {
         endTurnButton.setBounds(725,550,150,75);
         endTurnButton.addActionListener(e -> endTurn());
         endTurnButton.setFocusable(false);
-        endTurnButton.setFont(minecraft);
+        endTurnButton.setFont(GraphicsComponents.pixelFontSmall);
         endTurnButton.setBorderPainted(false);
         GraphicsComponents.buttonImageLoader(endTurnButton);
         frame.add(endTurnButton);
@@ -147,7 +132,7 @@ public class PanelManager {
         surrenderButton.setBounds(725,15,150,75);
         surrenderButton.addActionListener(e -> surrender());
         surrenderButton.setFocusable(false);
-        surrenderButton.setFont(minecraft);
+        surrenderButton.setFont(GraphicsComponents.pixelFontSmall);
         surrenderButton.setBorderPainted(false);
         GraphicsComponents.buttonImageLoader(surrenderButton);
         frame.add(surrenderButton);
@@ -167,7 +152,7 @@ public class PanelManager {
         frame.add(showhandButton);
 
         VPDisplay.setBounds(6,125,200,80);
-        VPDisplay.setFont(minecraft);
+        VPDisplay.setFont(GraphicsComponents.pixelFontSmall);
         VPDisplay.setForeground(Color.white);
         frame.add(VPDisplay);
     }

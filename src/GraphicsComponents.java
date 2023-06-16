@@ -1,16 +1,32 @@
 package src;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class GraphicsComponents {
+    public static Font pixelFontLarge;
+    public static Font pixelFontMid;
+    public static Font pixelFontSmall;
 
+    GraphicsComponents() {
+        try{
+            // load a custom font in your project folder
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            pixelFontLarge = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(30f);
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")));
+            pixelFontMid = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(20f);
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")));
+            pixelFontSmall = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")).deriveFont(13f);
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("imageAssets/Minecraft.ttf")));
+        }
+        catch(IOException | FontFormatException ignored){
+
+        }
+    }
 
     /**
      * loads the image onto the button inputted
@@ -59,15 +75,18 @@ public class GraphicsComponents {
     }
 
     /**
-     *
+     * Loads bg image onto a panel
      * @param image image path
      * @param panel panel to add to
      */
     public static void loadBackgroundImage(String image, JPanel panel) {
         ImageIcon bgImg = new ImageIcon(image);
+        Image imgT = bgImg.getImage(); // transform it
+        Image newimg = imgT.getScaledInstance(panel.getWidth(), panel.getHeight(), Image.SCALE_DEFAULT); // scale it the smooth way
+        bgImg = new ImageIcon(newimg);  // transform it back
 
         JLabel backGround = new JLabel("", bgImg, JLabel.CENTER);
-        backGround.setBounds(0,0, PanelManager.ScreenWidth, PanelManager.ScreenHeight);
+        backGround.setBounds(0,0, panel.getWidth(), panel.getHeight());
         panel.add(backGround);
     }
 }
